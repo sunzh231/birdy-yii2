@@ -1,5 +1,5 @@
 <?php
-namespace app\controllers;
+namespace backend\controllers;
 
 use Yii;
 use yii\rest\ActiveController;
@@ -8,14 +8,16 @@ use app\utils\Curl;
 
 class BaseController extends ActiveController
 {
-  // /**
-  // * GET
-  // */
-  // public function getAccessToken() {
-  //   $curl = new Curl;
-  //   $AppId = 'wx46a8d31ccf5a0d32';
-  //   $AppSecret = '465e626250bff7fc0454341b338d41c9';
-  //   $getUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid='.$AppId.'&secret='.$AppSecret;
-  //   return $curl->Get($getUrl);
-  // }
+  public $serializer = [
+    'class' => 'yii\rest\Serializer',
+    'collectionEnvelope' => 'items',
+  ];
+
+  public function actions()
+  {
+    $actions = parent::actions();
+    // 注销系统自带的实现方法
+    unset($actions['index'], $actions['update'], $actions['create'], $actions['delete'], $actions['view']);
+    return $actions;
+  }
 }
