@@ -2,12 +2,28 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\helpers\ArrayHelper;
+use yii\filters\auth\CompositeAuth;
+use yii\filters\auth\HttpBasicAuth;
+use yii\filters\auth\HttpBearerAuth;
+use yii\filters\auth\QueryParamAuth;
+use yii\filters\AccessControl;
 use yii\rest\ActiveController;
-use yii\data\ActiveDataProvider;
 
-class RestController extends BaseController
+class RestController extends ActiveController
 {
-  public $modelClass = 'app\models\Rest';
+  public $serializer = [
+    'class' => 'yii\rest\Serializer',
+    'collectionEnvelope' => 'items',
+  ];
+
+  public function actions()
+  {
+    $actions = parent::actions();
+    // 注销系统自带的实现方法
+    unset($actions['index'], $actions['update'], $actions['create'], $actions['delete'], $actions['view']);
+    return $actions;
+  }
 
   public function behaviors()
   {
@@ -20,68 +36,12 @@ class RestController extends BaseController
           QueryParamAuth::className(),
         ],
       ],
+      // 'access' => [
+      //   'class' => AccessControl::className(),
+      //   'only' => [],
+      //   'rules' => [
+      //   ],
+      // ],
     ]);
-  }
-
-  public function actionIndex()
-  {
-      $modelClass = $this->modelClass;
-      $query = $modelClass::find(); // equivalent to $query = EntryForm::find()
-      return new ActiveDataProvider(['query' => $query, 'pagination' => ['pageSize' => 10]]);
-  }
-
-  public function actionCreate()
-  {
-      $model = new Product;
-      $model->attributes = Yii::$app->request->post();
-      if (!$model->save()) {
-          return array_values($model->getFirstErrors())[0];
-      }
-      return $model;
-  }
-
-  public function actionView($id)
-  {
-      $model = $this->findModel($id);
-      if ($model === null) {
-          throw new NotFoundHttpException('Can not find this object!');
-      } else {
-          return $model;
-      }
-  }
-
-  public function actionUpdate($id)
-  {
-      $model = $this->findModel($id);
-      if ($model === null) {
-          throw new NotFoundHttpException('Can not find this object!');
-      } else {
-          $model->attributes = Yii::$app->request->post();
-          if (!$model->save()) {
-              return array_values($model->getFirstErrors())[0];
-          }
-          return $model;
-      }
-  }
-
-  public function actionDelete($id)
-  {
-      $model = $this->findModel($id);
-      // Delete in physical
-      if($model) {
-        $model->delete();
-        $modelClass = $this->modelClass;
-        $query = $modelClass::find(); // equivalent to $query = EntryForm::find()
-        return new ActiveDataProvider(['query' => $query, 'pagination' => ['pageSize' => 10]]);
-      }
-      // Delete in logical
-      // $model->isDeleted = true;
-      // $model->save();
-      return null;
-  }
-
-  private function findModel($id)
-  {
-      return Product::findOne(['id' => $id]);
   }
 }

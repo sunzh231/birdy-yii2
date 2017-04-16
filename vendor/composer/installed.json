@@ -3147,5 +3147,53 @@
             }
         ],
         "description": "BDD assertion library for PHPUnit"
+    },
+    {
+        "name": "fedemotta/yii2-cronjob",
+        "version": "v1.1",
+        "version_normalized": "1.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/fedemotta/yii2-cronjob.git",
+            "reference": "351b893f66e8758933183bfafb653d72a109e053"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://files.phpcomposer.com/files/fedemotta/yii2-cronjob/351b893f66e8758933183bfafb653d72a109e053.zip",
+            "reference": "351b893f66e8758933183bfafb653d72a109e053",
+            "shasum": ""
+        },
+        "require": {
+            "yiisoft/yii2": "*"
+        },
+        "time": "2015-10-07T20:47:12+00:00",
+        "type": "yii2-extension",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "fedemotta\\cronjob\\": ""
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Federico Nicolás Motta",
+                "email": "fedemotta@gmail.com"
+            }
+        ],
+        "description": "Yii2 extension to help in the creation of automated console scripts",
+        "keywords": [
+            "console",
+            "cron",
+            "crontab",
+            "extension",
+            "job",
+            "schedule",
+            "script",
+            "yii2"
+        ]
     }
 ]

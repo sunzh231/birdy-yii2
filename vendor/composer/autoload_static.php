@@ -29,6 +29,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             'phpDocumentor\\Reflection\\' => 25,
         ),
+        'f' => 
+        array (
+            'fedemotta\\cronjob\\' => 18,
+        ),
         'c' => 
         array (
             'cebe\\markdown\\' => 14,
@@ -109,6 +113,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'fedemotta\\cronjob\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/fedemotta/yii2-cronjob',
         ),
         'cebe\\markdown\\' => 
         array (

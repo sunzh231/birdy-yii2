@@ -48,4 +48,13 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker',
     ),
   ),
+  'fedemotta/yii2-cronjob' => 
+  array (
+    'name' => 'fedemotta/yii2-cronjob',
+    'version' => '1.1.0.0',
+    'alias' => 
+    array (
+      '@fedemotta/cronjob' => $vendorDir . '/fedemotta/yii2-cronjob',
+    ),
+  ),
 );
