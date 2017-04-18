@@ -15,7 +15,7 @@ add('shared_dirs', []);
 add('writable_dirs', []);
 
 // Servers
-server('staging', 'birdycloud.com')
+server('staging', '45.63.122.60')
     ->user('root')
     ->identityFile()
     ->set('deploy_path', '/www')
@@ -23,7 +23,7 @@ server('staging', 'birdycloud.com')
     ->pty(true);
 
 // Servers
-server('production', 'birdycloud.com')
+server('production', '45.63.122.60')
     ->user('root')
     ->identityFile()
     ->set('deploy_path', '/www')
@@ -35,7 +35,7 @@ desc('Restart PHP-FPM service');
 task('php-fpm:restart', function () {
     // The user must have rights for restart service
     // /etc/sudoers: username ALL=NOPASSWD:/bin/systemctl restart php-fpm.service
-    run('service php5-fpm restart');
+    run('service php7.0-fpm reload');
 });
 after('deploy:symlink', 'php-fpm:restart');
 
