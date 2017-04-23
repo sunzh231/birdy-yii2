@@ -64,8 +64,8 @@ class WechatController extends ActiveController
 
   private function responseMsg()
   {
-    //get post data, May be due to the different environments
-    // $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+    $postStr = $GLOBALS["HTTP_RAW_POST_DATA"];
+    echo "";
     // if (!empty($postStr)) {
     //   libxml_disable_entity_loader(true);
     //   $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
@@ -104,7 +104,6 @@ class WechatController extends ActiveController
     //   echo "";
     //   exit;
     // }
-    echo "";
   }
 
   //接收文本消息
