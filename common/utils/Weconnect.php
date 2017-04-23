@@ -7,8 +7,11 @@ define("TOKEN", "weixin");
 
 class Weconnect
 {
+  public static function test () {
+    return ['12321'];
+  }
   //回复文本消息
-  private static function transmitText($object, $content)
+  public static function transmitText($object, $content)
   {
     $textTpl = "<xml>
       <ToUserName><![CDATA[%s]]></ToUserName>
@@ -22,7 +25,7 @@ class Weconnect
   }
 
   //回复图文
-  private static function transmitNews($object, $arr_item)
+  public static function transmitNews($object, $arr_item)
   {
     if(!is_array($arr_item))
       return;
@@ -50,7 +53,7 @@ class Weconnect
   }
 
   //音乐消息
-  private static function transmitMusic($object, $musicArray, $flag = 0)
+  public static function transmitMusic($object, $musicArray, $flag = 0)
   {
     $itemTpl = "<Music>
       <Title><![CDATA[%s]]></Title>

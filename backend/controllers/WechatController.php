@@ -40,6 +40,7 @@ class WechatController extends ActiveController
         }
         break;
       case 'POST':
+        // return Weconnect::test();
         $this->responseMsg();
         break;
       default:
