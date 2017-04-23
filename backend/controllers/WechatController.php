@@ -11,6 +11,11 @@ class WechatController extends ActiveController
 {
   public $modelClass = 'common\models\Channel';
 
+  public $serializer = [
+      'class' => 'yii\rest\Serializer',
+      'collectionEnvelope' => 'items',
+  ];
+
   public function behaviors()
   {
     $behaviors = parent::behaviors();
@@ -26,6 +31,14 @@ class WechatController extends ActiveController
       ],
     ];
     return $behaviors;
+  }
+
+  public function actions()
+  {
+    $actions = parent::actions();
+    // 注销系统自带的实现方法
+    unset($actions['index'], $actions['update'], $actions['create'], $actions['delete'], $actions['view']);
+    return $actions;
   }
 
   public function actionValid()
@@ -56,9 +69,9 @@ class WechatController extends ActiveController
     $tmpStr = sha1( $tmpStr );
 
     if($tmpStr == $signature) {
-        return true;
+      return true;
     } else {
-        return false;
+      return false;
     }
   }
 
