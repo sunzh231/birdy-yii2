@@ -11,7 +11,6 @@ class ChannelController extends RestController
 
   public function actionIndex()
   {
-    return ['test' => $this->modelClass];
     $modelClass = $this->modelClass;
     $query = $modelClass::find(); // equivalent to $query = EntryForm::find()
     return new ActiveDataProvider(['query' => $query, 'pagination' => ['pageSize' => 10]]);
