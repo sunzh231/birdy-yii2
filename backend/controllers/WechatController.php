@@ -6,6 +6,7 @@ use yii\rest\ActiveController;
 use yii\web\Response;
 use yii\filters\Cors;
 use common\models\Channel;
+use common\utils\Weconnect;
 
 class WechatController extends ActiveController
 {
@@ -112,9 +113,9 @@ class WechatController extends ActiveController
     $keyword = trim($object->Content);
     $contentStr = "Welcome to wechat world!";
     if (is_array($contentStr)){
-      $resultStr = $this->transmitNews($object, $contentStr);
+      $resultStr = Weconnect::transmitNews($object, $contentStr);
     }else{
-      $resultStr = $this->transmitText($object, $contentStr);
+      $resultStr = Weconnect::transmitText($object, $contentStr);
     }
     return $resultStr;
   }
@@ -145,7 +146,7 @@ class WechatController extends ActiveController
   private function receiveImage($object)
   {
     $contentStr = "你发送的是图片，地址为：".$object->PicUrl;
-    $resultStr = $this->transmitText($object, $contentStr);
+    $resultStr = Weconnect::transmitText($object, $contentStr);
     return $resultStr;
   }
 
@@ -154,7 +155,7 @@ class WechatController extends ActiveController
   private function receiveVoice($object)
   {
     $contentStr = "你发送的是语音，媒体ID为：".$object->MediaId;
-    $resultStr = $this->transmitText($object, $contentStr);
+    $resultStr = Weconnect::transmitText($object, $contentStr);
     return $resultStr;
   }
 
@@ -162,7 +163,7 @@ class WechatController extends ActiveController
   private function receiveVideo($object)
   {
     $contentStr = "你发送的是视频，媒体ID为：".$object->MediaId;
-    $resultStr = $this->transmitText($object, $contentStr);
+    $resultStr = Weconnect::transmitText($object, $contentStr);
     return $resultStr;
   }
 
@@ -170,7 +171,7 @@ class WechatController extends ActiveController
   private function receiveLocation($object)
   {
     $contentStr = "你发送的是位置，纬度为：".$object->Location_X."；经度为：".$object->Location_Y."；缩放级别为：".$object->Scale."；位置为：".$object->Label;
-    $resultStr = $this->transmitText($object, $contentStr);
+    $resultStr = Weconnect::transmitText($object, $contentStr);
     return $resultStr;
   }
 
@@ -178,7 +179,7 @@ class WechatController extends ActiveController
   private function receiveLink($object)
   {
     $contentStr = "你发送的是链接，标题为：".$object->Title."；内容为：".$object->Description."；链接地址为：".$object->Url;
-    $resultStr = $this->transmitText($object, $contentStr);
+    $resultStr = Weconnect::transmitText($object, $contentStr);
     return $resultStr;
   }
 
@@ -207,74 +208,10 @@ class WechatController extends ActiveController
 
     //两种回复
     if (is_array($contentStr)){
-      $resultStr = $this->transmitNews($object, $contentStr);
+      $resultStr = Weconnect::transmitNews($object, $contentStr);
     }else{
-      $resultStr = $this->transmitText($object, $contentStr);
+      $resultStr = Weconnect::transmitText($object, $contentStr);
     }
-    return $resultStr;
-  }
-
-  //回复文本消息
-  private function transmitText($object, $content)
-  {
-    $textTpl = "<xml>
-    <ToUserName><![CDATA[%s]]></ToUserName>
-    <FromUserName><![CDATA[%s]]></FromUserName>
-    <CreateTime>%s</CreateTime>
-    <MsgType><![CDATA[text]]></MsgType>
-    <Content><![CDATA[%s]]></Content>
-    </xml>";
-    $resultStr = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $content);
-    return $resultStr;
-  }
-
-  //回复图文
-  private function transmitNews($object, $arr_item)
-  {
-    if(!is_array($arr_item))
-      return;
-    $itemTpl = "<item>
-      <Title><![CDATA[%s]]></Title>
-      <Description><![CDATA[%s]]></Description>
-      <PicUrl><![CDATA[%s]]></PicUrl>
-      <Url><![CDATA[%s]]></Url>
-      </item>";
-    $item_str = "";
-    foreach ($arr_item as $item)
-      $item_str .= sprintf($itemTpl, $item['Title'], $item['Description'], $item['PicUrl'], $item['Url']);
-
-   $newsTpl = "<xml>
-    <ToUserName><![CDATA[%s]]></ToUserName>
-    <FromUserName><![CDATA[%s]]></FromUserName>
-    <CreateTime>%s</CreateTime>
-    <MsgType><![CDATA[news]]></MsgType>
-    <Content><![CDATA[]]></Content>
-    <ArticleCount>%s</ArticleCount>
-    <Articles>$item_str</Articles>
-    </xml>";
-    $resultStr = sprintf($newsTpl, $object->FromUserName, $object->ToUserName, time(), count($arr_item));
-    return $resultStr;
-  }
-
-  //音乐消息
-  private function transmitMusic($object, $musicArray, $flag = 0)
-  {
-    $itemTpl = "<Music>
-      <Title><![CDATA[%s]]></Title>
-      <Description><![CDATA[%s]]></Description>
-      <MusicUrl><![CDATA[%s]]></MusicUrl>
-      <HQMusicUrl><![CDATA[%s]]></HQMusicUrl>
-      </Music>";
-    $item_str = sprintf($itemTpl, $musicArray['Title'], $musicArray['Description'], $musicArray['MusicUrl'], $musicArray['HQMusicUrl']);
-    $textTpl = "<xml>
-      <ToUserName><![CDATA[%s]]></ToUserName>
-      <FromUserName><![CDATA[%s]]></FromUserName>
-      <CreateTime>%s</CreateTime>
-      <MsgType><![CDATA[music]]></MsgType>
-      $item_str
-      <FuncFlag>%d</FuncFlag>
-      </xml>";
-    $resultStr = sprintf($textTpl, $object->FromUserName, $object->ToUserName, time(), $flag);
     return $resultStr;
   }
 }
