@@ -7,8 +7,20 @@ define("TOKEN", "weixin");
 
 class Weconnect
 {
-  public static function test () {
-    return ['12321'];
+  public static function checkSignature($signature, $timestamp, $nonce)
+  {
+    $token = TOKEN;
+    $tmpArr = array($token, $timestamp, $nonce);
+    // use SORT_STRING rule
+    sort($tmpArr, SORT_STRING);
+    $tmpStr = implode( $tmpArr );
+    $tmpStr = sha1( $tmpStr );
+
+    if($tmpStr == $signature) {
+      return true;
+    } else {
+      return false;
+    }
   }
   //回复文本消息
   public static function transmitText($object, $content)

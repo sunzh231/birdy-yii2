@@ -35,32 +35,15 @@ class WechatController extends ActiveController
     switch ($request->getMethod()) {
       case 'GET':
         $params = $request->get();
-        if ($this->checkSignature($params['signature'], $params['timestamp'], $params['nonce'])) {
+        if (Weconnect::checkSignature($params['signature'], $params['timestamp'], $params['nonce'])) {
           echo $params['echostr'];
         }
         break;
       case 'POST':
-        // return Weconnect::test();
         $this->responseMsg();
         break;
       default:
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-  }
-
-  private function checkSignature($signature, $timestamp, $nonce)
-  {
-    $token = 'weixin';
-    $tmpArr = array($token, $timestamp, $nonce);
-    // use SORT_STRING rule
-    sort($tmpArr, SORT_STRING);
-    $tmpStr = implode( $tmpArr );
-    $tmpStr = sha1( $tmpStr );
-
-    if($tmpStr == $signature) {
-      return true;
-    } else {
-      return false;
     }
   }
 
