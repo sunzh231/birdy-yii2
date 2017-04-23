@@ -69,35 +69,57 @@ class WechatController extends ActiveController
     if (!empty($postStr)) {
       libxml_disable_entity_loader(true);
       $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-      $RX_TYPE = trim($postObj->MsgType);
-      switch ($RX_TYPE)
-      {
-        case "text":
-          $resultStr = $this->receiveText($postObj);
-          break;
-        case "image":
-          $resultStr = $this->receiveImage($postObj);
-          break;
-        case "location":
-          $resultStr = $this->receiveLocation($postObj);
-          break;
-        case "voice":
-          $resultStr = $this->receiveVoice($postObj);
-          break;
-        case "video":
-          $resultStr = $this->receiveVideo($postObj);
-          break;
-        case "link":
-          $resultStr = $this->receiveLink($postObj);
-          break;
-        case "event":
-          $resultStr = $this->receiveEvent($postObj);
-          break;
-        default:
-          $resultStr = "unknow msg type: ".$RX_TYPE;
-          break;
-      }
-      echo $resultStr;
+//      $RX_TYPE = trim($postObj->MsgType);
+//      switch ($RX_TYPE)
+//      {
+//        case "text":
+//          $resultStr = $this->receiveText($postObj);
+//          break;
+//        case "image":
+//          $resultStr = $this->receiveImage($postObj);
+//          break;
+//        case "location":
+//          $resultStr = $this->receiveLocation($postObj);
+//          break;
+//        case "voice":
+//          $resultStr = $this->receiveVoice($postObj);
+//          break;
+//        case "video":
+//          $resultStr = $this->receiveVideo($postObj);
+//          break;
+//        case "link":
+//          $resultStr = $this->receiveLink($postObj);
+//          break;
+//        case "event":
+//          $resultStr = $this->receiveEvent($postObj);
+//          break;
+//        default:
+//          $resultStr = "unknow msg type: ".$RX_TYPE;
+//          break;
+//      }
+//      echo $resultStr;
+        $fromUsername = $postObj->FromUserName;
+        $toUsername = $postObj->ToUserName;
+        $keyword = trim($postObj->Content);
+        $time = time();
+        $textTpl = "<xml>
+            <ToUserName><![CDATA[%s]]></ToUserName>
+            <FromUserName><![CDATA[%s]]></FromUserName>
+            <CreateTime>%s</CreateTime>
+            <MsgType><![CDATA[%s]]></MsgType>
+            <Content><![CDATA[%s]]></Content>
+            <FuncFlag>0</FuncFlag>
+            </xml>";
+        if(!empty( $keyword ))
+        {
+            $msgType = "text";
+            $contentStr = "Welcome to wechat world!";
+            $resultStr = sprintf($textTpl, $fromUsername, $toUsername, $time, $msgType, $contentStr);
+            echo $resultStr;
+        }else{
+            echo "Input something...";
+        }
+
     } else {
       echo "";
       exit;
