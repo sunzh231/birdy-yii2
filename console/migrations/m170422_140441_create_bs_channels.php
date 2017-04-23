@@ -17,9 +17,10 @@ class m170422_140441_create_bs_channels extends Migration
         'name' => $this->string(32)->notNull()->unique()->comment('账号名称'),
         'account_type' => $this->integer()->notNull()->defaultValue(0)->comment('账号类型'),
         'channel_type' => $this->integer()->notNull()->defaultValue(0)->comment('渠道类型'),
-        'origin_id' => $this->string(32)->unique()->comment('原始ID'),
-        'app_id' => $this->string(32)->notNull()->unique()->comment('app id'),
-        'app_secret' => $this->string(32)->notNull()->unique()->comment('app secret'),
+        'originid' => $this->string(32)->unique()->comment('原始ID'),
+        'appid' => $this->string(32)->notNull()->unique()->comment('app id'),
+        'appsecret' => $this->string(32)->notNull()->unique()->comment('app secret'),
+        'wechat_token' => $this->string(128)->comment('微信access_token'),
 
         'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment('删除状态。0：已删除，1：正常'),
         'updated_by' => $this->integer()->notNull()->comment('修改人'),

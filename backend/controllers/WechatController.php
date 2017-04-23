@@ -7,6 +7,7 @@ use yii\web\Response;
 use yii\filters\Cors;
 use common\models\Channel;
 use common\utils\Weconnect;
+use common\utils\Curl;
 
 class WechatController extends ActiveController
 {
@@ -54,7 +55,7 @@ class WechatController extends ActiveController
     if (!empty($postStr)) {
       libxml_disable_entity_loader(true);
       $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-      $fromUsername = $postObj->FromUserName;
+      // $fromUsername = $postObj->FromUserName;
       $toUsername = $postObj->ToUserName;
       $RX_TYPE = trim($postObj->MsgType);
       switch ($RX_TYPE)
@@ -126,6 +127,37 @@ class WechatController extends ActiveController
     return $contentStr;
   }
 
+  //点击菜单消息
+  private function receiveClick($object)
+  {
+    switch ($object->EventKey)
+    {
+      case "1":
+        $contentStr = "猫咪酱个性DIY服装，我们专业定制个性【班服，情侣装，亲子装等，有长短T恤，卫衣，长短裤】来图印制即可，给你温馨可爱的TA，有事可直接留言微信";
+        break;
+
+      case "2":
+        $contentStr = "你点击了菜单: ".$object->EventKey;
+        break;
+
+      case "3":
+        $contentStr = "是傻逼";
+        break;
+
+      default:
+        $contentStr = "你点击了菜单: ".$object->EventKey;
+        break;
+    }
+
+     //两种回复
+    if (is_array($contentStr)){
+      $resultStr = Weconnect::transmitNews($object, $contentStr);
+    }else{
+      $resultStr = Weconnect::transmitText($object, $contentStr);
+    }
+    return $resultStr;
+  }
+
   //接收图片
   private function receiveImage($object)
   {
@@ -133,7 +165,6 @@ class WechatController extends ActiveController
     $resultStr = Weconnect::transmitText($object, $contentStr);
     return $resultStr;
   }
-
 
   //接收语音
   private function receiveVoice($object)
@@ -164,38 +195,6 @@ class WechatController extends ActiveController
   {
     $contentStr = "你发送的是链接，标题为：".$object->Title."；内容为：".$object->Description."；链接地址为：".$object->Url;
     $resultStr = Weconnect::transmitText($object, $contentStr);
-    return $resultStr;
-  }
-
-
- //点击菜单消息
-  private function receiveClick($object)
-  {
-     switch ($object->EventKey)
-     {
-       case "1":
-        $contentStr = "猫咪酱个性DIY服装，我们专业定制个性【班服，情侣装，亲子装等，有长短T恤，卫衣，长短裤】来图印制即可，给你温馨可爱的TA，有事可直接留言微信";
-       break;
-
-       case "2":
-        $contentStr = "你点击了菜单: ".$object->EventKey;
-       break;
-
-       case "3":
-        $contentStr = "是傻逼";
-       break;
-
-       default:
-        $contentStr = "你点击了菜单: ".$object->EventKey;
-       break;
-     }
-
-    //两种回复
-    if (is_array($contentStr)){
-      $resultStr = Weconnect::transmitNews($object, $contentStr);
-    }else{
-      $resultStr = Weconnect::transmitText($object, $contentStr);
-    }
     return $resultStr;
   }
 }

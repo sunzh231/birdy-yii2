@@ -39,12 +39,12 @@ class Channel extends ActiveRecord
 
   public function attributes()
   {
-    return ['id', 'name', 'origin_id', 'app_id', 'app_secret',
+    return ['id', 'name', 'originid', 'appid', 'appsecret', 'wechat_token',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'origin_id', 'app_id', 'app_secret',
+    return ['id', 'name', 'originid', 'appid', 'appsecret', 'wechat_token',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
 
