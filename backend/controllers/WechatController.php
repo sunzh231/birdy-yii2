@@ -66,45 +66,44 @@ class WechatController extends ActiveController
   {
     // $postStr = $GLOBALS["HTTP_RAW_POST_DATA"]; //PHP5有效
     $postStr = file_get_contents("php://input"); //PHP7有效
-    echo "";
-    // if (!empty($postStr)) {
-    //   libxml_disable_entity_loader(true);
-    //   $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
-    //   $fromUsername = $postObj->FromUserName;
-    //   $toUsername = $postObj->ToUserName;
-    //   $RX_TYPE = trim($postObj->MsgType);
-    //   switch ($RX_TYPE)
-    //   {
-    //     case "text":
-    //       $resultStr = $this->receiveText($postObj);
-    //       break;
-    //     case "image":
-    //       $resultStr = $this->receiveImage($postObj);
-    //       break;
-    //     case "location":
-    //       $resultStr = $this->receiveLocation($postObj);
-    //       break;
-    //     case "voice":
-    //       $resultStr = $this->receiveVoice($postObj);
-    //       break;
-    //     case "video":
-    //       $resultStr = $this->receiveVideo($postObj);
-    //       break;
-    //     case "link":
-    //       $resultStr = $this->receiveLink($postObj);
-    //       break;
-    //     case "event":
-    //       $resultStr = $this->receiveEvent($postObj);
-    //       break;
-    //     default:
-    //       $resultStr = "unknow msg type: ".$RX_TYPE;
-    //       break;
-    //   }
-    //   echo $resultStr;
-    // } else {
-    //   echo "";
-    //   exit;
-    // }
+    if (!empty($postStr)) {
+      libxml_disable_entity_loader(true);
+      $postObj = simplexml_load_string($postStr, 'SimpleXMLElement', LIBXML_NOCDATA);
+      $fromUsername = $postObj->FromUserName;
+      $toUsername = $postObj->ToUserName;
+      $RX_TYPE = trim($postObj->MsgType);
+      switch ($RX_TYPE)
+      {
+        case "text":
+          $resultStr = $this->receiveText($postObj);
+          break;
+        case "image":
+          $resultStr = $this->receiveImage($postObj);
+          break;
+        case "location":
+          $resultStr = $this->receiveLocation($postObj);
+          break;
+        case "voice":
+          $resultStr = $this->receiveVoice($postObj);
+          break;
+        case "video":
+          $resultStr = $this->receiveVideo($postObj);
+          break;
+        case "link":
+          $resultStr = $this->receiveLink($postObj);
+          break;
+        case "event":
+          $resultStr = $this->receiveEvent($postObj);
+          break;
+        default:
+          $resultStr = "unknow msg type: ".$RX_TYPE;
+          break;
+      }
+      echo $resultStr;
+    } else {
+      echo "";
+      exit;
+    }
   }
 
   //接收文本消息
