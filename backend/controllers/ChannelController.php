@@ -3,14 +3,15 @@ namespace backend\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
-use common\models\User;
+use common\models\Channel;
 
-class UserController extends RestController
+class ChannelController extends RestController
 {
-  public $modelClass = 'common\models\User';
+  public $modelClass = 'common\models\Channel';
 
   public function actionIndex()
   {
+    return ['test' => $this->modelClass];
     $modelClass = $this->modelClass;
     $query = $modelClass::find(); // equivalent to $query = EntryForm::find()
     return new ActiveDataProvider(['query' => $query, 'pagination' => ['pageSize' => 10]]);
@@ -18,7 +19,7 @@ class UserController extends RestController
 
   public function actionCreate()
   {
-    $model = new User;
+    $model = new Channel;
     $model->attributes = Yii::$app->request->post();
     if (!$model->save()) {
       return array_values($model->getFirstErrors())[0];
@@ -68,6 +69,6 @@ class UserController extends RestController
 
   private function findModel($id)
   {
-    return User::findOne(['id' => $id]);
+    return Channel::findOne(['id' => $id]);
   }
 }

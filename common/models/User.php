@@ -24,14 +24,14 @@ use yii\web\IdentityInterface;
 class User extends ActiveRecord implements IdentityInterface
 {
   const STATUS_DELETED = 0;
-  const STATUS_ACTIVE = 10;
+  const STATUS_ACTIVE = 1;
 
   /**
    * @inheritdoc
    */
   public static function tableName()
   {
-    return '{{%user}}';
+    return 'bs_users';
   }
 
   /**
@@ -53,6 +53,17 @@ class User extends ActiveRecord implements IdentityInterface
       ['status', 'default', 'value' => self::STATUS_ACTIVE],
       ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
     ];
+  }
+
+  public function attributes()
+  {
+    return ['id', 'username', 'password_hash', 'email', 'tel', 'access_token',
+            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+  }
+  public function safeAttributes()
+  {
+    return ['id', 'username', 'password_hash', 'email', 'tel', 'access_token',
+            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
 
   /**
