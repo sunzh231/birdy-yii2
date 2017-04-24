@@ -4,10 +4,22 @@ namespace backend\controllers;
 use Yii;
 use yii\data\ActiveDataProvider;
 use common\models\Channel;
+use common\models\Menu;
+use common\utils\Weconnect;
 
 class ChannelController extends RestController
 {
   public $modelClass = 'common\models\Channel';
+
+  public function actionMenu()
+  {
+    $params = Yii::$app->request->post();
+    $model = $this->findModel($params['id']);
+    $access_token = Weconnect::getAccessToken($model->appid, $model->appsecret);
+    // $menu = new Menu;
+    $result = Weconnect::createMenu($params, $access_token->access_token);
+    return $result;
+  }
 
   public function actionIndex()
   {
@@ -68,6 +80,6 @@ class ChannelController extends RestController
 
   private function findModel($id)
   {
-    return Channel::findOne(['id' => $id]);
+    return Channel::findOne($id);
   }
 }

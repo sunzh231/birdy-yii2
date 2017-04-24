@@ -6,14 +6,14 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
-class Channel extends ActiveRecord
+class Fans extends ActiveRecord
 {
   const STATUS_DELETED = 0;
   const STATUS_ACTIVE = 1;
 
   public static function tableName()
   {
-    return 'bs_channels';
+    return 'bs_fans';
   }
 
   /**
@@ -39,12 +39,19 @@ class Channel extends ActiveRecord
 
   public function attributes()
   {
-    return ['id', 'name', 'originid', 'appid', 'appsecret', 'wechat_token',
+    return ['id', 'nickname', 'headimgurl', 'openid', 'unionid', 'sex', 'language',
+            'city', 'province', 'country', 'subscribe', 'subscribe_time', 'remark', 'tagid_list'
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'originid', 'appid', 'appsecret', 'wechat_token',
+    return ['id', 'nickname', 'headimgurl', 'openid', 'unionid', 'sex', 'language',
+            'city', 'province', 'country', 'subscribe', 'subscribe_time', 'remark', 'tagid_list'
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+  }
+
+  public function getId()
+  {
+    return $this->getPrimaryKey();
   }
 }

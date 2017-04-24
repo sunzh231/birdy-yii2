@@ -146,7 +146,7 @@ class Curl{
   /**
    * @GET请求
    */
-  public static function Get($url, array $params = array()) {
+  public function Get($url, array $params = array()) {
     if ($params) {
       if (strpos($url, '?')) {
         $url .= "&".http_build_query($params);
@@ -168,7 +168,7 @@ class Curl{
   /**
    * @POST请求
    */
-  public static function Post($url, array $params = array()) {
+  public function Post($url, array $params = array()) {
     $this->Start($url);
     curl_setopt($this->ch_, CURLOPT_SSL_VERIFYPEER, 0);
     curl_setopt($this->ch_, CURLOPT_HTTPHEADER, array("Content-Type: application/json;charset=utf-8"));
@@ -184,7 +184,7 @@ class Curl{
   /**
    * @POST请求
    */
-  public static function PostForm($url, array $params = array()) {
+  public function PostForm($url, array $params = array()) {
     $this->Start($url);
     curl_setopt($this->ch_, CURLOPT_SSL_VERIFYPEER, 0);
     // curl_setopt($this->ch_, CURLOPT_HTTPHEADER, array("Content-Type:application/x-www-form-urlencoded"));
@@ -200,7 +200,7 @@ class Curl{
   /**
    * @tips: google http head 方法
    */
-  public static function Head($url, array $params = array()) {
+  public function Head($url, array $params = array()) {
     $this->Start($url);
     curl_setopt($this->ch_, CURLOPT_TIMEOUT, Curl::time_);
     curl_setopt($this->ch_, CURLOPT_RETURNTRANSFER , 0);

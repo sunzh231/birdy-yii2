@@ -3,65 +3,36 @@
     "navbar" : {
       "UPLOAD" : "上传",
       "new" : {
-        "NEW" : "New",
+        "NEW" : "消息",
         "PROJECT" : "Projects",
-        "TASK" : "Task",
-        "USER" : "User",
-        "EMAIL" : "Email"
+        "TASK" : "任务",
+        "USER" : "用户",
+        "EMAIL" : "电子邮件"
       },
       "NOTIFICATIONS" : "通知"
     }
   },
   "aside" : {
     "nav" : {
-      "HEADER" : "Navigation",
-      "DASHBOARD" : "主页",
-      "CALENDAR" : "Calendar",
-      "EMAIL" : "Email",
-      "WIDGETS" : "Widgets",
-      "components" : {
-        "COMPONENTS" : "Components",
-        "ui_kits" : {
-          "UI_KITS" : "UI Kits",
-          "BUTTONS" : "Buttons",
-          "ICONS" : "Icons",
-          "GRID" : "Grid",
-          "BOOTSTRAP" : "Bootstrap",
-          "SORTABLE" : "Sortable",
-          "PORTLET" : "Portlet",
-          "TIMELINE" : "Timeline",
-          "VECTOR_MAP" : "Vector Map"
-        },
-        "table" : {
-          "TABLE" : "Table",
-          "TABLE_STATIC" : "Table static",
-          "DATATABLE" : "Datatable",
-          "FOOTABLE" : "Footable"
-        },
-        "form" : {
-          "FORM" : "Form",
-          "FORM_ELEMENTS" : "Form elements",
-          "FORM_VALIDATION" : "Form validation",
-          "FORM_WIZARD" : "Form wizard"
-        },
-        "CHART" : "Chart",
-        "pages" : {
-          "PAGES" : "Pages",
-          "PROFILE" : "Profile",
-          "POST" : "Post",
-          "SEARCH" : "Search",
-          "INVOICE" : "Invoice",
-          "LOCK_SCREEN" : "Lock screen",
-          "SIGNIN" : "Signin",
-          "SIGNUP" : "Signup",
-          "FORGOT_PASSWORD" : "Forgot password",
-          "404" : "404"
-        }
+      "BASE_FEATURE": "基础功能",
+      "CORE_FEATURE": "核心功能",
+      "EXTEND_FEATURE": "扩展功能",
+      "STUFF": "个人中心",
+      "base": {
+        "DASHBOARD" : "主页",
+        "CHANNEL": "渠道管理",
+        "SYS_SETTING": "系统设置"
       },
-      "your_stuff" : {
-        "YOUR_STUFF": "Your Stuff",
-        "PROFILE" : "Profile",
-        "DOCUMENTS" : "Documents"
+      "core": {
+        "DASHBOARD" : "主页",
+        "CUSTOMER": "客户管理"
+      },
+      "extend": {
+        "CUSTOM_MODULE": "自定义模块"
+      },
+      "stuff" : {
+        "PROFILE" : "我的信息",
+        "DOCUMENTS" : "帮助文档"
       }
     },
     "MILESTONE" : "Milestone",

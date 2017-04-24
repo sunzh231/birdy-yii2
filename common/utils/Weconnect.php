@@ -1,12 +1,27 @@
 <?php
 namespace common\utils;
 
-use app\utils\Curl;
+use common\utils\Curl;
 
 define("TOKEN", "weixin");
 
 class Weconnect
 {
+  public static function getAccessToken($appid, $appsecret)
+  {
+    $params = ['appid' => $appid, 'secret' => $appsecret];
+    $getUrl = 'https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential';
+    $curl = new Curl;
+    return $curl->Get($getUrl, $params);
+  }
+
+  public static function createMenu($params, $token)
+  {
+    $url = 'https://api.weixin.qq.com/cgi-bin/menu/create?access_token='.$token;
+    $curl = new Curl;
+    return $curl->Post($url, $params);
+  }
+
   public static function checkSignature($signature, $timestamp, $nonce)
   {
     $token = TOKEN;
