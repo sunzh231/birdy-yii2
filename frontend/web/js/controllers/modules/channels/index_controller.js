@@ -1,7 +1,7 @@
 'use strict';
 
 /* User Controller */
-app.controller('UserCtrl', ['$scope','dialogs', function($scope, $dialogs) {
+app.controller('UserCtrl', ['$scope','dialogs','$resource', function($scope, $dialogs, $resource) {
   var aoColumns = [];
   $('#target_table').find('th').each(function(index, elem) {
     if($(elem).attr('field')) {
@@ -28,9 +28,29 @@ app.controller('UserCtrl', ['$scope','dialogs', function($scope, $dialogs) {
     //   '</div>'
   });
   $scope.table_options = {
-    sAjaxSource: '/api/channel/index?access-token=123456',
-    aoColumns: aoColumns
+    data: resp.items,
+    serverSide: true,
+    aoColumns: aoColumns,
+    serverSide: true
+    stateSave: false
+    fnServerData: function( sUrl, aoData, fnCallback, oSettings ) {
+      oSettings.jqXHR = $.ajax({
+      "url": sUrl,
+      beforeSend: function(xhr) {
+        xhr.withCredentials = true;
+      },
+      "data": aoData,
+      "type": 'get',
+      "success": fnCallback,
+      "cache": false
+    });
   }
+  var resource = $resource('/api/channel/index?access-token=123456');
+  resource.get({},function(resp) {
+    console.log(resp);
+
+  });
+
   $scope.launch = function(which){
     var dlg = $dialogs.create('/src/tpl/modules/channels/dialog.html','DialogCtrl',{},{key: false,back: 'static'});
     dlg.result.then(function(name){
