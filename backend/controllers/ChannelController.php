@@ -32,6 +32,8 @@ class ChannelController extends RestController
   {
     $model = new Channel;
     $model->attributes = Yii::$app->request->post();
+    $model->updated_by = 1;
+    $model->created_by = 1;
     if (!$model->save()) {
       return array_values($model->getFirstErrors())[0];
     }

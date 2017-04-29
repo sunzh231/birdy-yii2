@@ -21,13 +21,20 @@ angular.module('app')
         $stateProvider.state('app', {
               abstract: true,
               url: '/app',
-              templateUrl: layout
+              templateUrl: layout,
+              controller: 'BaseCtrl',
+              resolve: {
+                loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
+                  return $ocLazyLoad.load('js/controllers/base_controller.js');
+                }]
+              }
           }).state('app.custom_module', {
               url: '/custom_module',
               templateUrl: 'tpl/modules/custom_module.html',
               resolve: load(['js/controllers/chart.js'])
           }).state('app.index', {
               url: '/:target/index',
+              controller: 'IndexCtrl',
               templateUrl: function ($stateParams){
                 return 'tpl/modules/'+ $stateParams.target +'/index.html';
               },

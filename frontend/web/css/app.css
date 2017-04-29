@@ -5194,3 +5194,18 @@ a.text-#000000:hover {
     background-color: #7266ba;
   }
 }
+
+.table-wrap .panel-footer .turn-btn {
+  float: right;
+  width: 100px;
+}
+
+.table-wrap .panel-footer .turn-btn .input-sm {
+  float: none;
+  width: 42px;
+  text-align: center;
+}
+
+.modal .modal-dialog {
+  width: 600px;
+}
