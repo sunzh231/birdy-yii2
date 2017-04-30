@@ -1,0 +1,196 @@
+<div id="channel_detail">
+  <div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3"> 媒体账号详情 </h1>
+  </div>
+  <div class="wrapper-md">
+    <div class="tab-container">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href data-toggle="tab" data-target="#tab_1"> 基础配置 </a>
+        </li>
+        <li>
+          <a href data-toggle="tab" data-target="#tab_2">
+            粉丝管理
+            <span class="badge bg-danger badge-sm m-l-xs">6</span>
+          </a>
+        </li>
+        <li>
+          <a href data-toggle="tab" data-target="#tab_3">
+            消息管理
+            <span class="badge bg-primary badge-sm m-l-xs">9</span>
+          </a>
+        </li>
+        <li>
+          <a href data-toggle="tab" data-target="#tab_4"> 关注消息配置 </a>
+        </li>
+        <li>
+          <a href data-toggle="tab" data-target="#tab_5"> 素材库 </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+          <div class="row row-sm">
+            <div class="col-lg-5 col-md-6 col-sm-8">
+              <div class="mobile-preview-wrap">
+
+              </div>
+            </div>
+            <div class="col-lg-7 col-md-6 col-sm-8">
+              <div class="panel  panel-default">
+                <div class="panel-heading">
+                  菜单设置
+                </div>
+                <div class="panel-body">
+                  <form class="form-horizontal" method="get">
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">菜单名称</label>
+                      <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="请输入菜单名称">
+                        <span class="help-block m-b-none">字数不超过4个汉字或8个字母</span>
+                      </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">菜单类型</label>
+                      <div class="col-sm-9">
+                        <ui-select ng-model="menu.selected" theme="bootstrap">
+                          <ui-select-match placeholder="请选择菜单类型">{{$select.selected.name}}</ui-select-match>
+                          <ui-select-choices group-by="'group'" repeat="item in menu_types | filter: $select.search">
+                            <span ng-bind-html="item.name | highlight: $select.search"></span>
+                            <small ng-bind-html="item.type | highlight: $select.search"></small>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">页面地址</label>
+                          <div class="col-sm-9">
+                            <div class="input-group">
+                              <input type="text" class="form-control" placeholder="请输入点击菜单跳转地址">
+                              <span class="input-group-btn">
+                                <button class="btn btn-info" ng-click="" type="button">选择</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">关键字</label>
+                          <div class="col-sm-9">
+                            <ui-select ng-model="menu.selected" theme="bootstrap">
+                              <ui-select-match placeholder="请选择自定义事件关键字">{{$select.selected.name}}</ui-select-match>
+                              <ui-select-choices group-by="'group'" repeat="item in menu_types | filter: $select.search">
+                                <span ng-bind-html="item.name | highlight: $select.search"></span>
+                                <small ng-bind-html="item.type | highlight: $select.search"></small>
+                              </ui-select-choices>
+                            </ui-select>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <ul class="metail-type">
+                              <li> 图文消息 </li>
+                              <li> 图片 </li>
+                              <li> 语音 </li>
+                              <li> 视频 </li>
+                            </ul>
+                          </div>
+                          <div class="panel-body">
+                            啊实打实地方
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row operation-wrap">
+            <div class="col-lg-12 text-center">
+              <button class="btn m-b-xs w-xs btn-info">保存并发布</button>
+              <button class="btn m-b-xs w-xs btn-default">预览</button>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="tab_2">
+          <ul class="list-group list-group-alt list-group-lg no-borders pull-in m-b-none">
+            <li class="list-group-item">
+              <a href="#" class="pull-left thumb-md m-r">
+                <img src="img/a0.jpg" alt="..." class="img-circle">
+              </a>
+              <div class="clear">
+                <a href="#" class="h4 text-primary m-b-sm block">Jone Dosh <span class="label label-sm bg-info">Editor</span></a>
+                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="pull-left thumb-md m-r">
+                <img src="img/a1.jpg" alt="..." class="img-circle">
+              </a>
+              <div class="clear">
+                <a href="#" class="h4 text-primary m-b-sm block">Miya Soe <span class="label label-sm bg-danger">VIP</span></a>
+                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="pull-left thumb-md m-r">
+                <img src="img/a2.jpg" alt="..." class="img-circle">
+              </a>
+              <div class="clear">
+                <a href="#" class="h4 text-primary m-b-sm block">Jocob</a>
+                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="pull-left thumb-md m-r">
+                <img src="img/a3.jpg" alt="..." class="img-circle">
+              </a>
+              <div class="clear">
+                <a href="#" class="h4 text-primary m-b-sm block">Goal De</a>
+                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
+              </div>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="pull-left thumb-md m-r">
+                <img src="img/a4.jpg" alt="..." class="img-circle">
+              </a>
+              <div class="clear">
+                <a href="#" class="h4 text-primary m-b-sm block">Miia Se</a>
+                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-pane" id="tab_3">
+          <ul class="list-group list-group-lg no-borders pull-in m-b-none">
+            <li class="list-group-item">
+              <a href="#" class="h4 text-primary m-b-sm block">Mauris convallis mauris at pellentesque volutpat</a>
+              <p class="b wrapper-md pos-rlt bg-light r r-2x"><span class="arrow top pull-left arrow-light"></span>Lorem ipsum dolor sit amet, fermentum diam. Vivamus vel tincidunt libero, vitae elementum ligula venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum</p>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="h4 text-primary m-b-sm block">Phasellus at ultricies neque, quis malesuada augu</a>
+              <p class="b wrapper-md pos-rlt"><span class="arrow top pull-left"></span>Fermentum diam. Vivamus vel tincidunt libero, vitae elementum ligula venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum</p>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="h4 text-primary m-b-sm block">Morbi nec nunc condimentum, egestas dui nec, fermentum diam</a>
+              <p class="b wrapper-md pos-rlt bg-info text-lt r r-2x"><span class="arrow top pull-left arrow-info"></span>Vivamus vel tincidunt libero, vitae elementum ligula venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum</p>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="h4 text-primary m-b-sm block">Vestibulum ullamcorper sodales nisi nec condimentum Mauris convallis</a>
+              <p class="b wrapper-md pos-rlt"><span class="arrow top pull-left"></span>Egestas dui nec, fermentum diam. Vivamus vel tincidunt libero, vitae elementum ligula venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum</p>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-pane" id="tab_4">
+          12321
+        </div>
+        <div class="tab-pane" id="tab_5">
+          12321
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

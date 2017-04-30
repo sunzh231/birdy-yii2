@@ -150,20 +150,27 @@
               <th>渠道名称</th>
               <th>原始ID</th>
               <th>APP ID</th>
-              <th style="width:30px;"></th>
+              <th style="width:120px;">操作</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="item in result['items']">
-              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-              <td><span class="text-ellipsis">{{ item.name }}</span></td>
+              <td>
+                <label class="i-checks m-b-none">
+                  <input type="checkbox" value="{{item.id}}"><i></i>
+                </label>
+              </td>
+              <td><a ui-sref="app.detail({target: 'channels', id: '{{item.id}}'})"><span class="text-ellipsis">{{ item.name }}</span></a></td>
               <td><span class="text-ellipsis">{{ item.originid }}</span></td>
               <td><span class="text-ellipsis">{{ item.appid }}</span></td>
               <td>
-                <a href class="active" ui-toggle-class>
-                  <i class="fa fa-check text-success text-active"></i>
-                  <i class="fa fa-times text-danger text"></i>
-                </a>
+                <div class="btn-group dropdown row-btn-group">
+                  <button class="btn btn-success" data-toggle="dropdown">操作<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="">编辑</a></li>
+                    <li><a href="">删除</a></li>
+                  </ul>
+                </div>
               </td>
             </tr>
           </tbody>

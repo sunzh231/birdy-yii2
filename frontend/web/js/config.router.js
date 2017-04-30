@@ -23,11 +23,7 @@ angular.module('app')
               url: '/app',
               templateUrl: layout,
               controller: 'BaseCtrl',
-              resolve: {
-                loadMyCtrl: ['$ocLazyLoad', function($ocLazyLoad) {
-                  return $ocLazyLoad.load('js/controllers/base_controller.js');
-                }]
-              }
+              resolve: load(['js/controllers/chart.js', 'ui.select', 'js/controllers/base_controller.js'])
           }).state('app.custom_module', {
               url: '/custom_module',
               templateUrl: 'tpl/modules/custom_module.html',
@@ -54,7 +50,8 @@ angular.module('app')
                 }]
               }
           }).state('app.detail', {
-              url: '/:target/detail',
+              url: '/:target/detail/:id',
+              controller: 'DetailCtrl',
               templateUrl: function ($stateParams){
                 return 'tpl/modules/'+ $stateParams.target +'/detail.html';
               },

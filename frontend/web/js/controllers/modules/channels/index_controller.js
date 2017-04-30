@@ -1,4 +1,5 @@
 'use strict';
+
 var dlg = null;
 /* User Controller */
 app.controller('IndexCtrl', ['$scope', 'dialogs', '$resource', function($scope, $dialogs, $resource) {

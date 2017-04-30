@@ -1,7 +1,3 @@
-/* 
-
-*/
-
 html {
   background-color: #f0f3f4;
 }
@@ -5195,6 +5191,24 @@ a.text-#000000:hover {
   }
 }
 
+.table-wrap .table-responsive table tbody tr td {
+  line-height: 32px;
+}
+
+.table-wrap .table-responsive table tbody tr td a {
+  color: #23b7e5;
+}
+
+.table-wrap .table-responsive table tbody tr td .row-btn-group .btn-success {
+  height: 28px;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.table-wrap .table-responsive table tbody tr td .row-btn-group .dropdown-menu {
+  min-width: 100px;
+}
+
 .table-wrap .panel-footer .turn-btn {
   float: right;
   width: 100px;
@@ -5208,4 +5222,26 @@ a.text-#000000:hover {
 
 .modal .modal-dialog {
   width: 600px;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap {
+  width: 320px;
+  height: 568px;
+  border: solid 1px #eaeff0;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .metail-type {
+  height: 10px;
+  clear: both;
+  list-style: none;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .metail-type li {
+  float: left;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .operation-wrap {
+  margin-top: 20px;
 }
