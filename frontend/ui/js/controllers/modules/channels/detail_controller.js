@@ -2,7 +2,7 @@
 
 var dlg = null;
 /* User Controller */
-app.controller('DetailCtrl', ['$scope', 'dialogs', '$resource', function($scope, $dialogs, $resource) {
+app.controller('DetailCtrl', ['$scope', '$stateParams', '$resource', function($scope, $stateParams, $resource) {
   $scope.menu = {};
   $scope.menu_types = [
     { name: '点击推事件', type: 'click', content: 12 },
@@ -16,12 +16,49 @@ app.controller('DetailCtrl', ['$scope', 'dialogs', '$resource', function($scope,
     { name: '下发消息', type: 'media_id', content: 15 },
     { name: '跳转图文消息URL', type: 'view_limited', content: 43 }
   ];
-}]);
+  $scope.wechatMenus = []
+  $scope.addMenu = function (index) {
+    if (index !== undefined) {
+      $scope.wechatMenus[index].sub_button.push({
+        name: 'test',
+        type: { name: '跳转图文消息URL', type: 'view_limited', content: 43 },
+        key: '123',
+        media_id: '',
+        url: ''
+      })
+    } else {
+      $scope.wechatMenus.push({
+        name: 'test',
+        type: 'click',
+        key: '123',
+        media_id: '',
+        url: '',
+        sub_button: []
+      })
+    }
 
-
-app.controller('TabsDemoCtrl', ['$scope', function($scope) {
-  $scope.tabs = [
-    { title:'Dynamic Title 1', content:'Dynamic content 1' },
-    { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
-  ];
+  }
+  $scope.setMenu = function (parentIndex, index, $event) {
+    $event.stopPropagation();
+    if (parentIndex === -1) {
+      $scope.menu = $scope.wechatMenus[index]
+    } else {
+      $scope.menu = $scope.wechatMenus[parentIndex].sub_button[index]
+    }
+  }
+  console.log($stateParams);
+  $scope.menuActive = function () {
+    var url = '/api/channel/menu?access-token=123456';
+    var resource = $resource(url);
+    var result = {
+      id: $stateParams.id,
+      data: {
+        button: $scope.wechatMenus
+      }
+    }
+    console.log(result);
+    resource.save(result, function(resp) {
+      console.log(resp)
+    });
+  }
 }]);

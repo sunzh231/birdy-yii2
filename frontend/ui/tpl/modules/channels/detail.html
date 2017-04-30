@@ -32,7 +32,24 @@
           <div class="row row-sm">
             <div class="col-lg-5 col-md-6 col-sm-8">
               <div class="mobile-preview-wrap">
+                <div class="mobile-bottom">
+                  <div class="keyboard-btn"></div>
+                  <ul>
+                    <li ng-repeat="menu in wechatMenus" ng-click="setMenu(-1, $index, $event)" class="wechat-menu">
+                      <ul>
+                        <li ng-repeat="sub_menu in menu.sub_button" ng-click="setMenu($parent.$index, $index, $event)" class="wechat-sub-menu">
 
+                        </li>
+                        <li ng-show="menu.sub_button.length < 5" ng-click="addMenu($index)" class="add-menu-btn">
+                          添加子菜单
+                        </li>
+                      </ul>
+                    </li>
+                    <li ng-show="wechatMenus.length < 3" ng-click="addMenu()" class="add-menu-btn">
+                      添加菜单
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
             <div class="col-lg-7 col-md-6 col-sm-8">
@@ -45,7 +62,7 @@
                     <div class="form-group">
                       <label class="col-sm-3 control-label">菜单名称</label>
                       <div class="col-sm-9">
-                        <input type="text" class="form-control" placeholder="请输入菜单名称">
+                        <input type="text" ng-model="menu.name" class="form-control" placeholder="请输入菜单名称">
                         <span class="help-block m-b-none">字数不超过4个汉字或8个字母</span>
                       </div>
                     </div>
@@ -53,7 +70,7 @@
                     <div class="form-group">
                       <label class="col-sm-3 control-label">菜单类型</label>
                       <div class="col-sm-9">
-                        <ui-select ng-model="menu.selected" theme="bootstrap">
+                        <ui-select ng-model="menu.type" theme="bootstrap">
                           <ui-select-match placeholder="请选择菜单类型">{{$select.selected.name}}</ui-select-match>
                           <ui-select-choices group-by="'group'" repeat="item in menu_types | filter: $select.search">
                             <span ng-bind-html="item.name | highlight: $select.search"></span>
@@ -69,7 +86,7 @@
                           <label class="col-sm-3 control-label">页面地址</label>
                           <div class="col-sm-9">
                             <div class="input-group">
-                              <input type="text" class="form-control" placeholder="请输入点击菜单跳转地址">
+                              <input type="text" ng-model="menu.url" class="form-control" placeholder="请输入点击菜单跳转地址">
                               <span class="input-group-btn">
                                 <button class="btn btn-info" ng-click="" type="button">选择</button>
                               </span>
@@ -79,7 +96,7 @@
                         <div class="form-group">
                           <label class="col-sm-3 control-label">关键字</label>
                           <div class="col-sm-9">
-                            <ui-select ng-model="menu.selected" theme="bootstrap">
+                            <ui-select ng-model="menu.event_key" theme="bootstrap">
                               <ui-select-match placeholder="请选择自定义事件关键字">{{$select.selected.name}}</ui-select-match>
                               <ui-select-choices group-by="'group'" repeat="item in menu_types | filter: $select.search">
                                 <span ng-bind-html="item.name | highlight: $select.search"></span>
@@ -98,7 +115,7 @@
                             </ul>
                           </div>
                           <div class="panel-body">
-                            啊实打实地方
+                            <input type="text" ng-model="menu.media_id" class="form-control" placeholder="Media ID">
                           </div>
                         </div>
                       </div>
@@ -110,7 +127,7 @@
           </div>
           <div class="row operation-wrap">
             <div class="col-lg-12 text-center">
-              <button class="btn m-b-xs w-xs btn-info">保存并发布</button>
+              <button ng-click="menuActive()" class="btn m-b-xs w-xs btn-info">保存并发布</button>
               <button class="btn m-b-xs w-xs btn-default">预览</button>
             </div>
           </div>

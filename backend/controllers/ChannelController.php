@@ -17,7 +17,7 @@ class ChannelController extends RestController
     $model = $this->findModel($params['id']);
     $access_token = Weconnect::getAccessToken($model->appid, $model->appsecret);
     // $menu = new Menu;
-    $result = Weconnect::createMenu($params, $access_token->access_token);
+    $result = Weconnect::createMenu($params['data'], $access_token->access_token);
     return $result;
   }
 

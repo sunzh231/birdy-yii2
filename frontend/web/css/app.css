@@ -5225,9 +5225,63 @@ a.text-#000000:hover {
 }
 
 #channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap {
+  position: relative;
   width: 320px;
-  height: 568px;
+  height: 520px;
   border: solid 1px #eaeff0;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap .mobile-bottom {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 320px;
+  height: 50px;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap .mobile-bottom .keyboard-btn {
+  float: left;
+  width: 50px;
+  height: 50px;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap .mobile-bottom ul {
+  height: 50px;
+  padding: 0;
+  list-style: none;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap .mobile-bottom ul .wechat-menu {
+  position: relative;
+  float: left;
+  width: 90px;
+  height: 100%;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+  border: solid 1px #dee5e7;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap .mobile-bottom ul .wechat-menu ul {
+  position: absolute;
+  bottom: 270px;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap .mobile-bottom ul .wechat-menu ul .wechat-sub-menu {
+  width: 90px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+  border: solid 1px #dee5e7;
+}
+
+#channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap .mobile-bottom ul .add-menu-btn {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  cursor: pointer;
+  border: solid 1px #dee5e7;
 }
 
 #channel_detail .wrapper-md .tab-container .tab-content .tab-pane .metail-type {
