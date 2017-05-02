@@ -3,6 +3,47 @@
     <h1 class="m-n font-thin h3"> 媒体账号详情 </h1>
   </div>
   <div class="wrapper-md">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">基础信息</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">账号名称:</label>
+            <div class="col-sm-8">{{ channel.name }}</div>
+          </div>
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">账号类型:</label>
+            <div class="col-sm-8">微信订阅号</div>
+          </div>
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">媒体类型:</label>
+            <div class="col-sm-8 control-content">微信</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">原始ID:</label>
+            <div class="col-sm-8 control-content">{{ channel.originid }}</div>
+          </div>
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">App ID:</label>
+            <div class="col-sm-8 control-content">{{ channel.appid }}</div>
+          </div>
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">App Secret:</label>
+            <div class="col-sm-8 control-content">{{ channel.appsecret }}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">回调地址:</label>
+            <div class="col-sm-8 control-content">http://birdycloud.xyz/api/wechat/valid</div>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="tab-container">
       <ul class="nav nav-tabs">
         <li class="active">
@@ -133,53 +174,83 @@
           </div>
         </div>
         <div class="tab-pane" id="tab_2">
-          <ul class="list-group list-group-alt list-group-lg no-borders pull-in m-b-none">
-            <li class="list-group-item">
-              <a href="#" class="pull-left thumb-md m-r">
-                <img src="img/a0.jpg" alt="..." class="img-circle">
-              </a>
-              <div class="clear">
-                <a href="#" class="h4 text-primary m-b-sm block">Jone Dosh <span class="label label-sm bg-info">Editor</span></a>
-                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
+          <div class="panel panel-default table-wrap">
+            <div class="panel-heading">
+              粉丝列表
+            </div>
+            <div class="row wrapper">
+              <div class="col-sm-5 m-b-xs">
+                <select class="input-sm form-control w-sm inline v-middle">
+                  <option value="0">Bulk action</option>
+                  <option value="1">Delete selected</option>
+                  <option value="2">Bulk edit</option>
+                  <option value="3">Export</option>
+                </select>
+                <button class="btn btn-sm btn-info">查询</button>
               </div>
-            </li>
-            <li class="list-group-item">
-              <a href="#" class="pull-left thumb-md m-r">
-                <img src="img/a1.jpg" alt="..." class="img-circle">
-              </a>
-              <div class="clear">
-                <a href="#" class="h4 text-primary m-b-sm block">Miya Soe <span class="label label-sm bg-danger">VIP</span></a>
-                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped b-t b-light">
+                <thead>
+                  <tr>
+                    <th style="width:20px;">
+                      <label class="i-checks m-b-none">
+                        <input type="checkbox"><i></i>
+                      </label>
+                    </th>
+                    <th>头像</th>
+                    <th>昵称</th>
+                    <th>openid</th>
+                    <th>性别</th>
+                    <th>地址</th>
+                    <th>关注时间</th>
+                    <th>关注状态</th>
+                    <th>备注</th>
+                    <th style="width:120px;">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in result['items']">
+                    <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+                    <td><span class="text-ellipsis">{{ item.username }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.email }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td>
+                      <a href class="active" ui-toggle-class>
+                        <i class="fa fa-check text-success text-active"></i>
+                        <i class="fa fa-times text-danger text"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <footer class="panel-footer">
+              <div class="row">
+                <div class="col-sm-4 text-left">
+                  <small class="text-muted inline m-t-sm m-b-sm">第{{ pagination.currentPage }}页 共{{ pagination.pageCount }}页</small>
+                </div>
+                <div class="col-sm-8 text-right text-center-xs">
+                  <div class="input-group turn-btn">
+                    <input type="text" class="form-control input-sm" ng-model="turnPage">
+                    <span class="input-group-btn">
+                      <button class="btn btn-sm btn-info" ng-click="setPage(turnPage)" type="button">跳转</button>
+                    </span>
+                  </div>
+                  <ul uib-pagination total-items="pagination.totalCount" ng-model="pagination.currentPage"
+                      max-size="5" items-per-page="10" class="pagination pagination-sm m-t-none m-b-none"
+                      ng-change="pageChanged()"
+                      previous-text="上一页" next-text="下一页" boundary-link-numbers="true">
+                  </ul>
+                </div>
               </div>
-            </li>
-            <li class="list-group-item">
-              <a href="#" class="pull-left thumb-md m-r">
-                <img src="img/a2.jpg" alt="..." class="img-circle">
-              </a>
-              <div class="clear">
-                <a href="#" class="h4 text-primary m-b-sm block">Jocob</a>
-                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <a href="#" class="pull-left thumb-md m-r">
-                <img src="img/a3.jpg" alt="..." class="img-circle">
-              </a>
-              <div class="clear">
-                <a href="#" class="h4 text-primary m-b-sm block">Goal De</a>
-                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
-              </div>
-            </li>
-            <li class="list-group-item">
-              <a href="#" class="pull-left thumb-md m-r">
-                <img src="img/a4.jpg" alt="..." class="img-circle">
-              </a>
-              <div class="clear">
-                <a href="#" class="h4 text-primary m-b-sm block">Miia Se</a>
-                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id neque quam. Aliquam sollicitudin egestas dui nec, fermentum diam. Vivamus vel tincidunt libero</div>
-              </div>
-            </li>
-          </ul>
+            </footer>
+          </div>
         </div>
         <div class="tab-pane" id="tab_3">
           <ul class="list-group list-group-lg no-borders pull-in m-b-none">

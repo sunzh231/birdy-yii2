@@ -5224,6 +5224,14 @@ a.text-#000000:hover {
   width: 600px;
 }
 
+.control-label {
+  text-align: right;
+}
+
+.control-content {
+  word-wrap: break-word;
+}
+
 #channel_detail .wrapper-md .tab-container .tab-content .tab-pane .mobile-preview-wrap {
   position: relative;
   width: 320px;

@@ -3,6 +3,11 @@
 var dlg = null;
 /* User Controller */
 app.controller('DetailCtrl', ['$scope', '$stateParams', '$resource', function($scope, $stateParams, $resource) {
+  var url = '/api/channel/view/:channel_id?access-token=123456';
+  var resource = $resource(url, {channel_id: '@id'});
+  resource.get({channel_id: $stateParams.id}, function(resp) {
+    $scope.channel = resp;
+  });
   $scope.menu = {};
   $scope.menu_types = [
     { name: '点击推事件', type: 'click', content: 12 },
@@ -46,7 +51,7 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$resource', function($s
       $scope.menu = $scope.wechatMenus[parentIndex].sub_button[index]
     }
   }
-  console.log($stateParams);
+
   $scope.menuActive = function () {
     var url = '/api/channel/menu?access-token=123456';
     var resource = $resource(url);
@@ -56,9 +61,29 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$resource', function($s
         button: $scope.wechatMenus
       }
     }
-    console.log(result);
     resource.save(result, function(resp) {
       console.log(resp)
     });
   }
+
+  // Fans List
+  $scope.table_render = function(current_page) {
+    var url = '/api/user/index?page='+ current_page +'&access-token=123456';
+    var resource = $resource(url);
+    resource.get({},function(resp) {
+      $scope.result = resp;
+      $scope.pagination = resp['_meta'];
+      $scope.turnPage = $scope.pagination.currentPage;
+    });
+  }
+
+  $scope.setPage = function (pageNo) {
+    $scope.table_render(pageNo);
+  };
+
+  $scope.pageChanged = function() {
+    $scope.table_render($scope.pagination.currentPage);
+  };
+
+  $scope.table_render(1);
 }]);
