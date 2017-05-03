@@ -6,6 +6,7 @@ use yii\rest\ActiveController;
 use yii\web\Response;
 use yii\filters\Cors;
 use common\models\Channel;
+use common\models\Fans;
 use common\utils\Weconnect;
 use common\utils\Curl;
 
@@ -112,7 +113,34 @@ class WechatController extends ActiveController
     switch ($object->Event)
     {
       case "subscribe":
-        $contentStr = "你关注了我";    //关注后回复内容
+        $model = Channel::findOne(['originid' => $object->ToUserName]);
+        $access_token = Weconnect::getAccessToken($model->appid, $model->appsecret);
+        $userInfo = Weconnect::getUserInfo($object->FromUserName, $access_token->access_token);
+
+        $fans = Fans::findOne(['openid' => $object->FromUserName]);
+        if (!$fans) {
+          $fans = new Fans();
+        }
+        $fans->nickname = $userInfo->nickname;
+        $fans->headimgurl = $userInfo->headimgurl;
+        $fans->openid = $userInfo->openid;
+        $fans->unionid = $userInfo->unionid;
+        $fans->sex = $userInfo->sex;
+        $fans->language = $userInfo->language;
+        $fans->city = $userInfo->city;
+        $fans->province = $userInfo->province;
+        $fans->country = $userInfo->country;
+        $fans->subscribe = $userInfo->subscribe;
+        $fans->subscribe_time = $userInfo->subscribe_time;
+        $fans->remark = $userInfo->remark;
+        $fans->tagid_list = '';
+        $fans->updated_by = 1;
+        $fans->created_by = 1;
+        if (!$fans->save()) {
+            return false;
+        }
+
+        $contentStr = Weconnect::transmitNews($object, "欢迎关注！");
         break;
       case "unsubscribe":
         $contentStr = "你取消了关注";

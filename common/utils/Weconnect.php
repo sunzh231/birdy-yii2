@@ -22,6 +22,14 @@ class Weconnect
     return $curl->Post($url, $params);
   }
 
+  public static function getUserInfo($openid, $token)
+  {
+    $params= [];
+    $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$token.'&openid='.$openid.'&lang=zh_CN';
+    $curl = new Curl;
+    return $curl->Get($url, $params);
+  }
+
   public static function checkSignature($signature, $timestamp, $nonce)
   {
     $token = TOKEN;
