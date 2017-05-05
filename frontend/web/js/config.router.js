@@ -23,7 +23,7 @@ angular.module('app')
               url: '/app',
               templateUrl: layout,
               controller: 'BaseCtrl',
-              resolve: load(['js/controllers/chart.js', 'ui.select', 'js/controllers/base_controller.js'])
+              resolve: load(['textAngular', 'ui.select', 'js/controllers/base_controller.js'])
           }).state('app.custom_module', {
               url: '/custom_module',
               templateUrl: 'tpl/modules/custom_module.html',

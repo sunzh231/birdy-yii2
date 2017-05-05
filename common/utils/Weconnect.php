@@ -22,6 +22,13 @@ class Weconnect
     return $curl->Post($url, $params);
   }
 
+  public static function createMaterial($params, $token) {
+    $url = 'https://api.weixin.qq.com/cgi-bin/material/add_material?access_token='.$token;
+    $curl = new Curl;
+    // $params = ['type'=> 'image', 'media' => '@'.$targetPath];
+    $result = $curl->PostForm($url, $params);
+  }
+
   public static function getUserInfo($openid, $token)
   {
     $params= [];

@@ -3,11 +3,12 @@ namespace backend\controllers;
 
 use Yii;
 use yii\data\ActiveDataProvider;
-use common\models\Fans;
+use common\models\Channel;
+use common\utils\Weconnect;
 
-class FansController extends RestController
+class ChannelController extends RestController
 {
-  public $modelClass = 'common\models\Fans';
+  public $modelClass = 'common\models\Channel';
 
   public function actionIndex()
   {
@@ -18,8 +19,10 @@ class FansController extends RestController
 
   public function actionCreate()
   {
-    $model = new Fans;
+    $model = new Channel;
     $model->attributes = Yii::$app->request->post();
+    $model->updated_by = 1;
+    $model->created_by = 1;
     if (!$model->save()) {
       return array_values($model->getFirstErrors())[0];
     }
@@ -68,6 +71,6 @@ class FansController extends RestController
 
   private function findModel($id)
   {
-    return Fans::findOne(['id' => $id]);
+    return Channel::findOne($id);
   }
 }
