@@ -45,7 +45,10 @@ module.exports = {
           'videogular-buffering/buffering.min.js',
           'videogular-overlay-play/overlay-play.min.js',
           'videogular-poster/poster.min.js',
-          'videogular-ima-ads/ima-ads.min.js'
+          'videogular-ima-ads/ima-ads.min.js',
+          'ueditor/ueditor.config.js',
+          'ueditor/ueditor.parse.js',
+          'angular-ueditor/dist/angular-ueditor.min.js'
         ],
         dest: 'web/libs/angular',
         cwd:  'bower_components',

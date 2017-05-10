@@ -10,7 +10,7 @@ angular.module('app')
       easyPieChart:   [   '../libs/jquery/jquery.easy-pie-chart/dist/jquery.easypiechart.fill.js'],
       sparkline:      [   '../libs/jquery/jquery.sparkline/dist/jquery.sparkline.retina.js'],
       plot:           [   '../libs/jquery/flot/jquery.flot.js',
-                          '../libs/jquery/flot/jquery.flot.pie.js', 
+                          '../libs/jquery/flot/jquery.flot.pie.js',
                           '../libs/jquery/flot/jquery.flot.resize.js',
                           '../libs/jquery/flot.tooltip/js/jquery.flot.tooltip.min.js',
                           '../libs/jquery/flot.orderbars/js/jquery.flot.orderBars.js',
@@ -33,7 +33,7 @@ angular.module('app')
       dataTable:      [   '../libs/jquery/datatables/media/js/jquery.dataTables.min.js',
                           '../libs/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.js',
                           '../libs/jquery/plugins/integration/bootstrap/3/dataTables.bootstrap.css'],
-      vectorMap:      [   '../libs/jquery/bower-jvectormap/jquery-jvectormap-1.2.2.min.js', 
+      vectorMap:      [   '../libs/jquery/bower-jvectormap/jquery-jvectormap-1.2.2.min.js',
                           '../libs/jquery/bower-jvectormap/jquery-jvectormap-world-mill-en.js',
                           '../libs/jquery/bower-jvectormap/jquery-jvectormap-us-aea-en.js',
                           '../libs/jquery/bower-jvectormap/jquery-jvectormap.css'],
@@ -48,7 +48,7 @@ angular.module('app')
                           '../libs/jquery/bootstrap-daterangepicker/daterangepicker-bs3.css'],
       tagsinput:      [   '../libs/jquery/bootstrap-tagsinput/dist/bootstrap-tagsinput.js',
                           '../libs/jquery/bootstrap-tagsinput/dist/bootstrap-tagsinput.css']
-                      
+
     }
   )
   .constant('MODULE_CONFIG', [
@@ -173,6 +173,14 @@ angular.module('app')
           name: 'angular-skycons',
           files: [
               '../libs/angular/angular-skycons/angular-skycons.js'
+          ]
+      },
+      {
+          name: 'angular-uedit',
+          files: [
+              '../libs/ueditor/ueditor.config.js',
+              '../libs/ueditor/ueditor.parse.js',
+              '../libs/angular-ueditor/dist/angular-ueditor.min.js',
           ]
       }
     ]

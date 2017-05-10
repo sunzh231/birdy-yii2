@@ -57,4 +57,13 @@ return array (
       '@fedemotta/cronjob' => $vendorDir . '/fedemotta/yii2-cronjob',
     ),
   ),
+  'dcb9/yii2-qiniu' => 
+  array (
+    'name' => 'dcb9/yii2-qiniu',
+    'version' => '0.5.0.0',
+    'alias' => 
+    array (
+      '@dcb9/qiniu' => $vendorDir . '/dcb9/yii2-qiniu/src',
+    ),
+  ),
 );
