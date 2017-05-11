@@ -6,21 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
-/**
- * User model
- *
- * @property integer $id
- * @property string $username
- * @property string $password_hash
- * @property string $password_reset_token
- * @property string $email
- * @property string $auth_key
- * @property integer $status
- * @property integer $created_at
- * @property integer $updated_at
- * @property string $password write-only password
- */
-class Team extends ActiveRecord
+class Module extends ActiveRecord
 {
   const STATUS_DELETED = 0;
   const STATUS_ACTIVE = 1;
@@ -30,7 +16,7 @@ class Team extends ActiveRecord
    */
   public static function tableName()
   {
-    return 'bs_users';
+    return 'bs_modules';
   }
 
   /**
@@ -56,31 +42,13 @@ class Team extends ActiveRecord
 
   public function attributes()
   {
-    return ['id', 'username', 'password_hash', 'email', 'tel', 'access_token',
+    return ['id', 'name', 'desc', 'parent_id', 'grade_code', 'sync_status',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
   public function safeAttributes()
   {
-    return ['id', 'username', 'password_hash', 'email', 'tel', 'access_token',
+    return ['id', 'name', 'desc', 'parent_id', 'grade_code', 'sync_status',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
 
-  /**
-   * Finds user by username
-   *
-   * @param string $username
-   * @return static|null
-   */
-  public static function findByUsername($username)
-  {
-    return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function getId()
-  {
-    return $this->getPrimaryKey();
-  }
 }

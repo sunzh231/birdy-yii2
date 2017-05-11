@@ -166,6 +166,28 @@ class Curl{
   }
 
   /**
+   * @GET请求 Response str
+   */
+  public function GetStr($url, array $params = array()) {
+    if ($params) {
+      if (strpos($url, '?')) {
+        $url .= "&".http_build_query($params);
+      }
+      else {
+        $url .= "?".http_build_query($params);
+      }
+    }
+    $this->Start($url);
+    curl_setopt($this->ch_, CURLOPT_TIMEOUT, Curl::time_);
+    if (strpos($url, 'https') === 0) {
+      curl_setopt($this->ch_, CURLOPT_SSL_VERIFYHOST, 0);
+      curl_setopt($this->ch_, CURLOPT_SSL_VERIFYPEER, 0);
+    }
+    $this->body_=$this->Execx();
+    return $this->body_;
+  }
+
+  /**
    * @POST请求
    */
   public function Post($url, array $params = array()) {

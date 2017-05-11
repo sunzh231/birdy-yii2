@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m130524_201442_create_bs_users extends Migration
+class m170511_143708_create_bs_module_operations extends Migration
 {
   public function up()
   {
@@ -12,15 +12,11 @@ class m130524_201442_create_bs_users extends Migration
       $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
     }
 
-    $this->createTable('bs_users', [
+    $this->createTable('bs_module_operations', [
       'id' => $this->primaryKey()->comment('主键'),
-      'username' => $this->string(32)->notNull()->unique()->comment('用户名'),
-      'auth_key' => $this->string(32)->comment('session登录验证字段'),
-      'password_hash' => $this->string(128)->notNull()->comment('加密密码'),
-      'password_reset_token' => $this->string(128)->unique()->comment('密码重置token'),
-      'email' => $this->string(32)->unique()->comment('电子邮箱'),
-      'tel' => $this->string(16)->unique()->comment('手机号码'),
-      'access_token' => $this->string(128)->unique()->comment('restful登录验证字段'),
+      'name' => $this->string(32)->notNull()->comment('操作名'),
+      'module_id' => $this->integer()->notNull()->comment('模块ID'),
+      'auth_code' => $this->integer()->notNull()->comment('权限值'),
 
       'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment('删除状态。0：已删除，1：正常'),
       'updated_by' => $this->integer()->notNull()->comment('修改人'),
@@ -32,6 +28,17 @@ class m130524_201442_create_bs_users extends Migration
 
   public function down()
   {
-    $this->dropTable('bs_users');
+    $this->dropTable('bs_module_operations');
   }
+
+  /*
+  // Use safeUp/safeDown to run migration code within a transaction
+  public function safeUp()
+  {
+  }
+
+  public function safeDown()
+  {
+  }
+  */
 }

@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m170504_140806_create_bs_materials extends Migration
+class m170511_123840_create_bs_user_role extends Migration
 {
   public function up()
   {
@@ -12,21 +12,20 @@ class m170504_140806_create_bs_materials extends Migration
       $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
     }
 
-    $this->createTable('bs_materials', [
+    $this->createTable('bs_user_role', [
       'id' => $this->primaryKey()->comment('主键'),
-      'channel_id' => $this->integer()->notNull()->comment('外键。渠道ID'),
+      'user_id' => $this->integer()->notNull()->comment('用户ID'),
+      'role_id' => $this->integer()->notNull()->comment('角色ID'),
 
       'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment('删除状态。0：已删除，1：正常'),
-      'updated_by' => $this->integer()->notNull()->comment('修改人'),
-      'updated_at' => $this->integer()->notNull()->comment('修改时间'),
-      'created_at' => $this->integer()->notNull()->comment('创建人'),
-      'created_by' => $this->integer()->notNull()->comment('创建时间')
-    ]);
+      'created_by' => $this->integer()->notNull()->comment('创建人'),
+      'created_at' => $this->integer()->notNull()->comment('创建时间')
+    ], $tableOptions);
   }
 
   public function down()
   {
-    $this->dropTable('bs_materials');
+    $this->dropTable('bs_user_role');
   }
 
   /*

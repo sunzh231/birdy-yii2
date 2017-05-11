@@ -5,9 +5,8 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\data\ActiveDataProvider;
 
-class Role extends ActiveRecord
+class Module extends ActiveRecord
 {
   const STATUS_DELETED = 0;
   const STATUS_ACTIVE = 1;
@@ -17,7 +16,7 @@ class Role extends ActiveRecord
    */
   public static function tableName()
   {
-    return 'bs_roles';
+    return 'bs_modules';
   }
 
   /**
@@ -43,23 +42,13 @@ class Role extends ActiveRecord
 
   public function attributes()
   {
-    return ['id', 'name', 'desc', 'email', 'account_id',
+    return ['id', 'name', 'auth_name', 'desc', 'parent_id', 'grade_code',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'desc', 'email', 'account_id',
+    return ['id', 'name', 'auth_name', 'desc', 'parent_id', 'grade_code',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
-  }
-
-  public static function findById($id)
-  {
-    return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
-  }
-
-  public static function findWithPagination($pagination)
-  {
-    return new ActiveDataProvider(['query' => static::find(), 'pagination' => ['pageSize' => 10]]);
   }
 
 }

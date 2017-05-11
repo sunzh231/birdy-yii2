@@ -6,6 +6,7 @@ use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use common\models\Role;
 
 /**
  * User model
@@ -142,6 +143,12 @@ class User extends ActiveRecord implements IdentityInterface
   public function getAuthKey()
   {
     return $this->auth_key;
+  }
+
+  public function getRoles()
+  {
+    return $this->hasMany(Role::className(), ['id' => 'role_id'])
+      ->viaTable('bs_user_role', ['user_id' => 'id']);
   }
 
   /**
