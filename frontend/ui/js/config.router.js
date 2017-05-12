@@ -18,7 +18,34 @@ angular.module('app')
         var layout = "tpl/app.html";
         $urlRouterProvider.otherwise('/app/users/index');
 
-        $stateProvider.state('app', {
+        $stateProvider
+          .state('lockme', {
+              url: '/lockme',
+              templateUrl: 'tpl/page_lockme.html'
+          })
+          .state('access', {
+              url: '/access',
+              template: '<div ui-view class="fade-in-right-big smooth"></div>'
+          })
+          .state('access.signin', {
+              url: '/signin',
+              templateUrl: 'tpl/page_signin.html',
+              resolve: load( ['js/controllers/signin.js'] )
+          })
+          .state('access.signup', {
+              url: '/signup',
+              templateUrl: 'tpl/page_signup.html',
+              resolve: load( ['js/controllers/signup.js'] )
+          })
+          .state('access.forgotpwd', {
+              url: '/forgotpwd',
+              templateUrl: 'tpl/page_forgotpwd.html'
+          })
+          .state('access.404', {
+              url: '/404',
+              templateUrl: 'tpl/page_404.html'
+          })
+          .state('app', {
               abstract: true,
               url: '/app',
               templateUrl: layout,
