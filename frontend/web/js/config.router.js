@@ -21,7 +21,7 @@ angular.module('app')
         $stateProvider
           .state('lockme', {
               url: '/lockme',
-              templateUrl: 'tpl/page_lockme.html'
+              templateUrl: 'tpl/lockme.html'
           })
           .state('access', {
               url: '/access',
@@ -29,21 +29,21 @@ angular.module('app')
           })
           .state('access.signin', {
               url: '/signin',
-              templateUrl: 'tpl/page_signin.html',
+              templateUrl: 'tpl/signin.html',
               resolve: load( ['js/controllers/signin.js'] )
           })
           .state('access.signup', {
               url: '/signup',
-              templateUrl: 'tpl/page_signup.html',
+              templateUrl: 'tpl/signup.html',
               resolve: load( ['js/controllers/signup.js'] )
           })
           .state('access.forgotpwd', {
               url: '/forgotpwd',
-              templateUrl: 'tpl/page_forgotpwd.html'
+              templateUrl: 'tpl/forgotpwd.html'
           })
           .state('access.404', {
               url: '/404',
-              templateUrl: 'tpl/page_404.html'
+              templateUrl: 'tpl/404.html'
           })
           .state('app', {
               abstract: true,

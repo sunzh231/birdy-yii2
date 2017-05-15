@@ -2,97 +2,51 @@
 namespace backend\controllers;
 
 use Yii;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
+use yii\rest\ActiveController;
+use common\models\User;
 
 /**
  * Site controller
  */
-class SiteController extends Controller
+class SiteController extends ActiveController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
-                        'actions' => ['logout', 'index'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
+  public $modelClass = 'common\models\User';
+
+  public $serializer = [
+    'class' => 'yii\rest\Serializer',
+    'collectionEnvelope' => 'items',
+  ];
+
+  public function actions()
+  {
+    $actions = parent::actions();
+    // 注销系统自带的实现方法
+    unset($actions['index'], $actions['update'], $actions['create'], $actions['delete'], $actions['view']);
+    return $actions;
+  }
+
+  public function actionSignup()
+  {
+    $model = new User;
+    $model->attributes = Yii::$app->request->post();
+    if (!$model->save()) {
+      return array_values($model->getFirstErrors())[0];
     }
+    return $model;
+  }
 
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-        ];
+  public function actionSignin()
+  {
+    $model = new User;
+    $model->attributes = Yii::$app->request->post();
+    if (!$model->save()) {
+      return array_values($model->getFirstErrors())[0];
     }
+    return $model;
+  }
 
-    /**
-     * Displays homepage.
-     *
-     * @return string
-     */
-    public function actionIndex()
-    {
-        return $this->render('index');
-    }
+  public function actionLogout()
+  {
 
-    /**
-     * Login action.
-     *
-     * @return string
-     */
-    public function actionLogin()
-    {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Logout action.
-     *
-     * @return string
-     */
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
-    }
+  }
 }

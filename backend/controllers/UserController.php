@@ -9,6 +9,26 @@ class UserController extends RestController
 {
   public $modelClass = 'common\models\User';
 
+  public function actionSignup()
+  {
+    $model = new User;
+    $model->attributes = Yii::$app->request->post();
+    if (!$model->save()) {
+      return array_values($model->getFirstErrors())[0];
+    }
+    return $model;
+  }
+
+  public function actionSignin()
+  {
+    $model = new User;
+    $model->attributes = Yii::$app->request->post();
+    if (!$model->save()) {
+      return array_values($model->getFirstErrors())[0];
+    }
+    return $model;
+  }
+
   public function actionIndex()
   {
     $modelClass = $this->modelClass;
