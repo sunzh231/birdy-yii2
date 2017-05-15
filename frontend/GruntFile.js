@@ -14,6 +14,11 @@ module.exports = function(grunt) {
         'clean:ui',
         'copy:libs',
         'copy:ui',
+				'useminPrepare',
+        'concat:generated',
+        'cssmin:generated',
+        'uglify:generated',
+				'usemin',
         'clean:tmp'
     ]);
 
