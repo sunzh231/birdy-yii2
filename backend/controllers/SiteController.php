@@ -2,6 +2,8 @@
 namespace backend\controllers;
 
 use Yii;
+use yii\base\InvalidParamException;
+use yii\web\BadRequestHttpException;
 use yii\rest\ActiveController;
 use common\models\User;
 
@@ -38,9 +40,13 @@ class SiteController extends ActiveController
   public function actionSignin()
   {
     $model = new User;
-    $model->attributes = Yii::$app->request->post();
-    if (!$model->save()) {
-      return array_values($model->getFirstErrors())[0];
+    try {
+      $model->attributes = Yii::$app->request->post();
+      if (!$model->save()) {
+        return array_values($model->getFirstErrors())[0];
+      }
+    } catch (InvalidParamException $e) {
+      throw new BadRequestHttpException($e->getMessage());
     }
     return $model;
   }
