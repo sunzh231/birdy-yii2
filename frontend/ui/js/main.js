@@ -3,8 +3,8 @@
 /* Controllers */
 
 angular.module('app')
-  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window',
-    function($scope, $translate, $localStorage, $window) {
+  .controller('AppCtrl', ['$scope', '$translate', '$localStorage', '$window', 'toaster',
+    function($scope, $translate, $localStorage, $window, toaster) {
       // add 'ie' classes to html
       var isIE = !!navigator.userAgent.match(/MSIE/i);
       if(isIE){ angular.element($window.document.body).addClass('ie');}
@@ -75,4 +75,12 @@ angular.module('app')
           return (/iPhone|iPod|iPad|Silk|Android|BlackBerry|Opera Mini|IEMobile/).test(ua);
       }
 
+      $scope.toaster = {
+          type: 'success',
+          title: 'Title',
+          text: 'Message'
+      };
+      $scope.pop = function(){
+          toaster.pop($scope.toaster.type, $scope.toaster.title, $scope.toaster.text);
+      };
   }]);

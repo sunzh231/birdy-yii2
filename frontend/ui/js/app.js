@@ -16,6 +16,7 @@ angular.module('app', [
     'ui.load',
     'ui.jq',
     'dialogs.main',
+    'toaster',
     'oc.lazyLoad',
     'pascalprecht.translate'
 ]);
