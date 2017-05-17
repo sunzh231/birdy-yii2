@@ -6,16 +6,6 @@
       </el-col>
       <el-col :span="20">
         <el-menu theme="dark" class="menus" default-active="1" mode="horizontal">
-          <el-menu-item index="1">我的渠道</el-menu-item>
-          <el-menu-item index="2">会员中心</el-menu-item>
-          <el-menu-item index="3">我的渠道</el-menu-item>
-          <el-menu-item index="4">会员中心</el-menu-item>
-          <el-submenu index="5">
-            <template slot="title">更多</template>
-            <el-menu-item index="5-1">选项1</el-menu-item>
-            <el-menu-item index="5-2">选项2</el-menu-item>
-            <el-menu-item index="5-3">选项3</el-menu-item>
-          </el-submenu>
           <div class="right-operation">
             <el-popover ref="popover" placement="top-start" width="160" trigger="hover">
               <div style="text-align: right; margin: 0">
@@ -99,14 +89,13 @@ export default {
     return {
       showRight: true,
       routes: [
-        {name: '首页1', icon: 'icon-user', route: '/user/list', subRoutes: [
-          {name: '选项1', icon: 'icon-user', route: '/user/list'},
-          {name: '选项2', icon: 'icon-user', route: '/user/list'}
-        ]},
-        {name: '首页2', icon: 'icon-user', route: '/user/list', subRoutes: []},
-        {name: '首页3', icon: 'icon-user', route: '/user/list', subRoutes: []},
-        {name: '首页4', icon: 'icon-user', route: '/user/list', subRoutes: []},
-        {name: '首页5', icon: 'icon-user', route: '/user/list', subRoutes: []}
+        {name: '贷款数据', icon: 'icon-user', route: '/user/list', subRoutes: []},
+        {name: '后台用户管理', icon: 'icon-user', route: '/user/list', subRoutes: []},
+        {name: '内容设置', icon: 'icon-setting', route: '/user/list', subRoutes: [
+          {name: '轮播图设置', icon: 'icon-user', route: '/user/list'},
+          {name: '页面引导语设置', icon: 'icon-user', route: '/user/list'},
+          {name: '贷款确认链接设置', icon: 'icon-user', route: '/user/list'},
+        ]}
       ]
     }
   },

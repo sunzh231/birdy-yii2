@@ -11,7 +11,7 @@
           <div v-for="(item, index) in routes">
             <el-submenu v-if="item.subRoutes && item.subRoutes.length > 0" :index="index+1+''">
               <template slot="title">
-                <i class="el-icon-message"></i>
+                <i class="el-icon-setting"></i>
                 {{item.name}}
               </template>
               <el-menu-item
@@ -19,13 +19,9 @@
                 :index="index+'-'+subIndex">
                 {{subItem.name}}
               </el-menu-item>
-              <!-- <el-menu-item-group title="test">
-                <el-menu-item index="3-1">选项1</el-menu-item>
-                <el-menu-item index="3-2">选项2</el-menu-item>
-              </el-menu-item-group> -->
             </el-submenu>
             <el-menu-item v-else :index="index + 1 + ''">
-              <i class="el-icon-menu"></i>
+              <i class="el-icon-star-on"></i>
               {{item.name}}
             </el-menu-item>
           </div>
