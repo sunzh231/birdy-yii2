@@ -1,6 +1,6 @@
 <template>
-  <div id="user-editor">
-    <el-dialog title="收货地址" v-model="dialogVisible">
+  <div id="demo-editor">
+    <el-dialog title="收货地址" v-model="dialogVisible" v-on:close="handleClose()">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px">
         <el-form-item label="活动名称" prop="name">
           <el-input v-model="ruleForm.name"></el-input>
@@ -46,24 +46,39 @@
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="handleReset">取 消</el-button>
-        <el-button type="primary" @click="handleSubmit">立即创建</el-button>
+        <el-button @click="handleClose()">取 消</el-button>
+        <el-button type="primary" :loading="btnLoading" @click="handleSubmit()">立即创建</el-button>
       </div>
     </el-dialog>
   </div>
 </template>
 <script>
+import DemoStore from '../LoanStore'
+import DemoService from '../LoanService'
+
 export default {
   props: {
     formLabelWidth: {
       type: String,
       required: false,
       default: '120px'
+    },
+    dialogVisible: {
+      type: Boolean,
+      required: true,
+      default: false
+    },
+    tableRow: {
+      type: Object,
+      required: false,
+      default: {}
     }
   },
   data() {
     return {
-      dialogVisible: false,
+      target: this.tableRow,
+      btnLoading: false,
+      demoService: new DemoService(this),
       ruleForm: {
         name: '',
         region: '',
@@ -101,23 +116,65 @@ export default {
     };
   },
   methods: {
-    fromParent () {
-      console.log('123')
-    },
-    handleReset() {
-      this.$refs.ruleForm.resetFields();
-      this.dialogVisible = false
+    handleClose () {
+      this.$refs.ruleForm.resetFields()
+      this.$emit('closeDialog')
     },
     handleSubmit(ev) {
       this.$refs.ruleForm.validate((valid) => {
         if (valid) {
-          alert('submit!');
-          this.dialogVisible = false
+          this.btnLoading = true
+          if (this.target.id) {
+            this.updateDemo()
+          } else {
+            this.createDemo()
+          }
         } else {
-          console.log('error submit!!');
           return false;
         }
       });
+    },
+    createDemo () {
+      this.demoService.create('/admin/demo/save').then((resp) => {
+        if (resp.success) {
+          this.$emit('closeDialog')
+        } else {
+          this.$notify({
+            title: '创建失败',
+            message: '网络异常，请稍后再试',
+            type: 'error'
+          })
+        }
+      }).catch((resp) => {
+        this.$notify({
+          title: '创建失败',
+          message: '网络异常，请稍后再试',
+          type: 'error'
+        })
+      }).finally(() => {
+        this.btnLoading = false
+      })
+    },
+    updateDemo () {
+      this.demoService.update('/admin/demo/update').then((resp) => {
+        if (resp.success) {
+          this.$emit('closeDialog')
+        } else {
+          this.$notify({
+            title: '更新失败',
+            message: '网络异常，请稍后再试',
+            type: 'error'
+          })
+        }
+      }).catch((resp) => {
+        this.$notify({
+          title: '更新失败',
+          message: '网络异常，请稍后再试',
+          type: 'error'
+        })
+      }).finally(() => {
+        this.btnLoading = false
+      })
     }
   }
 }

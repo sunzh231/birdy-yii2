@@ -6,8 +6,8 @@ module.exports = {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
     assetsRoot: path.resolve(__dirname, '../dist'),
-    assetsSubDirectory: 'static',
-    // assetsPublicPath: '/',
+    assetsSubDirectory: 'admin',
+    assetsPublicPath: '/',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
     // Surge or Netlify already gzip all static assets for you.
@@ -22,11 +22,11 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api/': {
-        target: 'http://localhost:9090/api/',
+      '/user/': {
+        target: 'http://localhost:8888/user/',
         changeOrigin: true,
         pathRewrite: {
-          '^/api/': ''
+          '^/user/': ''
         },
         headers:{
         }

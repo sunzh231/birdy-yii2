@@ -1,3 +1,5 @@
+import store from './store'
+
 //首字母大写
 const bigCamelCase = (str) => { // 正则法
   str = str.toLowerCase()
@@ -9,8 +11,8 @@ const bigCamelCase = (str) => { // 正则法
 
 //路由解析
 const targetRoute = (str) => {
-  const url = window.location.href
-  const target = url.substring(url.indexOf('#') + 2, url.indexOf(`/${str}`))
+  const currentPath = store.state.targetRoute
+  const target = currentPath.substring(1, currentPath.indexOf(`/${str}`))
   return target
 }
 

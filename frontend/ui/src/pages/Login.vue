@@ -5,14 +5,14 @@
         123
       </el-col>
       <el-col :span="6">
-        <el-form :model="loginForm" :rules="rules" ref="loginForm" class="login-form">
+        <el-form :model="target" :rules="rules" ref="loginForm" class="login-form">
           <div class="form-title"><i class="iconfont icon-user"></i>登录</div>
-          <el-form-item prop="username">
-            <el-input type="text" v-model="loginForm.username" placeholder="用户名">
+          <el-form-item prop="name">
+            <el-input type="text" v-model="target.name" placeholder="用户名">
             </el-input>
           </el-form-item>
-          <el-form-item prop="pass">
-            <el-input type="password" v-model="loginForm.pass" placeholder="密码" auto-complete="off"></el-input>
+          <el-form-item prop="password">
+            <el-input type="password" v-model="target.password" placeholder="密码" auto-complete="off"></el-input>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" size="large" class="login-btn" :loading="loginLoading" @click="handleSubmit">登录</el-button>
@@ -59,19 +59,28 @@
 </style>
 
 <script>
-import service from './loginService'
+import cookie from 'src/common/cookie'
+import BirdyService from './BirdyService'
+
+const login = (vm) => {
+  const resource = vm.$resource('/admin/user/login')
+  return resource.save(vm.target).then((resp) => {
+    return resp.data
+  })
+}
 
 export default {
   data() {
     return {
       loginLoading: false,
-      loginForm: {
-        username: '',
-        pass: ''
+      birdyService: new BirdyService(this),
+      target: {
+        name: '',
+        password: ''
       },
       rules: {
-        username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
-        pass: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+        name: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
+        password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
       }
     };
   },
@@ -87,11 +96,10 @@ export default {
     },
     login () {
       this.loginLoading = true
-      service.login(this).then((resp) => {
-        if (resp.msg === 'ok') {
-          this.$router.go({
-            path: '/main/dashboard'
-          })
+      this.birdyService.login('/user/login').then((resp) => {
+        if (resp.success) {
+          cookie.set('birdy_token', resp.data);
+          this.$router.push({ path: '/dashboard' })
         } else {
           this.$notify({
             title: '登录失败',

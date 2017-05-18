@@ -4,26 +4,28 @@
       <el-col :span="24">
         <h5 class="logo">Birdy</h5>
         <el-menu default-active="0">
-          <el-menu-item index="0">
-            <i class="el-icon-menu"></i>
-            首页
-          </el-menu-item>
-          <div v-for="(item, index) in routes">
-            <el-submenu v-if="item.subRoutes && item.subRoutes.length > 0" :index="index+1+''">
-              <template slot="title">
-                <i class="el-icon-setting"></i>
-                {{item.name}}
-              </template>
-              <el-menu-item
-                v-for="(subItem, subIndex) in item.subRoutes"
-                :index="index+'-'+subIndex">
-                {{subItem.name}}
-              </el-menu-item>
-            </el-submenu>
-            <el-menu-item v-else :index="index + 1 + ''">
-              <i class="el-icon-star-on"></i>
-              {{item.name}}
+          <router-link to="/">
+            <el-menu-item index="0">
+                <i class="el-icon-menu"></i>首页
             </el-menu-item>
+          </router-link>
+          <div v-for="(item, index) in routes">
+            <el-submenu v-if="item.subMenus && item.subMenus.length > 0" :index="index+1+''">
+              <template slot="title">
+                <i :class="item.icon"></i>{{item.name}}
+              </template>
+              <router-link v-for="(subItem, subIndex) in item.subMenus" :to="subItem.url">
+                <el-menu-item
+                  :index="index+'-'+subIndex">
+                  {{subItem.name}}
+                </el-menu-item>
+              </router-link>
+            </el-submenu>
+            <router-link :to="item.url" v-else>
+              <el-menu-item :index="index + 1 + ''">
+                <i :class="item.icon"></i>{{item.name}}
+              </el-menu-item>
+            </router-link>
           </div>
         </el-menu>
       </el-col>
