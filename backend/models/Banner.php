@@ -2,14 +2,13 @@
 namespace backend\models;
 
 use Yii;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
-class Content extends ActiveRecord
+class Banner extends ActiveRecord
 {
   public static function tableName()
   {
-    return 'bn_contents';
+    return 'bn_banners';
   }
 
   public function behaviors()
@@ -26,11 +25,11 @@ class Content extends ActiveRecord
 
   public function attributes()
   {
-    return ['id', 'name', 'description', 'link'];
+    return ['id', 'name', 'url', 'content_id'];
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'description', 'link'];
+    return ['id', 'name', 'url', 'content_id'];
   }
 
   /**
