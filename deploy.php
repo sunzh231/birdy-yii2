@@ -19,7 +19,7 @@ server('staging', '45.63.122.60')
     ->user('root')
     ->identityFile()
     ->set('deploy_path', '/www')
-    ->set('branch', 'init')
+    ->set('branch', 'feature/loan')
     ->pty(true);
 
 // Servers
