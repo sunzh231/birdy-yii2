@@ -19,7 +19,7 @@ class m170517_123537_create_bn_loans extends Migration
       'occupation' => $this->string(32)->notNull()->comment('职业'),
       'income' => $this->decimal(10, 2)->notNull()->comment('家庭收入'),
       'id_card_front' => $this->string(128)->notNull()->comment('身份证正面'),
-      'id_card_back' => $this->string(128)->notNull()->comment('身份证背面'),
+      'id_card_back' => $this->string(128)->comment('身份证背面'),
       'bank_pic' => $this->string(128)->notNull()->comment('银行卡照片'),
       'loan_status' => $this->smallInteger()->notNull()->defaultValue(0)->comment('贷款状态'),
 
