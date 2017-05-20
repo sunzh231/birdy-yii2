@@ -33,7 +33,7 @@ class UploadController extends BaseController
       $img= substr($img,$start+1);
       $img = str_replace(' ', '+', $img);
       $data = base64_decode($img);
-      $fileName = './upload/'. uniqid() . '.png';
+      $fileName = '/www/upload/'. uniqid() . '.png';
       $success = file_put_contents($fileName, $data);
       $data=array();
       if($success){
