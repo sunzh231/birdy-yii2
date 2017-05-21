@@ -79,7 +79,7 @@ Vue.http.interceptors.push((request, next) => {
   Vue.http.headers.common['Authorization'] = `${cookie.get("birdy_token")}`
   next((response) => {
     if(response.status === 403 || response.status === 401) {
-      window.location.href = '/admin#/login'
+      // window.location.href = '/admin#/login'
     }
     return response
   })
