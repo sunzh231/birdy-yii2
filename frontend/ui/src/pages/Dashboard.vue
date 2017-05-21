@@ -1,6 +1,6 @@
 <template>
   <div id="dashboard">
-    1232 dashboard
+    
   </div>
 </template>
 

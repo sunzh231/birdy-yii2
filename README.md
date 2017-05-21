@@ -9,3 +9,5 @@ https://deployer.org/
   c. 回滚迁移 yii migrate/down / yii migrate/down 3
   d. 添加列 yii migrate/create add_position_to_post --fields="position:integer"
   e. 删除列 yii migrate/create drop_position_from_post --fields="position:integer"
+
+chmod -R 777 path_to/backend/web/upload 

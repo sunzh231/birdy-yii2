@@ -97,9 +97,9 @@ export default {
       userService: new UserService(this),
       tableData: [],
       pagination: {
-        page: 0,
-        size: 15,
-        totalElements: 0
+        page: 1,
+        size: 10,
+        totalElements: 1
       },
       multipleSelection: [],
       dialogVisible: false,
@@ -169,18 +169,10 @@ export default {
     getUsers () {
       this.tableLoading = true
       let params = {}
-      Object.assign(params, this.pagination, this.searchParams)
-      this.userService.get('/user/list', params).then((resp) => {
-        if (resp.success) {
-          this.tableData = resp.data.content
-          this.pagination.totalElements = resp.data.totalElements
-        } else {
-          this.$notify({
-            title: '加载失败',
-            message: '网络异常，请稍后再试',
-            type: 'error'
-          })
-        }
+      // Object.assign(params, this.pagination, this.searchParams)
+      this.userService.get('api/user/index?access-token=abc123_', params).then((resp) => {
+        this.tableData = resp.items
+        // this.pagination.totalElements = resp.data.totalElements
       }).catch((resp) => {
         this.$notify({
           title: '加载失败',

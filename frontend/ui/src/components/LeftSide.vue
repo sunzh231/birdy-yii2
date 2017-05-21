@@ -2,7 +2,7 @@
   <div class="birdy-left-side">
     <el-row>
       <el-col :span="24">
-        <h5 class="logo">Birdy</h5>
+        <h5 class="logo">后台管理</h5>
         <el-menu default-active="0">
           <router-link to="/">
             <el-menu-item index="0">

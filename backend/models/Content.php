@@ -44,4 +44,9 @@ class Content extends ActiveRecord
     return static::findOne(['name' => $name]);
   }
 
+  public function getBanners()
+  {
+    return $this->hasMany(Banner::className(), ['content_id' => 'id']);
+  }
+
 }

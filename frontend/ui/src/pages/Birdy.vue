@@ -18,7 +18,7 @@
           <div class="right-operation">
             <el-popover ref="popover" placement="top-start" trigger="hover">
               <div class="user-info-detail">
-                <img src="http://localhost:8888/upload/avatar/default.jpeg" width="100px"/>
+                <img src="#" width="100px"/>
                 <el-row class="user-operation">
                   <el-col :span="10">
                     <span>Admin</span>
@@ -41,7 +41,7 @@
               </el-row>
             </el-popover>
             <el-button v-popover:popover class="user-info">
-              <img src="http://localhost:8888/upload/avatar/default.jpeg"/>
+              <!-- <img src="http://localhost:8888/upload/avatar/default.jpeg"/> -->
               <span>Admin</span>
             </el-button>
           </div>
@@ -49,12 +49,12 @@
 
         <el-row type="flex" class="row-bg" justify="center">
           <el-col :span="23">
-            <div class="breadcrumb">
+            <!-- <div class="breadcrumb">
               <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
                 <el-breadcrumb-item v-for="item in breadcrumbs" :to="{ path: item.path }">{{ item.name }}</el-breadcrumb-item>
               </el-breadcrumb>
-            </div>
+            </div> -->
 
             <router-view></router-view>
           </el-col>
@@ -151,12 +151,8 @@ export default {
       modules: [],
       menus: [
         {name: '贷款数据', icon: 'el-icon-star-on', url: '/loan/list', subMenus: []},
-        {name: '后台用户管理', icon: 'el-icon-star-on', url: '/user/list', subMenus: []},
-        {name: '内容设置', icon: 'el-icon-setting', url: '/user/list', subMenus: [
-          {name: '轮播图设置', icon: 'icon-user', url: '/setting/banner'},
-          {name: '页面引导语设置', icon: 'icon-user', url: '/user/list'},
-          {name: '贷款确认链接设置', icon: 'icon-user', url: '/user/list'},
-        ]}
+        // {name: '后台用户管理', icon: 'el-icon-star-on', url: '/user/list', subMenus: []},
+        {name: '内容设置', icon: 'el-icon-setting', url: '/setting/banner'}
       ],
       breadcrumbs: [
         {name: '用户列表', path: '/user/list'},

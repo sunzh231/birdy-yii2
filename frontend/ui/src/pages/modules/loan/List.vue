@@ -1,34 +1,5 @@
 <template>
   <div id="demo-list">
-    <el-row>
-      <el-col :span="12">
-        <el-form :inline="true" :model="searchParams">
-          <el-col :span="6">
-            <el-form-item>
-              <el-input v-model="searchParams.name" placeholder="审批人"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item>
-              <el-select v-model="searchParams.tel" placeholder="活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit()">查询</el-button>
-            <el-button @click="reset()">重置</el-button>
-          </el-form-item>
-        </el-form>
-      </el-col>
-      <el-col :span="12" style="text-align: right;">
-        <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
-        <el-button type="primary" icon="plus" @click="handleEdit()"></el-button>
-        <el-button type="danger" icon="delete" @click="handleDelete()"></el-button>
-      </el-col>
-    </el-row>
-
     <el-table v-loading="tableLoading" :data="tableData"
         element-loading-text="拼命加载中"
         @selection-change="handleSelectionChange()"
@@ -36,8 +7,8 @@
       <el-table-column type="selection" prop="id" width="50"></el-table-column>
       <el-table-column prop="name" fixed sortable label="姓名"></el-table-column>
       <el-table-column prop="tel" label="联系方式"></el-table-column>
-      <el-table-column prop="email" label="电子邮箱"></el-table-column>
-      <el-table-column inline-template fixed="right" label="操作" width="120" :context="_self">
+      <el-table-column prop="loan_amount" label="贷款申请金额"></el-table-column>
+      <!-- <el-table-column inline-template fixed="right" label="操作" width="120" :context="_self">
         <span>
           <el-dropdown split-button type="success" size="small" style="padding-top: 8px;" @click="handleView($index, row)">
             查看
@@ -51,7 +22,7 @@
             </el-dropdown-menu>
           </el-dropdown>
         </span>
-      </el-table-column>
+      </el-table-column> -->
     </el-table>
 
     <div class="pagination">
@@ -125,7 +96,7 @@ export default {
       this.getDemos()
     },
     handleView (index, row) {
-      this.$router.push({ path: `/demo/detail/${row.id}` })
+      // this.$router.push({ path: `/demo/detail/${row.id}` })
     },
     handleEdit (index, row) {
       this.dialogVisible = true
@@ -168,17 +139,9 @@ export default {
     getDemos () {
       this.tableLoading = true
       let params = {}
-      Object.assign(params, this.pagination, this.searchParams)
-      this.demoService.get('/admin/demo/list', params).then((resp) => {
-        if (resp.success) {
-          this.tableData = resp.data.content
-        } else {
-          his.$notify({
-            title: '加载失败',
-            message: '网络异常，请稍后再试',
-            type: 'error'
-          })
-        }
+      // Object.assign(params, this.pagination, this.searchParams)
+      this.demoService.get('/api/loan/index?access-token=abc123_', params).then((resp) => {
+        this.tableData = resp.items
       }).catch((resp) => {
         this.$notify({
           title: '加载失败',
