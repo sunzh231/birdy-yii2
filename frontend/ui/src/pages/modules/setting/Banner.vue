@@ -1,7 +1,7 @@
 <template>
   <div id="demo-detail">
     <el-form ref="form" :model="target" label-width="80px">
-      <el-form-item label="活动形式">
+      <el-form-item label="轮番图">
         <el-upload
           class="upload-demo"
           action="api/upload/file"

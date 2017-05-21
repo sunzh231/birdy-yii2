@@ -55,6 +55,7 @@ class ContentController extends RestController
         throw new NotFoundHttpException('Can not find this object!');
       } else {
         $model->attributes = Yii::$app->request->post();
+        $model->name = 'birdy';
         if (!$model->save()) {
           return array_values($model->getFirstErrors())[0];
         }
