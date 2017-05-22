@@ -48,6 +48,14 @@ return [
               'api/<controller:\w+>/<id:\d+>' => '<controller>/view',
               'api/<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
               'api/<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+
+              'api/modules/<module:\w+>/<controller:\w+>/<id:\d+>' => 'modules/<module>/<controller>/view',
+              'api/modules/<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>' => 'modules/<module>/<controller>/<action>',
+              'api/modules/<module:\w+>/<controller:\w+>/<action:\w+>' => 'modules/<module>/<controller>/<action>',
+
+              'api/<module:\w+>/<controller:\w+>/<id:\d+>' => '<module>/<controller>/view',
+              'api/<module:\w+>/<controller:\w+>/<action:\w+>/<id:\d+>' => '<module>/<controller>/<action>',
+              'api/<module:\w+>/<controller:\w+>/<action:\w+>' => '<module>/<controller>/<action>',
             ],
         ],
     ],
