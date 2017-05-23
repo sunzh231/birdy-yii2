@@ -31,6 +31,7 @@ class SiteController extends ActiveController
   {
     $model = new User;
     $model->attributes = Yii::$app->request->post();
+    $model->setPassword($model->password_hash);
     if (!$model->save()) {
       return array_values($model->getFirstErrors())[0];
     }
@@ -39,16 +40,17 @@ class SiteController extends ActiveController
 
   public function actionSignin()
   {
-    $model = new User;
     try {
-      $model->attributes = Yii::$app->request->post();
-      if (!$model->save()) {
-        return array_values($model->getFirstErrors())[0];
+      $params = Yii::$app->request->post();
+      $model = User::findByParams($params['name']);
+      if ($model->validatePassword($params['password'])) {
+        return ['code' => 0, 'msg' => 'OK', 'data' => $model];
+      } else {
+        return ['code' => -1, 'msg' => '用户名或密码错误'];
       }
     } catch (InvalidParamException $e) {
       throw new BadRequestHttpException($e->getMessage());
     }
-    return $model;
   }
 
   public function actionLogout()

@@ -10,8 +10,8 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
         '2cffec82183ee1cea088009cef9a6fc3' => __DIR__ . '/..' . '/ezyang/htmlpurifier/library/HTMLPurifier.composer.php',
         'a0edc8309cc5e1d60e3047b5df6b7052' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/functions_include.php',
-        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '841780ea2e1d6545ea3a253239d59c05' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/functions.php',
+        '2c102faa651ef8ea5874edb585946bce' => __DIR__ . '/..' . '/swiftmailer/swiftmailer/lib/swift_required.php',
         '180092cfc969a12e06f2132a203a3184' => __DIR__ . '/..' . '/codeception/verify/src/Codeception/function.php',
     );
 
@@ -32,6 +32,7 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         ),
         'f' => 
         array (
+            'filsh\\yii2\\oauth2server\\' => 24,
             'fedemotta\\cronjob\\' => 18,
         ),
         'd' => 
@@ -67,6 +68,7 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
+            'Payment\\' => 8,
         ),
         'L' => 
         array (
@@ -126,6 +128,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'filsh\\yii2\\oauth2server\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/filsh/yii2-oauth2-server',
         ),
         'fedemotta\\cronjob\\' => 
         array (
@@ -195,6 +201,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
+        'Payment\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/riverslei/payment/src',
+        ),
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
@@ -231,6 +241,13 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
+            ),
+        ),
+        'O' => 
+        array (
+            'OAuth2' => 
+            array (
+                0 => __DIR__ . '/..' . '/bshaffer/oauth2-server-php/src',
             ),
         ),
         'H' => 

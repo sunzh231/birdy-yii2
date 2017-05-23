@@ -3,7 +3,7 @@
 /* User Controller */
 app.controller('IndexCtrl', ['$scope', '$resource', function($scope, $resource) {
   $scope.table_render = function(current_page) {
-    var url = '/api/user/index?page='+ current_page +'&access-token=123456';
+    var url = '/api/bases/user/index?page='+ current_page +'&access-token=123456';
     var resource = $resource(url);
     resource.get({},function(resp) {
       $scope.result = resp;
@@ -19,6 +19,6 @@ app.controller('IndexCtrl', ['$scope', '$resource', function($scope, $resource) 
   $scope.pageChanged = function() {
     $scope.table_render($scope.pagination.currentPage);
   };
-  
+
   $scope.table_render(1);
 }]);

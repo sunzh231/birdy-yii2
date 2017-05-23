@@ -94,6 +94,19 @@ class User extends ActiveRecord implements IdentityInterface
     return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
   }
 
+  public static function findByParams($params)
+  {
+    return static::find()->where([
+        'and', 'status=:status',
+        ['or', 'username=:username', 'email=:email', 'tel=:tel']
+      ], [
+        ':status' => self::STATUS_ACTIVE,
+        ':username' => $params,
+        ':email' => $params,
+        ':tel' => $params
+      ])->one();
+  }
+
   /**
    * Finds user by password reset token
    *

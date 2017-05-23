@@ -8,7 +8,9 @@ app.controller('SigninController', ['$scope', '$resource', '$state', function($s
       var url = 'api/site/signin';
       var resource = $resource(url);
       resource.save($scope.user, function(resp) {
-        console.log(resp);
+        if (resp.code === 0) {
+          $state.go('app.index', {target: 'channels'});
+        }
       }, function(resp) {
         console.log(resp);
       });

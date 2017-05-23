@@ -49,7 +49,7 @@ angular.module('app')
               abstract: true,
               url: '/app',
               templateUrl: layout,
-              controller: 'BaseCtrl',
+              // controller: 'BaseCtrl',
               resolve: load(['textAngular', 'ui.select', 'js/controllers/base_controller.js'])
           }).state('app.custom_module', {
               url: '/custom_module',
@@ -63,6 +63,7 @@ angular.module('app')
               },
               resolve: {
                 loadMyCtrl: ['$ocLazyLoad', '$stateParams', function($ocLazyLoad, $stateParams) {
+                  console.log($stateParams.target);
                   return $ocLazyLoad.load('js/controllers/modules/'+ $stateParams.target +'/index_controller.js');
                 }]
               }
