@@ -18,6 +18,7 @@ return array(
     'fedemotta\\cronjob\\' => array($vendorDir . '/fedemotta/yii2-cronjob'),
     'dcb9\\qiniu\\' => array($vendorDir . '/dcb9/yii2-qiniu/src'),
     'cebe\\markdown\\' => array($vendorDir . '/cebe/markdown'),
+    'arogachev\\excel\\' => array($vendorDir . '/arogachev/yii2-excel/src'),
     'Webmozart\\Assert\\' => array($vendorDir . '/webmozart/assert/src'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
     'Symfony\\Component\\Yaml\\' => array($vendorDir . '/symfony/yaml'),

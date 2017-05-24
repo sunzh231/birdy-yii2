@@ -2,5 +2,5 @@
 
 /* User Controller */
 app.controller('BaseCtrl', ['$scope', '$resource', function($scope, $resource) {
-
+  console.log('1232');
 }]);

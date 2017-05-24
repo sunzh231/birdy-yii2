@@ -76,4 +76,13 @@ return array (
     ),
     'bootstrap' => 'filsh\\yii2\\oauth2server\\Bootstrap',
   ),
+  'arogachev/yii2-excel' => 
+  array (
+    'name' => 'arogachev/yii2-excel',
+    'version' => '0.1.1.0',
+    'alias' => 
+    array (
+      '@arogachev/excel' => $vendorDir . '/arogachev/yii2-excel/src',
+    ),
+  ),
 );

@@ -4,8 +4,57 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "ba84d920af4356f71a4f0d2fd690fc48",
+    "content-hash": "ba5333fe112e80871775140be0d08756",
     "packages": [
+        {
+            "name": "arogachev/yii2-excel",
+            "version": "0.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arogachev/yii2-excel.git",
+                "reference": "e8321b9b3e121323a6f6e8cc1df14d72dd6eacc3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/arogachev/yii2-excel/e8321b9b3e121323a6f6e8cc1df14d72dd6eacc3.zip",
+                "reference": "e8321b9b3e121323a6f6e8cc1df14d72dd6eacc3",
+                "shasum": ""
+            },
+            "require": {
+                "phpoffice/phpexcel": "1.8.*",
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "yiisoft/yii2-codeception": "~2.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "arogachev\\excel\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexey Rogachev",
+                    "email": "arogachev90@gmail.com"
+                }
+            ],
+            "description": "ActiveRecord import and export based on PHPExcel for Yii 2 framework",
+            "homepage": "https://github.com/arogachev/yii2-excel",
+            "keywords": [
+                "Active Record",
+                "PHPExcel",
+                "excel",
+                "export",
+                "import",
+                "yii2"
+            ],
+            "time": "2016-07-23T06:45:48+00:00"
+        },
         {
             "name": "bower-asset/bootstrap",
             "version": "v3.3.7",
@@ -626,6 +675,63 @@
             "time": "2017-04-28T10:15:08+00:00"
         },
         {
+            "name": "phpoffice/phpexcel",
+            "version": "1.8.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHPOffice/PHPExcel.git",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://files.phpcomposer.com/files/PHPOffice/PHPExcel/372c7cbb695a6f6f1e62649381aeaa37e7e70b32.zip",
+                "reference": "372c7cbb695a6f6f1e62649381aeaa37e7e70b32",
+                "shasum": ""
+            },
+            "require": {
+                "ext-xml": "*",
+                "ext-xmlwriter": "*",
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "PHPExcel": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Balliauw",
+                    "homepage": "http://blog.maartenballiauw.be"
+                },
+                {
+                    "name": "Mark Baker"
+                },
+                {
+                    "name": "Franck Lefevre",
+                    "homepage": "http://blog.rootslabs.net"
+                },
+                {
+                    "name": "Erik Tilt"
+                }
+            ],
+            "description": "PHPExcel - OpenXML - Read, Create and Write Spreadsheet documents in PHP - Spreadsheet engine",
+            "homepage": "http://phpexcel.codeplex.com",
+            "keywords": [
+                "OpenXML",
+                "excel",
+                "php",
+                "spreadsheet",
+                "xls",
+                "xlsx"
+            ],
+            "time": "2015-05-01T07:00:55+00:00"
+        },
+        {
             "name": "phpspec/php-diff",
             "version": "v1.1.0",
             "source": {
@@ -1233,16 +1339,16 @@
         },
         {
             "name": "codeception/base",
-            "version": "2.2.11",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Codeception/base.git",
-                "reference": "eea7d29115390772363a4f7744396927b33bf4f3"
+                "reference": "07f89a0ec4b850bebd8e5f48ea6f1aa9b13e4a48"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/Codeception/base/eea7d29115390772363a4f7744396927b33bf4f3.zip",
-                "reference": "eea7d29115390772363a4f7744396927b33bf4f3",
+                "url": "https://files.phpcomposer.com/files/Codeception/base/07f89a0ec4b850bebd8e5f48ea6f1aa9b13e4a48.zip",
+                "reference": "07f89a0ec4b850bebd8e5f48ea6f1aa9b13e4a48",
                 "shasum": ""
             },
             "require": {
@@ -1321,7 +1427,7 @@
                 "functional testing",
                 "unit testing"
             ],
-            "time": "2017-05-11T21:58:39+00:00"
+            "time": "2017-05-22T23:55:43+00:00"
         },
         {
             "name": "codeception/verify",

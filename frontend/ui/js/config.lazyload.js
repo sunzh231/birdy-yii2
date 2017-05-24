@@ -182,7 +182,13 @@ angular.module('app')
               '../libs/ueditor/ueditor.parse.js',
               '../libs/angular-ueditor/dist/angular-ueditor.min.js',
           ]
-      }
+      },
+      {
+          name: 'angular-base-controller',
+          files: [
+              'js/controllers/base_controller.js'
+          ]
+      },
     ]
   )
   // oclazyload config

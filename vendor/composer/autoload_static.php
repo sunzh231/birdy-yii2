@@ -43,6 +43,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             'cebe\\markdown\\' => 14,
         ),
+        'a' => 
+        array (
+            'arogachev\\excel\\' => 16,
+        ),
         'W' => 
         array (
             'Webmozart\\Assert\\' => 17,
@@ -145,6 +149,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             0 => __DIR__ . '/..' . '/cebe/markdown',
         ),
+        'arogachev\\excel\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/arogachev/yii2-excel/src',
+        ),
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
@@ -241,6 +249,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
+            ),
+            'PHPExcel' => 
+            array (
+                0 => __DIR__ . '/..' . '/phpoffice/phpexcel/Classes',
             ),
         ),
         'O' => 
