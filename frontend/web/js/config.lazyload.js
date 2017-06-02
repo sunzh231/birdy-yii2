@@ -188,7 +188,7 @@ angular.module('app')
           files: [
               'js/controllers/base_controller.js'
           ]
-      },
+      }
     ]
   )
   // oclazyload config

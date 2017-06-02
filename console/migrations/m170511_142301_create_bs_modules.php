@@ -19,6 +19,7 @@ class m170511_142301_create_bs_modules extends Migration
       'desc' => $this->string(128)->comment('描述'),
       'parent_id' => $this->integer()->notNull()->defaultValue(0)->comment('父级ID'),
       'grade_code' => $this->string(128)->comment('级别编码'),
+      'tenant_id' => $this->integer()->comment('租户ID'),
 
       'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment('删除状态。0：已删除，1：正常'),
       'updated_by' => $this->integer()->notNull()->comment('修改人'),

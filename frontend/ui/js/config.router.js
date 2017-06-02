@@ -63,7 +63,6 @@ angular.module('app')
               },
               resolve: {
                 loadMyCtrl: ['$ocLazyLoad', '$stateParams', function($ocLazyLoad, $stateParams) {
-                  console.log($stateParams.target);
                   return $ocLazyLoad.load('js/controllers/modules/'+ $stateParams.target +'/index_controller.js');
                 }]
               }

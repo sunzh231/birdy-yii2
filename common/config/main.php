@@ -18,6 +18,10 @@ return [
                 ],
             ],
         ],
+        'jwt' => [
+          'class' => 'sizeg\jwt\Jwt',
+          'key' => 'secret',
+        ],
     ],
     'modules'=>[
         //other modules .....

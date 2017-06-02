@@ -16,7 +16,7 @@ class m170511_121525_create_bs_roles extends Migration
       'id' => $this->primaryKey()->comment('主键'),
       'name' => $this->string(32)->notNull()->comment('角色名'),
       'desc' => $this->string(128)->comment('描述'),
-      'account_id' => $this->integer()->comment('账户ID'),
+      'tenant_id' => $this->integer()->comment('租户ID'),
 
       'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment('删除状态。0：已删除，1：正常'),
       'updated_by' => $this->integer()->notNull()->comment('修改人'),

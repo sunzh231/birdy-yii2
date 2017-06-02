@@ -7,6 +7,7 @@ use yii\filters\auth\CompositeAuth;
 use yii\filters\auth\HttpBasicAuth;
 use yii\filters\auth\HttpBearerAuth;
 use yii\filters\auth\QueryParamAuth;
+use sizeg\jwt\JwtHttpBasicAuth;
 use yii\filters\AccessControl;
 use yii\rest\ActiveController;
 
@@ -29,13 +30,16 @@ class RestController extends ActiveController
   {
     return ArrayHelper::merge(parent::behaviors(), [
       'authenticator' => [
-        'class' => CompositeAuth::className(),
-        'authMethods' => [
-          HttpBasicAuth::className(),
-          HttpBearerAuth::className(),
-          QueryParamAuth::className(),
-        ],
+        'class' => JwtHttpBasicAuth::className(),
       ],
+      // 'authenticator' => [
+      //   'class' => CompositeAuth::className(),
+      //   'authMethods' => [
+      //     HttpBasicAuth::className(),
+      //     HttpBearerAuth::className(),
+      //     QueryParamAuth::className(),
+      //   ],
+      // ],
       // 'access' => [
       //   'class' => AccessControl::className(),
       //   'only' => [],

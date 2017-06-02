@@ -19,6 +19,7 @@ class m170511_125627_create_bs_teams extends Migration
       'parent_id' => $this->integer()->comment('父级ID'),
       'grade_code' => $this->string(128)->comment('级别编码'),
       'sync_status' => $this->smallInteger()->notNull()->defaultValue(0)->comment('企业号同步状态。0：未同步，1：已同步'),
+      'tenant_id' => $this->integer()->comment('租户ID'),
 
       'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment('删除状态。0：已删除，1：正常'),
       'updated_by' => $this->integer()->notNull()->comment('修改人'),

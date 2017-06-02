@@ -21,6 +21,7 @@ class m130524_201442_create_bs_users extends Migration
       'email' => $this->string(32)->unique()->comment('电子邮箱'),
       'tel' => $this->string(16)->unique()->comment('手机号码'),
       'access_token' => $this->string(128)->unique()->comment('restful登录验证字段'),
+      'tenant_id' => $this->integer()->comment('租户ID'),
 
       'status' => $this->smallInteger()->notNull()->defaultValue(1)->comment('删除状态。0：已删除，1：正常'),
       'updated_by' => $this->integer()->notNull()->comment('修改人'),

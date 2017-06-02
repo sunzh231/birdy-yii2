@@ -9,7 +9,8 @@ app.controller('SigninController', ['$scope', '$resource', '$state', function($s
       var resource = $resource(url);
       resource.save($scope.user, function(resp) {
         if (resp.code === 0) {
-          $state.go('app.index', {target: 'channels'});
+          // $state.go('app.index', {target: 'channels'}, {reload: true});
+          window.location.href = '/'
         }
       }, function(resp) {
         console.log(resp);

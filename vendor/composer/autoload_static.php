@@ -19,12 +19,17 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'y' => 
         array (
             'yii\\swiftmailer\\' => 16,
+            'yii\\redis\\' => 10,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
             'yii\\composer\\' => 13,
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
+        ),
+        's' => 
+        array (
+            'sizeg\\jwt\\' => 10,
         ),
         'p' => 
         array (
@@ -77,6 +82,7 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
+            'Lcobucci\\JWT\\' => 13,
         ),
         'G' => 
         array (
@@ -103,6 +109,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
         ),
+        'yii\\redis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-redis',
+        ),
         'yii\\gii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-gii',
@@ -126,6 +136,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'yii\\' => 
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
+        ),
+        'sizeg\\jwt\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/sizeg/yii2-jwt',
         ),
         'phpDocumentor\\Reflection\\' => 
         array (
@@ -216,6 +230,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
+        ),
+        'Lcobucci\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

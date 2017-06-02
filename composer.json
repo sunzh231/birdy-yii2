@@ -25,7 +25,9 @@
         "dcb9/yii2-qiniu": "^0.5.0",
         "filsh/yii2-oauth2-server": "~2.0",
         "riverslei/payment": "~3.1",
-        "arogachev/yii2-excel": "*"
+        "arogachev/yii2-excel": "*",
+        "sizeg/yii2-jwt": "^1.0",
+        "yiisoft/yii2-redis": "^2.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
