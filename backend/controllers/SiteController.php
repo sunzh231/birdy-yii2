@@ -47,7 +47,7 @@ class SiteController extends ActiveController
       $signer = new Sha256();
       $token = Yii::$app->jwt->getBuilder()->setIssuer('http://example.com'); // Retrieves the generated token
 
-      return $token;
+      // return $token;
       if ($model->validatePassword($params['password'])) {
         return ['code' => 0, 'msg' => 'OK', 'data' => $model, 'token' => $token];
       } else {

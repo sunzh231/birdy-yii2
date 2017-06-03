@@ -20,6 +20,7 @@ class RoleController extends RestController
   {
     $model = new Role;
     $model->attributes = Yii::$app->request->post();
+    $this->setAdminInfo($model);
     if (!$model->save()) {
       return array_values($model->getFirstErrors())[0];
     }

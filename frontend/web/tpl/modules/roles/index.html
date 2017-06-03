@@ -1,7 +1,7 @@
 <div ng-controller="IndexCtrl">
   <div class="bg-light lter b-b wrapper-md">
     <h1 class="m-n font-thin h3">
-      用户管理
+      角色管理
       <button class="btn btn-info pull-right" ng-click="launch('create')">
         <i class="fa fa-plus"></i><span>新增</span>
       </button>
@@ -10,7 +10,7 @@
   <div class="wrapper-md table-wrap">
     <div class="panel panel-default">
       <div class="panel-heading">
-        用户列表
+        角色列表
       </div>
       <div class="row wrapper">
         <div class="col-sm-5 m-b-xs">
@@ -32,18 +32,16 @@
                   <input type="checkbox"><i></i>
                 </label>
               </th>
-              <th>用户名</th>
-              <th>电子邮箱</th>
-              <th>手机号码</th>
+              <th>角色名称</th>
+              <th>描述</th>
               <th style="width:30px;"></th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="item in result['items']">
               <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-              <td><span class="text-ellipsis">{{ item.username }}</span></td>
-              <td><span class="text-ellipsis">{{ item.email }}</span></td>
-              <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+              <td><span class="text-ellipsis">{{ item.name }}</span></td>
+              <td><span class="text-ellipsis">{{ item.desc }}</span></td>
               <td>
                 <a href class="active" ui-toggle-class>
                   <i class="fa fa-check text-success text-active"></i>

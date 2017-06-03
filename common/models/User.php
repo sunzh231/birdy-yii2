@@ -58,12 +58,12 @@ class User extends ActiveRecord implements IdentityInterface
 
   public function attributes()
   {
-    return ['id', 'username', 'password_hash', 'email', 'tel', 'access_token',
+    return ['id', 'username','realname', 'password_hash', 'email', 'tel', 'access_token',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
   public function safeAttributes()
   {
-    return ['id', 'username', 'password_hash', 'email', 'tel', 'access_token',
+    return ['id', 'username','realname', 'password_hash', 'email', 'tel', 'access_token',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
 
@@ -158,10 +158,15 @@ class User extends ActiveRecord implements IdentityInterface
     return $this->auth_key;
   }
 
+  public function getUserRoles()
+  {
+    return $this->hasMany(UserRole::className(), ['user_id' => 'id']);
+  }
+
   public function getRoles()
   {
     return $this->hasMany(Role::className(), ['id' => 'role_id'])
-      ->viaTable('bs_user_role', ['user_id' => 'id']);
+      ->via('userRoles');
   }
 
   /**

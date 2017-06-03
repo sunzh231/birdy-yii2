@@ -15,6 +15,7 @@ class m130524_201442_create_bs_users extends Migration
     $this->createTable('bs_users', [
       'id' => $this->primaryKey()->comment('主键'),
       'username' => $this->string(32)->notNull()->unique()->comment('用户名'),
+      'realname' => $this->string(32)->notNull()->unique()->comment('真实姓名'),
       'auth_key' => $this->string(32)->comment('session登录验证字段'),
       'password_hash' => $this->string(128)->notNull()->comment('加密密码'),
       'password_reset_token' => $this->string(128)->unique()->comment('密码重置token'),

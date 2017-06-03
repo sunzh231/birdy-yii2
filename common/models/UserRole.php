@@ -3,11 +3,10 @@ namespace common\models;
 
 use Yii;
 use yii\base\NotSupportedException;
-use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\data\ActiveDataProvider;
 
-class Role extends ActiveRecord
+class UserRole extends ActiveRecord
 {
   const STATUS_DELETED = 0;
   const STATUS_ACTIVE = 1;
@@ -17,17 +16,7 @@ class Role extends ActiveRecord
    */
   public static function tableName()
   {
-    return 'bs_roles';
-  }
-
-  /**
-   * @inheritdoc
-   */
-  public function behaviors()
-  {
-    return [
-      TimestampBehavior::className(),
-    ];
+    return 'bs_user_role';
   }
 
   /**
@@ -43,19 +32,13 @@ class Role extends ActiveRecord
 
   public function attributes()
   {
-    return ['id', 'name', 'desc', 'tenant_id',
-            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+    return ['id', 'user_id', 'role_id',
+            'status', 'created_by', 'created_at'];
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'desc', 'tenant_id',
-            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
-  }
-
-  public function getUsers()
-  {
-    return $this->hasMany(User::className(), ['id' => 'user_id'])
-      ->viaTable('bs_user_role', ['role_id' => 'id']);
+    return ['id', 'user_id', 'role_id',
+            'status', 'created_by', 'created_at'];
   }
 
   public static function findById($id)

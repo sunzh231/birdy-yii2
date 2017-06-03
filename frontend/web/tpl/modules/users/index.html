@@ -1,6 +1,11 @@
 <div ng-controller="IndexCtrl">
   <div class="bg-light lter b-b wrapper-md">
-    <h1 class="m-n font-thin h3">用户管理</h1>
+    <h1 class="m-n font-thin h3">
+      用户管理
+      <button class="btn btn-info pull-right" ng-click="launch('create')">
+        <i class="fa fa-plus"></i><span>新增</span>
+      </button>
+    </h1>
   </div>
   <div class="wrapper-md table-wrap">
     <div class="panel panel-default">

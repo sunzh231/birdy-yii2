@@ -29,17 +29,17 @@ class RestController extends ActiveController
   public function behaviors()
   {
     return ArrayHelper::merge(parent::behaviors(), [
-      'authenticator' => [
-        'class' => JwtHttpBasicAuth::className(),
-      ],
       // 'authenticator' => [
-      //   'class' => CompositeAuth::className(),
-      //   'authMethods' => [
-      //     HttpBasicAuth::className(),
-      //     HttpBearerAuth::className(),
-      //     QueryParamAuth::className(),
-      //   ],
+      //   'class' => JwtHttpBasicAuth::className(),
       // ],
+      'authenticator' => [
+        'class' => CompositeAuth::className(),
+        'authMethods' => [
+          HttpBasicAuth::className(),
+          HttpBearerAuth::className(),
+          QueryParamAuth::className(),
+        ],
+      ],
       // 'access' => [
       //   'class' => AccessControl::className(),
       //   'only' => [],
@@ -47,5 +47,11 @@ class RestController extends ActiveController
       //   ],
       // ],
     ]);
+  }
+
+  protected function setAdminInfo($target)
+  {
+    $target->updated_by = 0;
+    $target->created_by = 0;
   }
 }

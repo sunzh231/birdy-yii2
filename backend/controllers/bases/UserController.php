@@ -5,6 +5,7 @@ use Yii;
 use backend\controllers\RestController;
 use yii\data\ActiveDataProvider;
 use common\models\User;
+use common\models\UserRole;
 
 class UserController extends RestController
 {
@@ -19,11 +20,20 @@ class UserController extends RestController
 
   public function actionCreate()
   {
+    $params = Yii::$app->request->post();
     $model = new User;
-    $model->attributes = Yii::$app->request->post();
+    $model->attributes = $params;
     $model->setPassword($model->password_hash);
+    $this->setAdminInfo($model);
     if (!$model->save()) {
       return array_values($model->getFirstErrors())[0];
+    }
+    foreach ($params['roles'] as $role) {
+      $userRole = new UserRole;
+      $userRole->role_id = $role['id'];
+      $userRole->created_by = 0;
+      $userRole->created_at = time();
+      $model->link('userRoles', $userRole);
     }
     return $model;
   }
