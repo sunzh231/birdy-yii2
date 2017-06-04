@@ -6,12 +6,14 @@ use common\utils\Weconnect;
 
 class Jssdk {
 
-  public static function getSignPackage($appId, $appSecret) {
+  public static function getSignPackage($appId, $appSecret, $url = null) {
     $jsapiTicket = Jssdk::getJsApiTicket($appId, $appSecret);
 
     // 注意 URL 一定要动态获取，不能 hardcode.
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-    $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    if (!$url) {
+      $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+      $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    }
 
     $timestamp = time();
     $nonceStr = Jssdk::createNonceStr();
