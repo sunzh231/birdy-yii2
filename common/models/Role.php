@@ -48,8 +48,7 @@ class Role extends ActiveRecord
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'desc', 'tenant_id',
-            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+    return ['name', 'desc', 'tenant_id'];
   }
 
   public function getUsers()

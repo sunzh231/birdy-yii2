@@ -4,7 +4,7 @@ var dlg = null;
 /* User Controller */
 app.controller('IndexCtrl', ['$scope', 'dialogs', '$resource', function($scope, $dialogs, $resource) {
   $scope.table_render = function(current_page) {
-    var url = '/api/socails/channel/index?page='+ current_page +'&access-token=123456';
+    var url = '/api/socails/channel/index?page='+ current_page;
     var resource = $resource(url);
     resource.get({},function(resp) {
       $scope.result = resp;
@@ -40,7 +40,7 @@ app.controller('DialogCtrl', ['$scope', '$resource', function($scope, $resource)
   }
 
   $scope.save = function(){
-    var url = '/api/socails/channel/create?access-token=123456';
+    var url = '/api/socails/channel/create';
     var resource = $resource(url);
     resource.save($scope.channel, function(resp) {
       dlg.close();

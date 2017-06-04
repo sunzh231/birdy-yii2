@@ -44,7 +44,6 @@ class Channel extends ActiveRecord
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'originid', 'appid', 'appsecret', 'wechat_token',
-            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+    return ['name', 'originid', 'appid', 'appsecret', 'wechat_token'];
   }
 }

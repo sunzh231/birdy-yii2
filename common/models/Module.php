@@ -47,8 +47,7 @@ class Module extends ActiveRecord
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'auth_name', 'desc', 'parent_id', 'grade_code',
-            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+    return ['name', 'auth_name', 'desc', 'parent_id', 'grade_code'];
   }
 
 }

@@ -45,9 +45,8 @@ class Fans extends ActiveRecord
   }
   public function safeAttributes()
   {
-    return ['id', 'nickname', 'headimgurl', 'openid', 'unionid', 'sex', 'language',
-            'city', 'province', 'country', 'subscribe', 'subscribe_time', 'remark', 'tagid_list'
-            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+    return ['nickname', 'headimgurl', 'openid', 'unionid', 'sex', 'language',
+            'city', 'province', 'country', 'subscribe', 'subscribe_time', 'remark', 'tagid_list'];
   }
 
   public function getId()

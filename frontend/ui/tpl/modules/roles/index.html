@@ -27,11 +27,6 @@
         <table class="table table-striped b-t b-light">
           <thead>
             <tr>
-              <th style="width:20px;">
-                <label class="i-checks m-b-none">
-                  <input type="checkbox"><i></i>
-                </label>
-              </th>
               <th>角色名称</th>
               <th>描述</th>
               <th style="width:120px;">操作</th>
@@ -39,7 +34,6 @@
           </thead>
           <tbody>
             <tr ng-repeat="item in result['items']">
-              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
               <td><span class="text-ellipsis">{{ item.name }}</span></td>
               <td><span class="text-ellipsis">{{ item.desc }}</span></td>
               <td>

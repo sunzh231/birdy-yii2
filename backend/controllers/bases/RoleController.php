@@ -29,7 +29,7 @@ class RoleController extends RestController
 
   public function actionView($id)
   {
-    $model = Role::findById($id);
+    $model = $this->modelClass::findById($id);
     if ($model === null) {
       throw new NotFoundHttpException('Can not find this object!');
     } else {
@@ -39,7 +39,7 @@ class RoleController extends RestController
 
   public function actionUpdate($id)
   {
-    $model = Role::findById($id);
+    $model = $this->modelClass::findById($id);
     if ($model === null) {
       throw new NotFoundHttpException('Can not find this object!');
     } else {
@@ -53,7 +53,7 @@ class RoleController extends RestController
 
   public function actionDelete($id)
   {
-    $model = Role::findById($id);
+    $model = $this->modelClass::findById($id);
     // Delete in physical
     if($model) {
       $model->delete();

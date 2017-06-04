@@ -42,7 +42,6 @@ class Menu extends ActiveRecord
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'type', 'grade_code', 'event_key', 'content',
-            'created_by', 'created_at', 'updated_by', 'updated_at'];
+    return ['name', 'type', 'grade_code', 'event_key', 'content'];
   }
 }

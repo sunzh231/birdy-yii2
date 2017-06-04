@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
 use common\models\Role;
+use yii\data\ActiveDataProvider;
 
 /**
  * User model
@@ -58,13 +59,13 @@ class User extends ActiveRecord implements IdentityInterface
 
   public function attributes()
   {
-    return ['id', 'username','realname', 'password_hash', 'email', 'tel', 'access_token',
+    return ['id', 'username', 'realname', 'password_hash', 'email', 'tel', 'access_token',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
+
   public function safeAttributes()
   {
-    return ['id', 'username','realname', 'password_hash', 'email', 'tel', 'access_token',
-            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+    return ['username', 'realname', 'password_hash', 'email', 'tel'];
   }
 
   /**
@@ -73,6 +74,11 @@ class User extends ActiveRecord implements IdentityInterface
   public static function findIdentity($id)
   {
     return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+  }
+
+  public static function findWithPagination($pagination = null)
+  {
+    return new ActiveDataProvider(['query' => static::find(), 'pagination' => ['pageSize' => 10]]);
   }
 
   /**
@@ -207,10 +213,10 @@ class User extends ActiveRecord implements IdentityInterface
   }
 
   # 生成access_token
-    public function generateAccessToken()
-    {
-      $this->access_token = Yii::$app->security->generateRandomString();
-    }
+  public function generateAccessToken()
+  {
+    $this->access_token = Yii::$app->security->generateRandomString();
+  }
 
   /**
    * Generates new password reset token

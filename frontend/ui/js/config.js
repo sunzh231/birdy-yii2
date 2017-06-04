@@ -27,4 +27,13 @@ angular.module('app')
     $translateProvider.preferredLanguage('zn_CH');
     // Tell the module to store the language in the local storage
     $translateProvider.useLocalStorage();
+  }])
+  .config(['$resourceProvider', function($resourceProvider){
+    $resourceProvider.defaults.actions = {
+      create: {method: 'POST', headers: {Authorization: 'Bearer 123456'}},
+      get:    {method: 'GET', headers: {Authorization: 'Bearer 123456'}},
+      query:  {method: 'GET', isArray: false, headers: {Authorization: 'Bearer 123456'}},
+      update: {method: 'PUT', headers: {Authorization: 'Bearer 123456'}},
+      delete: {method: 'DELETE', headers: {Authorization: 'Bearer 123456'}}
+    };
   }]);

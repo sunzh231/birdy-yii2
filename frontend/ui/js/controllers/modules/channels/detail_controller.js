@@ -3,7 +3,7 @@
 var dlg = null;
 /* User Controller */
 app.controller('DetailCtrl', ['$scope', '$stateParams', '$resource', function($scope, $stateParams, $resource) {
-  var url = '/api/socails/channel/view/:channel_id?access-token=123456';
+  var url = '/api/socails/channel/view/:channel_id';
   var resource = $resource(url, {channel_id: '@id'});
   resource.get({channel_id: $stateParams.id}, function(resp) {
     $scope.channel = resp;
@@ -53,7 +53,7 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$resource', function($s
   }
 
   $scope.menuActive = function () {
-    var url = '/api/socails/channel/menu?access-token=123456';
+    var url = '/api/socails/channel/menu';
     var resource = $resource(url);
     var result = {
       id: $stateParams.id,
@@ -68,7 +68,7 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$resource', function($s
 
   // Fans List
   $scope.table_render = function(current_page) {
-    var url = '/api/socails/fans/index?page='+ current_page +'&access-token=123456';
+    var url = '/api/socails/fans/index?page='+ current_page;
     var resource = $resource(url);
     resource.get({},function(resp) {
       $scope.result = resp;
@@ -90,7 +90,7 @@ app.controller('DetailCtrl', ['$scope', '$stateParams', '$resource', function($s
 
 app.controller('MeterialCtrl', ['$scope', 'dialogs', '$resource', function($scope, $dialogs, $resource) {
   $scope.table_render = function(current_page) {
-    var url = '/api/meterials/channel/index?page='+ current_page +'&access-token=123456';
+    var url = '/api/meterials/channel/index?page='+ current_page;
     var resource = $resource(url);
     resource.get({},function(resp) {
       $scope.result = resp;
@@ -126,7 +126,7 @@ app.controller('DialogCtrl', ['$scope', '$resource', function($scope, $resource)
   }
 
   $scope.save = function(){
-    var url = '/api/channel/create?access-token=123456';
+    var url = '/api/channel/create';
     var resource = $resource(url);
     resource.save($scope.channel, function(resp) {
       dlg.close();

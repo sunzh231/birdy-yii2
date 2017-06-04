@@ -2,7 +2,7 @@
   <div class="bg-light lter b-b wrapper-md">
     <h1 class="m-n font-thin h3">
       用户管理
-      <button class="btn btn-info pull-right" ng-click="launch('create')">
+      <button class="btn btn-info pull-right" ng-click="launch(0)">
         <i class="fa fa-plus"></i><span>新增</span>
       </button>
     </h1>
@@ -13,43 +13,34 @@
         用户列表
       </div>
       <div class="row wrapper">
-        <div class="col-sm-5 m-b-xs">
-          <select class="input-sm form-control w-sm inline v-middle">
-            <option value="0">Bulk action</option>
-            <option value="1">Delete selected</option>
-            <option value="2">Bulk edit</option>
-            <option value="3">Export</option>
-          </select>
-          <button class="btn btn-sm btn-info">查询</button>
+        <div class="col-sm-12 m-b-xs">
+          <input type="text" ng-model="query.keywords" placeholder="用户名/真实姓名/手机号码/电子邮箱" class="input-sm form-control w-md inline v-middle"/>
+          <button class="btn btn-sm btn-info" ng-click="table_render(1)">查询</button>
         </div>
       </div>
       <div class="table-responsive">
         <table class="table table-striped b-t b-light">
           <thead>
             <tr>
-              <th style="width:20px;">
-                <label class="i-checks m-b-none">
-                  <input type="checkbox"><i></i>
-                </label>
-              </th>
               <th>用户名</th>
-              <th>电子邮箱</th>
+              <th>真实姓名</th>
               <th>手机号码</th>
-              <th style="width:120px;"></th>
+              <th>电子邮箱</th>
+              <th style="width:120px;">操作</th>
             </tr>
           </thead>
           <tbody>
             <tr ng-repeat="item in result['items']">
-              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
               <td><span class="text-ellipsis">{{ item.username }}</span></td>
-              <td><span class="text-ellipsis">{{ item.email }}</span></td>
+              <td><span class="text-ellipsis">{{ item.realname }}</span></td>
               <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+              <td><span class="text-ellipsis">{{ item.email }}</span></td>
               <td>
                 <div class="btn-group dropdown row-btn-group">
                   <button class="btn btn-success" data-toggle="dropdown">操作<span class="caret"></span></button>
                   <ul class="dropdown-menu">
-                    <li><a href="">编辑</a></li>
-                    <li><a href="">删除</a></li>
+                    <li><a href="" ng-click="launch(item.id)">编辑</a></li>
+                    <li><a href="" ng-click="del(item.id)">删除</a></li>
                   </ul>
                 </div>
               </td>

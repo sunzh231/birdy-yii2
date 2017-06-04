@@ -3,7 +3,6 @@ namespace backend\controllers\bases;
 
 use Yii;
 use backend\controllers\RestController;
-use yii\data\ActiveDataProvider;
 use common\models\User;
 use common\models\UserRole;
 
@@ -13,9 +12,9 @@ class UserController extends RestController
 
   public function actionIndex()
   {
-    $modelClass = $this->modelClass;
-    $query = $modelClass::find(); // equivalent to $query = EntryForm::find()
-    return new ActiveDataProvider(['query' => $query, 'pagination' => ['pageSize' => 10]]);
+    $pagination = [];
+    $query = $this->modelClass::findWithPagination($pagination);
+    return $query;
   }
 
   public function actionCreate()
@@ -31,8 +30,6 @@ class UserController extends RestController
     foreach ($params['roles'] as $role) {
       $userRole = new UserRole;
       $userRole->role_id = $role['id'];
-      $userRole->created_by = 0;
-      $userRole->created_at = time();
       $model->link('userRoles', $userRole);
     }
     return $model;
@@ -40,24 +37,34 @@ class UserController extends RestController
 
   public function actionView($id)
   {
-    $model = $this->findModel($id);
+    $model = $this->modelClass::findIdentity($id);
     if ($model === null) {
       throw new NotFoundHttpException('Can not find this object!');
     } else {
-      return $model;
+      return ['user' =>$model, 'roles' => $model->roles];
     }
   }
 
   public function actionUpdate($id)
   {
-    $model = $this->findModel($id);
+    $model = $this->modelClass::findIdentity($id);
+    $origin_password = $model->password_hash;
     if ($model === null) {
       throw new NotFoundHttpException('Can not find this object!');
     } else {
-      $model->attributes = Yii::$app->request->post();
-      $model->setPassword($model->password_hash);
+      $params = Yii::$app->request->post();
+      $model->attributes = $params;
+      if ($origin_password != $params['password_hash']) {
+        $model->setPassword($model->password_hash);
+      }
       if (!$model->save()) {
         return array_values($model->getFirstErrors())[0];
+      }
+      UserRole::deleteAll('user_id = :user_id', [':user_id' => $model->id]);
+      foreach ($params['roles'] as $role) {
+        $user_role = new UserRole;
+        $user_role->role_id = $role['id'];
+        $model->link('userRoles', $user_role);
       }
       return $model;
     }
@@ -65,22 +72,17 @@ class UserController extends RestController
 
   public function actionDelete($id)
   {
-    $model = $this->findModel($id);
+    $model = $this->modelClass::findIdentity($id);
     // Delete in physical
     if($model) {
       $model->delete();
-      $modelClass = $this->modelClass;
-      $query = $modelClass::find(); // equivalent to $query = EntryForm::find()
-      return new ActiveDataProvider(['query' => $query, 'pagination' => ['pageSize' => 10]]);
+      $pagination = [];
+      $query = $this->modelClass::findWithPagination($pagination);
+      return $query;
     }
     // Delete in logical
     // $model->isDeleted = true;
     // $model->save();
     return null;
-  }
-
-  private function findModel($id)
-  {
-    return User::findOne(['id' => $id]);
   }
 }
