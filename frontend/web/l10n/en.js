@@ -1,4 +1,6 @@
 {
+  "DIALOGS_YES": "确定",
+  "DIALOGS_NO": "取消",
   "header" : {
     "navbar" : {
       "UPLOAD" : "上传",

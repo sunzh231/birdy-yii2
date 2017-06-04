@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m170423_120309_create_bs_menus extends Migration
+class m170423_120309_create_soc_menus extends Migration
 {
   public function up()
   {
@@ -12,7 +12,7 @@ class m170423_120309_create_bs_menus extends Migration
       $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
     }
 
-    $this->createTable('bs_menus', [
+    $this->createTable('soc_menus', [
       'id' => $this->primaryKey()->comment('主键'),
       'name' => $this->string(8)->notNull()->comment('菜单名称'),
       'type' => $this->integer()->notNull()->defaultValue(0)->comment('菜单类型'),
@@ -31,7 +31,7 @@ class m170423_120309_create_bs_menus extends Migration
 
   public function down()
   {
-    $this->dropTable('bs_menus');
+    $this->dropTable('soc_menus');
   }
 
   /*

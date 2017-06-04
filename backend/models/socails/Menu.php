@@ -1,5 +1,5 @@
 <?php
-namespace common\models;
+namespace backend\models\socails;
 
 use Yii;
 use yii\base\NotSupportedException;

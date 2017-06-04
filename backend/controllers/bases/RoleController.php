@@ -29,7 +29,7 @@ class RoleController extends RestController
 
   public function actionView($id)
   {
-    $model = $this->findModel($id);
+    $model = Role::findById($id);
     if ($model === null) {
       throw new NotFoundHttpException('Can not find this object!');
     } else {
@@ -57,8 +57,9 @@ class RoleController extends RestController
     // Delete in physical
     if($model) {
       $model->delete();
-      $query = $this->modelClass::find(); // equivalent to $query = EntryForm::find()
-      return new ActiveDataProvider(['query' => $query, 'pagination' => ['pageSize' => 10]]);
+      $pagination = [];
+      $query = $this->modelClass::findWithPagination($pagination);
+      return $query;
     }
     // Delete in logical
     // $model->status = 0;

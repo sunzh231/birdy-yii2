@@ -2,7 +2,7 @@
   <div class="bg-light lter b-b wrapper-md">
     <h1 class="m-n font-thin h3">
       角色管理
-      <button class="btn btn-info pull-right" ng-click="launch('create')">
+      <button class="btn btn-info pull-right" ng-click="launch(0)">
         <i class="fa fa-plus"></i><span>新增</span>
       </button>
     </h1>
@@ -34,7 +34,7 @@
               </th>
               <th>角色名称</th>
               <th>描述</th>
-              <th style="width:30px;"></th>
+              <th style="width:120px;">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -43,10 +43,13 @@
               <td><span class="text-ellipsis">{{ item.name }}</span></td>
               <td><span class="text-ellipsis">{{ item.desc }}</span></td>
               <td>
-                <a href class="active" ui-toggle-class>
-                  <i class="fa fa-check text-success text-active"></i>
-                  <i class="fa fa-times text-danger text"></i>
-                </a>
+                <div ng-if="item.id > 0" class="btn-group dropdown row-btn-group">
+                  <button class="btn btn-success" data-toggle="dropdown">操作<span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="" ng-click="launch(item.id)">编辑</a></li>
+                    <li><a href="" ng-click="del(item.id)">删除</a></li>
+                  </ul>
+                </div>
               </td>
             </tr>
           </tbody>

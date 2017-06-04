@@ -1,19 +1,23 @@
 <?php
-namespace common\models;
+namespace backend\models\pcm;
 
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\data\ActiveDataProvider;
 
-class Channel extends ActiveRecord
+class Unit extends ActiveRecord
 {
   const STATUS_DELETED = 0;
   const STATUS_ACTIVE = 1;
 
+  /**
+   * @inheritdoc
+   */
   public static function tableName()
   {
-    return 'bs_channels';
+    return 'bs_roles';
   }
 
   /**
@@ -39,12 +43,29 @@ class Channel extends ActiveRecord
 
   public function attributes()
   {
-    return ['id', 'name', 'originid', 'appid', 'appsecret', 'wechat_token',
+    return ['id', 'name', 'desc', 'tenant_id',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
   public function safeAttributes()
   {
-    return ['id', 'name', 'originid', 'appid', 'appsecret', 'wechat_token',
+    return ['id', 'name', 'desc', 'tenant_id',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
+
+  public function getUsers()
+  {
+    return $this->hasMany(User::className(), ['id' => 'user_id'])
+      ->viaTable('bs_user_role', ['role_id' => 'id']);
+  }
+
+  public static function findById($id)
+  {
+    return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
+  }
+
+  public static function findWithPagination($pagination = null)
+  {
+    return new ActiveDataProvider(['query' => static::find(), 'pagination' => ['pageSize' => 10]]);
+  }
+
 }

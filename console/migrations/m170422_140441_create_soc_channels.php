@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m170422_140441_create_bs_channels extends Migration
+class m170422_140441_create_soc_channels extends Migration
 {
   public function up()
   {
@@ -12,7 +12,7 @@ class m170422_140441_create_bs_channels extends Migration
         $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
     }
 
-    $this->createTable('bs_channels', [
+    $this->createTable('soc_channels', [
       'id' => $this->primaryKey()->comment('主键'),
       'name' => $this->string(32)->notNull()->unique()->comment('账号名称'),
       'account_type' => $this->integer()->notNull()->defaultValue(0)->comment('账号类型'),
@@ -33,7 +33,7 @@ class m170422_140441_create_bs_channels extends Migration
 
   public function down()
   {
-    $this->dropTable('bs_channels');
+    $this->dropTable('soc_channels');
   }
 
   /*

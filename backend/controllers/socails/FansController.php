@@ -4,11 +4,11 @@ namespace backend\controllers\socails;
 use Yii;
 use backend\controllers\RestController;
 use yii\data\ActiveDataProvider;
-use common\models\Fans;
+use backend\models\socails\Fans;
 
 class FansController extends RestController
 {
-  public $modelClass = 'common\models\Fans';
+  public $modelClass = 'backend\models\socails\Fans';
 
   public function actionIndex()
   {

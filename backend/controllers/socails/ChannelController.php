@@ -4,13 +4,13 @@ namespace backend\controllers\socails;
 use Yii;
 use backend\controllers\RestController;
 use yii\data\ActiveDataProvider;
-use common\models\Channel;
-use common\models\Menu;
+use backend\models\socails\Channel;
+use backend\models\socails\Menu;
 use common\utils\Weconnect;
 
 class ChannelController extends RestController
 {
-  public $modelClass = 'common\models\Channel';
+  public $modelClass = 'backend\models\socails\Channel';
 
   public function actionMenu()
   {
