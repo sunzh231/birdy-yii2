@@ -17,6 +17,7 @@ export default {
   },
   created () {
     this.pageInit()
+
   },
   methods: {
     pageInit () {

@@ -87,6 +87,37 @@ export default {
   created () {
     this.getData()
     this.pageInit()
+    let url = location.href.split('#')[0]
+    this.birdyService.get(`/api/wechat/config?url=${url}`).then((resp) => {
+      this.config = resp
+      this.$wechat.config({
+        debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+        appId: resp.appId, // 必填，公众号的唯一标识
+        timestamp: resp.timestamp, // 必填，生成签名的时间戳
+        nonceStr: resp.nonceStr, // 必填，生成签名的随机串
+        signature: resp.signature,// 必填，签名，见附录1
+        jsApiList: ['onMenuShareAppMessage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+      })
+
+      this.$wechat.onMenuShareAppMessage({
+        title: `${this.target.name}微信贷款信息核对确认书`, // 分享标题
+        desc: '微信官方贷款在线申请', // 分享描述
+        link: `http://loan.bailongsheng.cn/webapp/#/comfirm/${this.$route.params.id}`, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: 'http://loan.bailongsheng.cn/upload/base/loan_logo.png', // 分享图标
+        type: '', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: function () {
+            // 用户确认分享后执行的回调函数
+        },
+        cancel: function () {
+            // 用户取消分享后执行的回调函数
+        }
+      })
+    }).catch((resp) => {
+      console.log(resp)
+    }).finally(() => {
+
+    })
   },
   computed: {
     formatDate () {
@@ -106,7 +137,7 @@ export default {
     getData () {
       this.birdyService.get(`/api/loan/view/${this.$route.params.id}?access-token=abc123_`).then((resp) => {
         this.target = resp
-        document.getElementsByTagName('title')[0].innerText = `${this.target.name}微信贷款信息核对确认书`
+        // document.getElementsByTagName('title')[0].innerText = `${this.target.name}微信贷款信息核对确认书`
       }).catch((resp) => {
 
       }).finally(() => {
