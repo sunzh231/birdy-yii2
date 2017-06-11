@@ -8,21 +8,11 @@
       <el-table-column prop="name" fixed sortable label="姓名"></el-table-column>
       <el-table-column prop="tel" label="联系方式"></el-table-column>
       <el-table-column prop="loan_amount" label="贷款申请金额"></el-table-column>
-      <!-- <el-table-column inline-template fixed="right" label="操作" width="120" :context="_self">
+      <el-table-column inline-template fixed="right" label="操作" width="120" :context="_self">
         <span>
-          <el-dropdown split-button type="success" size="small" style="padding-top: 8px;" @click="handleView($index, row)">
-            查看
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item divided>
-                <el-button type="text" @click="handleEdit($index, row)">编辑</el-button>
-              </el-dropdown-item>
-              <el-dropdown-item divided>
-                <el-button type="text" @click="handleDelete($index, row)">删除</el-button>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
+          <el-button type="danger" @click="handleDelete($index, row)">删除</el-button>
         </span>
-      </el-table-column> -->
+      </el-table-column>
     </el-table>
 
     <div class="pagination">
@@ -32,7 +22,7 @@
         :current-page="pagination.page + 1"
         :page-sizes="[20, 30, 50, 100, 200]"
         :page-size="pagination.size"
-        layout="total, sizes, prev, pager, next, jumper"
+        layout="total, prev, pager, next, jumper"
         :total="pagination.totalElements">
       </el-pagination>
     </div>
@@ -71,9 +61,9 @@ export default {
       demoService: new DemoService(this),
       tableData: [],
       pagination: {
-        page: 0,
-        size: 15,
-        totalElements: 2
+        page: 1,
+        size: 20,
+        totalElements: 0
       },
       multipleSelection: [],
       dialogVisible: false,
@@ -142,6 +132,8 @@ export default {
       // Object.assign(params, this.pagination, this.searchParams)
       this.demoService.get('/api/loan/index?access-token=abc123_', params).then((resp) => {
         this.tableData = resp.items
+        this.pagination.page = resp._meta.currentPage
+        this.pagination.totalElements = resp._meta.totalCount
       }).catch((resp) => {
         this.$notify({
           title: '加载失败',
@@ -158,16 +150,10 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.demoService.remove(`/admin/demo/${ids}`).then((resp) => {
-          if (resp.success) {
-
-          } else {
-            this.$notify({
-              title: '删除失败',
-              message: '网络异常，请稍后再试',
-              type: 'error'
-            })
-          }
+        this.demoService.remove(`/api/loan/delete/${ids}?access-token=abc123_`).then((resp) => {
+          this.tableData = resp.items
+          this.pagination.page = resp._meta.currentPage
+          this.pagination.totalElements = resp._meta.totalCount
         }).catch((resp) => {
           this.$notify({
             title: '删除失败',
