@@ -62,7 +62,7 @@ export default {
       tableData: [],
       pagination: {
         page: 1,
-        size: 20,
+        size: 10,
         totalElements: 0
       },
       multipleSelection: [],
