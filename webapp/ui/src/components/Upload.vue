@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import lrz from 'lrz'
+
 export default {
   props: {
     fpath: {
@@ -32,21 +34,39 @@ export default {
       this.fileUpload()
     },
     onFileChange (e) {
-      var files = e.target.files || e.dataTransfer.files
+      let vm = this
+      let files = e.target.files || e.dataTransfer.files
       if (!files.length) return
-      this.createImage(files)
+      lrz(files[0])
+        .then(function (rst) {
+          vm.createImage(files)
+          console.log(rst)
+          rst.formData.append('fileLen', rst.fileLen)
+          // rst.formData.append('xxx', '我是其他参数');
+          // xhr.send(rst.formData);
+          vm.fileUpload(rst)
+        })
+        .then(function (rst) {
+          console.log(rst)
+          return rst;
+        })
+        .catch(function (err) {
+          alert(err);
+        })
+        .always(function () {
+          // 不管是成功失败，这里都会执行
+        });
     },
     createImage (file) {
       this.images = []
-      var vm = this
-      var reader = null
-      var leng = file.length
-      for (var i = 0; i < leng; i++) {
+      let vm = this
+      let reader = null
+      let leng = file.length
+      for (let i = 0; i < leng; i++) {
         reader = new window.FileReader()
         reader.readAsDataURL(file[i])
         reader.onload = function (e) {
           vm.images.push(e.target.result)
-          vm.fileUpload()
         }
       }
     },
@@ -54,22 +74,19 @@ export default {
       this.images = []
       this.$emit('update:fpath', '')
     },
-    // delImage: function (index) {
-    //   this.images.shift(index)
-    // },
-    fileUpload () {
-      if (this.images.length > 0) {
-        let formData = new FormData()
-        formData.append('top', this.images[0])
-        formData.append("file", new Blob(["Hello World!"], {type:"text/plain"}))
-        this.$http.post('/api/upload/picture', formData).then(function(resp) {
-          // this.filePath = resp.data
-          let url = resp.data.data
-          this.$emit('update:fpath', url)
-        }, function(err) {
-          console.log(err)
-        })
-      }
+    fileUpload (rst) {
+      // if (this.images.length > 0) {
+      //   let formData = new FormData()
+      //   formData.append('top', this.images[0])
+      //   formData.append("file", new Blob(["Hello World!"], {type:"text/plain"}))
+      // }
+      this.$http.post('/api/upload/picture', rst.formData).then(function(resp) {
+        // this.filePath = resp.data
+        let url = resp.data.data
+        this.$emit('update:fpath', url)
+      }, function(err) {
+        console.log(err)
+      })
     }
   }
 }
