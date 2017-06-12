@@ -130,7 +130,7 @@ export default {
       this.tableLoading = true
       let params = {}
       // Object.assign(params, this.pagination, this.searchParams)
-      this.demoService.get('/api/loan/index?access-token=abc123_', params).then((resp) => {
+      this.demoService.get(`/api/loan/index?page=${this.pagination.page}&access-token=abc123_`, params).then((resp) => {
         this.tableData = resp.items
         this.pagination.page = resp._meta.currentPage
         this.pagination.totalElements = resp._meta.totalCount
