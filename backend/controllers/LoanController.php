@@ -12,7 +12,7 @@ class LoanController extends RestController
   public function actionIndex()
   {
     $modelClass = $this->modelClass;
-    $query = $modelClass::find(); // equivalent to $query = EntryForm::find()
+    $query = $modelClass::find()->orderBy('created_at DESC'); // equivalent to $query = EntryForm::find()
     return new ActiveDataProvider(['query' => $query, 'pagination' => ['pageSize' => 10]]);
   }
 
