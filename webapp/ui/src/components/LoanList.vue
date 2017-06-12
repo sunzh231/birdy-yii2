@@ -68,6 +68,7 @@ export default {
           this.page = this.page + operation
         }
       }
+      this.getData(this.page)
     }
   },
   components: {

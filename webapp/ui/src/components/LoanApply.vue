@@ -222,6 +222,7 @@ export default {
           bank_pic: ''
         }
       }).catch((resp) => {
+        alert(resp)
         console.log(resp)
       }).finally(() => {
 
