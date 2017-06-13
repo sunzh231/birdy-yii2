@@ -10,4 +10,14 @@ https://deployer.org/
   d. 添加列 yii migrate/create add_position_to_post --fields="position:integer"
   e. 删除列 yii migrate/create drop_position_from_post --fields="position:integer"
 
-chmod -R 777 path_to/backend/web/upload 
+chmod -R 777 path_to/backend/web/upload
+
+docker volume create --name loan-app
+
+docker run --name loan-mysql -e MYSQL_ROOT_PASSWORD=abc123_ -d --restart="always" mysql:5.7.18
+
+docker run --name loan-app -d --restart="always" \
+--link loan-mysql:mysql \
+-v loan-app:/home/app \
+-p 0.0.0.0:10022:22 -p 0.0.0.0:10080:80 \
+ubuntu:16.04

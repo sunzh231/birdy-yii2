@@ -152,7 +152,8 @@ export default {
       menus: [
         {name: '贷款数据', icon: 'el-icon-star-on', url: '/loan/list', subMenus: []},
         // {name: '后台用户管理', icon: 'el-icon-star-on', url: '/user/list', subMenus: []},
-        {name: '内容设置', icon: 'el-icon-setting', url: '/setting/banner'}
+        {name: '内容设置', icon: 'el-icon-setting', url: '/setting/banner'},
+        {name: '结束页设置', icon: 'el-icon-setting', url: '/endpage/list'}
       ],
       breadcrumbs: [
         {name: '用户列表', path: '/user/list'},
