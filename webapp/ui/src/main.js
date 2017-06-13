@@ -12,6 +12,7 @@ import LoanApply from './components/LoanApply'
 import LoanConfirm from './components/LoanConfirm'
 import LoanList from './components/LoanList'
 import Upload from './components/Upload'
+import LoanEnd from './components/LoanEnd'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)
@@ -28,8 +29,8 @@ const routes = [{
   path: '/list',
   component: LoanList
 },{
-  path: '/upload',
-  component: Upload
+  path: '/loanend',
+  component: LoanEnd
 }]
 
 const router = new VueRouter({
