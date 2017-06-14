@@ -56,7 +56,7 @@
         </div>
         <div class="content-group">
           <label>手续费<span>:</span></label>
-          <span class="text-control">500元人民币/一次性</span>
+          <span class="text-control">800元人民币/一次性</span>
         </div>
         <div class="content-group help-tip">
           <label>办理截止时间<span>:</span></label>
@@ -166,6 +166,7 @@ export default {
 
 #loan_confirm {
   padding: 10px;
+  font-size: 18px;
   background: @dartWhite;
   .page-wrap {
     padding: 20px;
@@ -187,7 +188,7 @@ export default {
         }
       }
       .help-tip {
-        color: @baseRed;
+        color: red;
       }
     }
     .confirm-btn {

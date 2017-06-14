@@ -17,17 +17,24 @@
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
       </el-form-item>
+      <el-form-item label="二维码引导语">
+        <el-input type="textarea" v-model="target.pic"></el-input>
+      </el-form-item>
       <el-form-item label="二维码设置">
         <el-upload
           class="upload-demo"
           action="api/upload/file"
           :on-remove="handleRemoveQr"
+          :before-upload="uploadCheckQr"
           :on-success="onSuccessQr"
           :file-list="target.qr"
           list-type="picture">
           <el-button size="small" type="primary">点击上传</el-button>
           <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
         </el-upload>
+      </el-form-item>
+      <el-form-item label="常见问题标题">
+        <el-input type="textarea" v-model="target.description"></el-input>
       </el-form-item>
       <el-form-item label="常见问题设置">
         <el-button type="primary" class="add-issue" @click="addIssue" icon="plus">添加</el-button>
@@ -95,6 +102,8 @@ export default {
       bannerMap: new Map(),
       target: {
         title: '',
+        pic: '',
+        description: '',
         banners:[],
         qr: [],
         issues: [
@@ -103,8 +112,7 @@ export default {
             answer: ''
           }
         ]
-      },
-
+      }
     }
   },
   created () {
@@ -112,8 +120,25 @@ export default {
   },
   methods: {
     getDemos () {
-      this.demoService.get('/api/endpage/index?access-token=abc123_').then((resp) => {
-        console.log(resp)
+      this.demoService.get('/api/endpage/view/1?access-token=abc123_').then((resp) => {
+        let qr = []
+        let pics = []
+        for (let p of resp.pics) {
+          if (p.name == 'qr') {
+            qr.push(p)
+          } else {
+            pics.push(p)
+            this.bannerMap.set(p.name, p.url)
+          }
+        }
+        this.target = {
+          title: resp.content.title,
+          pic: resp.content.pic,
+          description: resp.content.description,
+          banners: pics,
+          qr: qr,
+          issues: resp.issues
+        }
       }).catch((resp) => {
         this.$notify({
           title: '加载失败',
@@ -131,7 +156,6 @@ export default {
       })
     },
     removeIssue (index) {
-      console.log(index)
       let issueMap = new Map()
       let i = 0
       for (let v of this.target.issues) {
@@ -160,17 +184,21 @@ export default {
       }
     },
     onSuccess (response, file, fileList) {
-      this.target.qr = [response.path]
+      this.bannerMap.set(response.name, response.path)
+      this.target.banners.push(response.path)
     },
     handleRemoveQr (file, fileList) {
       this.target.qr = []
     },
     onSuccessQr (response, file, fileList) {
-      this.bannerMap.set(response.name, response.path)
-      this.target.banners.push(response.path)
+      this.target.qr = [response.path]
     },
     onSubmit () {
       this.target.banners = [...this.bannerMap]
+      if (this.target.qr[0].url) {
+        this.target.qr = [this.target.qr.url]
+      }
+
       this.demoService.update('/api/endpage/update/1?access-token=abc123_', this.target).then((resp) => {
         this.$notify({
           title: '更新成功',

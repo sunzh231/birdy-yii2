@@ -5,6 +5,7 @@ use Yii;
 use yii\data\ActiveDataProvider;
 use backend\models\EndPage;
 use backend\models\Issue;
+use backend\models\Pic;
 
 class EndpageController extends RestController
 {
@@ -30,17 +31,17 @@ class EndpageController extends RestController
   public function actionView($id)
   {
     $model = $this->findModel($id);
-    $banners = $model->banners;
+    $issues = Issue::find()->all();
+    $pics = Pic::find()->all();
     if ($model === null) {
       throw new NotFoundHttpException('Can not find this object!');
     } else {
-      return ['content' => $model, 'banners' => $banners ];
+      return ['content' => $model, 'issues' => $issues, 'pics' => $pics ];
     }
   }
 
   public function actionUpdate($id)
   {
-    // return Yii::$app->request->post();
     $model = $this->findModel($id);
     if ($model) {
       Issue::deleteAll();
@@ -52,6 +53,17 @@ class EndpageController extends RestController
         $issue->description = '';
         $issue->save();
       }
+      Pic::deleteAll();
+      foreach ($params['banners'] as $arr) {
+        $pic = new Pic;
+        $pic->name = $arr[0];
+        $pic->url = $arr[1];
+        $pic->save();
+      }
+      $pic = new Pic;
+      $pic->name = 'qr';
+      $pic->url = $params['qr'][0];
+      $pic->save();
       if ($model === null) {
         throw new NotFoundHttpException('Can not find this object!');
       } else {
@@ -78,6 +90,17 @@ class EndpageController extends RestController
         $issue->description = '';
         $issue->save();
       }
+      Pic::deleteAll();
+      foreach ($params['banners'] as $arr) {
+        $pic = new Pic;
+        $pic->name = $arr[0];
+        $pic->url = $arr[1];
+        $pic->save();
+      }
+      $pic = new Pic;
+      $pic->name = 'qr';
+      $pic->url = $params['qr'][0];
+      $pic->save();
       return $model;
     }
   }
