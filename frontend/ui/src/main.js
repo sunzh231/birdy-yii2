@@ -43,6 +43,12 @@ const routes = [
           require([`./pages/modules/setting/Banner`], resolve)
         }
       }, {
+        path: '/endpage/list',
+        name: 'list',
+        component (resolve) {
+          require([`./pages/modules/endpage/List`], resolve)
+        }
+      }, {
         path: '/:target/detail/:id',
         name: 'detail',
         component (resolve) {

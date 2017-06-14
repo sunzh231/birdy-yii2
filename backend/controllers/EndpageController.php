@@ -40,14 +40,15 @@ class EndpageController extends RestController
 
   public function actionUpdate($id)
   {
+    // return Yii::$app->request->post();
     $model = $this->findModel($id);
     if ($model) {
       Issue::deleteAll();
       $params = Yii::$app->request->post();
       foreach ($params['issues'] as $arr) {
         $issue = new Issue;
-        $issue->question = $arr[0];
-        $issue->answer = $arr[1];
+        $issue->question = $arr['question'];
+        $issue->answer = $arr['answer'];
         $issue->description = '';
         $issue->save();
       }
@@ -55,7 +56,7 @@ class EndpageController extends RestController
         throw new NotFoundHttpException('Can not find this object!');
       } else {
         $model->attributes = Yii::$app->request->post();
-        $model->name = 'birdy';
+        $model->type = 1;
         if (!$model->save()) {
           return array_values($model->getFirstErrors())[0];
         }
@@ -64,6 +65,7 @@ class EndpageController extends RestController
     } else {
       $model = new EndPage;
       $model->attributes = Yii::$app->request->post();
+      $model->type = 1;
       if (!$model->save()) {
         return array_values($model->getFirstErrors())[0];
       }
@@ -71,8 +73,8 @@ class EndpageController extends RestController
       $params = Yii::$app->request->post();
       foreach ($params['issues'] as $arr) {
         $issue = new Issue;
-        $issue->question = $arr[0];
-        $issue->answer = $arr[1];
+        $issue->question = $arr['question'];
+        $issue->answer = $arr['answer'];
         $issue->description = '';
         $issue->save();
       }
@@ -82,6 +84,6 @@ class EndpageController extends RestController
 
   private function findModel($id)
   {
-    return Content::findOne(['id' => $id]);
+    return EndPage::findOne(['id' => $id]);
   }
 }

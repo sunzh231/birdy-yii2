@@ -1,90 +1,89 @@
 <template>
-  <div id="demo-list">
-    <el-row>
-      <el-col :span="12">
-        <el-form :inline="true" :model="searchParams">
-          <el-col :span="6">
-            <el-form-item>
-              <el-input v-model="searchParams.name" placeholder="审批人"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="6">
-            <el-form-item>
-              <el-select v-model="searchParams.tel" placeholder="活动区域">
-                <el-option label="区域一" value="shanghai"></el-option>
-                <el-option label="区域二" value="beijing"></el-option>
-              </el-select>
-            </el-form-item>
-          </el-col>
-          <el-form-item>
-            <el-button type="primary" @click="onSubmit()">查询</el-button>
-            <el-button @click="reset()">重置</el-button>
+  <div id="end-page">
+    <el-form ref="form" :model="target" label-width="80px">
+      <el-form-item label="标题">
+        <el-input v-model="target.title"></el-input>
+      </el-form-item>
+      <el-form-item label="图片设置">
+        <el-upload
+          class="upload-demo"
+          action="api/upload/file"
+          :on-remove="handleRemove"
+          :before-upload="uploadCheck"
+          :on-success="onSuccess"
+          :file-list="target.banners"
+          list-type="picture">
+          <el-button size="small" type="primary">点击上传</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="二维码设置">
+        <el-upload
+          class="upload-demo"
+          action="api/upload/file"
+          :on-remove="handleRemoveQr"
+          :on-success="onSuccessQr"
+          :file-list="target.qr"
+          list-type="picture">
+          <el-button size="small" type="primary">点击上传</el-button>
+          <div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>
+        </el-upload>
+      </el-form-item>
+      <el-form-item label="常见问题设置">
+        <el-button type="primary" class="add-issue" @click="addIssue" icon="plus">添加</el-button>
+        <div v-for="(item, index) in target.issues" class="issue-item">
+          <el-form-item label="问题">
+            <el-col class="mb-20" :span="18">
+              <el-input  v-model="item.question"></el-input>
+            </el-col>
           </el-form-item>
-        </el-form>
-      </el-col>
-      <el-col :span="12" style="text-align: right;">
-        <el-button type="primary">上传<i class="el-icon-upload el-icon--right"></i></el-button>
-        <el-button type="primary" icon="plus" @click="handleEdit()"></el-button>
-        <el-button type="danger" icon="delete" @click="handleDelete()"></el-button>
-      </el-col>
-    </el-row>
+          <el-form-item label="解答">
+            <el-col :span="18">
+              <el-input type="textarea" v-model="item.answer"></el-input>
+            </el-col>
+          </el-form-item>
+          <el-button type="danger" @click="removeIssue(index)" icon="delete">删除</el-button>
+        </div>
+      </el-form-item>
 
-    <el-table v-loading="tableLoading" :data="tableData"
-        element-loading-text="拼命加载中"
-        @selection-change="handleSelectionChange()"
-        highlight-current-row border style="width: 100%">
-      <el-table-column type="selection" prop="id" width="50"></el-table-column>
-      <el-table-column prop="name" fixed sortable label="姓名"></el-table-column>
-      <el-table-column prop="tel" label="联系方式"></el-table-column>
-      <el-table-column prop="email" label="电子邮箱"></el-table-column>
-      <el-table-column inline-template fixed="right" label="操作" width="120" :context="_self">
-        <span>
-          <el-dropdown split-button type="success" size="small" style="padding-top: 8px;" @click="handleView($index, row)">
-            查看
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item divided>
-                <el-button type="text" @click="handleEdit($index, row)">编辑</el-button>
-              </el-dropdown-item>
-              <el-dropdown-item divided>
-                <el-button type="text" @click="handleDelete($index, row)">删除</el-button>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </el-dropdown>
-        </span>
-      </el-table-column>
-    </el-table>
-
-    <div class="pagination">
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="pagination.page + 1"
-        :page-sizes="[20, 30, 50, 100, 200]"
-        :page-size="pagination.size"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="pagination.totalElements">
-      </el-pagination>
-    </div>
-    <edit
-      :dialog-visible="dialogVisible"
-      v-on:closeDialog="handleClose()"
-      :table-row="target">
-    </edit>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit">保存</el-button>
+        <el-button>取消</el-button>
+      </el-form-item>
+    </el-form>
   </div>
 </template>
 
 <style scoped lang="less">
-#demo-list {
-  .pagination {
-    text-align: center;
-    margin-top: 20px;
+@import '../../../assets/styles/variables.less';
+
+#end-page {
+  margin-top: 20px;
+
+  .issue-item {
+    padding: 20px;
+    border: solid 1px @baseGray;
+    border-radius: 3px;
+    margin-bottom: 20px;
+    .mb-20 {
+      margin-bottom: 20px;
+    }
+    .el-icon-delete {
+      color: @baseRed;
+      font-size: 20px;
+    }
+  }
+  .pull-right {
+    float: right;
+  }
+  .add-issue {
+    margin: 10px 0px;
   }
 }
 </style>
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
-import Edit from './components/Edit'
 import DemoStore from './DemoStore'
 import DemoService from './DemoService'
 
@@ -92,93 +91,29 @@ export default {
   DemoStore,
   data() {
     return {
-      searchParams: {
-        name: '',
-        tel: ''
-      },
-      tableLoading: false,
       demoService: new DemoService(this),
-      tableData: [],
-      pagination: {
-        page: 0,
-        size: 15,
-        totalElements: 2
+      bannerMap: new Map(),
+      target: {
+        title: '',
+        banners:[],
+        qr: [],
+        issues: [
+          {
+            question: '',
+            answer: ''
+          }
+        ]
       },
-      multipleSelection: [],
-      dialogVisible: false,
-      target: {}
+
     }
   },
   created () {
     this.getDemos()
   },
   methods: {
-    handleSelectionChange (val) {
-      this.multipleSelection = val
-    },
-    handleSizeChange(val) {
-      this.pagination.size = val
-      this.getDemos()
-    },
-    handleCurrentChange(val) {
-      this.pagination.page = val
-      this.getDemos()
-    },
-    handleView (index, row) {
-      this.$router.push({ path: `/demo/detail/${row.id}` })
-    },
-    handleEdit (index, row) {
-      this.dialogVisible = true
-      if (row) {
-        this.target = row
-      }
-    },
-    handleDelete (index, row) {
-      if (row) {
-        this.deleteDemos(row.id)
-      } else {
-        if (!this.multipleSelection) {
-          this.$message({
-            message: '请选择要删除的数据',
-            type: 'warning'
-          })
-        } else {
-          let ids = ''
-          for(let v of this.multipleSelection) {
-            console.log(v); // red green blue
-            if (ids) {
-              ids += `,${v.id}`
-            } else {
-              ids += v.id
-            }
-          }
-          this.deleteDemos(ids)
-        }
-      }
-    },
-    handleClose () {
-      this.dialogVisible = false
-    },
-    onSubmit () {
-      this.getDemos()
-    },
-    reset () {
-      this.searchParams = {}
-    },
     getDemos () {
-      this.tableLoading = true
-      let params = {}
-      Object.assign(params, this.pagination, this.searchParams)
-      this.demoService.get('/admin/demo/list', params).then((resp) => {
-        if (resp.success) {
-          this.tableData = resp.data.content
-        } else {
-          his.$notify({
-            title: '加载失败',
-            message: '网络异常，请稍后再试',
-            type: 'error'
-          })
-        }
+      this.demoService.get('/api/endpage/index?access-token=abc123_').then((resp) => {
+        console.log(resp)
       }).catch((resp) => {
         this.$notify({
           title: '加载失败',
@@ -189,41 +124,69 @@ export default {
         this.tableLoading = false
       })
     },
-    deleteDemos (ids) {
-      this.$confirm('此操作将永久删除该数据, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.demoService.remove(`/admin/demo/${ids}`).then((resp) => {
-          if (resp.success) {
+    addIssue () {
+      this.target.issues.push({
+        question: '',
+        answer: ''
+      })
+    },
+    removeIssue (index) {
+      console.log(index)
+      let issueMap = new Map()
+      let i = 0
+      for (let v of this.target.issues) {
+        issueMap.set(i, v)
+        i++
+      }
+      issueMap.delete(index)
+      this.target.issues = []
+      for (let val of issueMap.values()) {
+        this.target.issues.push(val)
+      }
+    },
+    handleRemove (file, fileList) {
+      if (file && this.bannerMap.size >= 1 && this.bannerMap.size <=3) {
+        this.bannerMap.delete(file.name)
+      }
+    },
+    uploadCheck (file) {
+      if (this.bannerMap.size >= 3) {
+        this.$notify({
+          title: '上传失败',
+          message: '轮播图最多上传三张图片',
+          type: 'error'
+        })
+        return false
+      }
+    },
+    onSuccess (response, file, fileList) {
+      this.target.qr = [response.path]
+    },
+    handleRemoveQr (file, fileList) {
+      this.target.qr = []
+    },
+    onSuccessQr (response, file, fileList) {
+      this.bannerMap.set(response.name, response.path)
+      this.target.banners.push(response.path)
+    },
+    onSubmit () {
+      this.target.banners = [...this.bannerMap]
+      this.demoService.update('/api/endpage/update/1?access-token=abc123_', this.target).then((resp) => {
+        this.$notify({
+          title: '更新成功',
+          message: '网页内容更新成功',
+          type: 'success'
+        })
+      }).catch((resp) => {
+        this.$notify({
+          title: '加载失败',
+          message: '网络异常，请稍后再试',
+          type: 'error'
+        })
+      }).finally(() => {
 
-          } else {
-            this.$notify({
-              title: '删除失败',
-              message: '网络异常，请稍后再试',
-              type: 'error'
-            })
-          }
-        }).catch((resp) => {
-          this.$notify({
-            title: '删除失败',
-            message: '网络异常，请稍后再试',
-            type: 'error'
-          })
-        }).finally(() => {
-          console.log('456')
-        })
-      }).catch(() => {
-        this.$message({
-          type: 'info',
-          message: '已取消删除'
-        })
       })
     }
-  },
-  components: {
-    Edit
   }
 }
 </script>
