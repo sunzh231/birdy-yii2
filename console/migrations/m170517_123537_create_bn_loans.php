@@ -13,7 +13,7 @@ class m170517_123537_create_bn_loans extends Migration
 
     $this->createTable('bn_loans', [
       'id' => $this->primaryKey()->comment('主键'),
-      'name' => $this->string(32)->notNull()->unique()->comment('姓名'),
+      'name' => $this->string(32)->notNull()->comment('姓名'),
       'tel' => $this->string(16)->comment('手机号码'),
       'loan_amount' => $this->decimal(10, 2)->notNull()->comment('贷款金额'),
       'occupation' => $this->string(32)->notNull()->comment('职业'),
