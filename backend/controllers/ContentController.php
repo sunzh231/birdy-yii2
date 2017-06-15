@@ -64,6 +64,7 @@ class ContentController extends RestController
     } else {
       $model = new Content;
       $model->attributes = Yii::$app->request->post();
+      $model->name = 'birdy';
       if (!$model->save()) {
         return array_values($model->getFirstErrors())[0];
       }
