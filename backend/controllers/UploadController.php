@@ -24,24 +24,51 @@ class UploadController extends BaseController
 
   public function actionPicture()
   {
-    $img = $_POST['top'];
-    if(!$img){
-      echo "no fileToUpload index";
-      exit();
+    // $img = $_POST['top'];
+    // if(!$img){
+    //   echo "no fileToUpload index";
+    //   exit();
+    // }
+    //
+    // $start=strpos($img,',');
+    // $img= substr($img,$start+1);
+    // $img = str_replace(' ', '+', $img);
+    // $data = base64_decode($img);
+    // $name = uniqid() . '.png';
+    // $fileName = './upload/'. $name;
+    // $success = file_put_contents($fileName, $data);
+    // if ($success) {
+    //   return ['code' => 0, 'msg' => '上传成功', 'data' => Yii::$app->params['domain'] .'upload/'. $name];
+    // } else {
+    //   return ['code' => -1, 'msg' => '上传失败'];
+    // }
+    $uf = $_FILES['file'];
+    if(!$uf){
+      $msg = "文件不存在";
+      return [ 'code' => -1, 'msg' => $msg];
+    }
+    $upload_file_temp = $uf['tmp_name'];
+    $upload_file_name = uniqid() . '.png';
+
+    if (!$upload_file_temp) {
+      $msg = "上传失败";
+      return [ 'code' => -1, 'msg' => $msg];
     }
 
-    $start=strpos($img,',');
-    $img= substr($img,$start+1);
-    $img = str_replace(' ', '+', $img);
-    $data = base64_decode($img);
-    $name = uniqid() . '.png';
-    $fileName = './upload/'. $name;
-    $success = file_put_contents($fileName, $data);
-    if ($success) {
-      return ['code' => 0, 'msg' => '上传成功', 'data' => Yii::$app->params['domain'] .'upload/'. $name];
-    } else {
-      return ['code' => -1, 'msg' => '上传失败'];
+    $file_size_max = 1024*1024*5;// 1M限制文件上传最大容量(bytes)
+    // 检查文件大小
+    if ($uf['size'] > $file_size_max) {
+      $msg = "对不起，你的文件容量超出允许范围：". $file_size_max;
+      return [ 'code' => -1, 'msg' => $msg];
     }
+    $store_dir = "./upload/";// 上传文件的储存位置
+    $file_path = $store_dir . $upload_file_name;
+    // 检查读写文件
+    if (!move_uploaded_file($upload_file_temp, $file_path)) {
+      $msg = "文件创建失败";
+      return [ 'code' => -1, 'msg' => $msg];
+    }
+    return ['code' => 0, 'msg' => '上传成功', 'data' => Yii::$app->params['domain'] .'upload/'. $upload_file_name];
   }
 
   public function actionFile()
