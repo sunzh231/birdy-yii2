@@ -1,4 +1,4 @@
 <?php
 return [
-  'domain' => 'http://localhost:8001/',
+  'domain' => 'http://122.114.222.13/',
 ];

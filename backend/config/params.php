@@ -1,5 +1,5 @@
 <?php
 return [
     'adminEmail' => 'admin@example.com',
-    'domain' => 'http://birdycloud.xyz/',
+    'domain' => 'http://122.114.222.13/',
 ];

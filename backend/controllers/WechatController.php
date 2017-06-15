@@ -51,8 +51,8 @@ class WechatController extends ActiveController
   {
     $request_params = Yii::$app->request->get();
     $params = [
-      'appid' => 'wxbf0b5a6d2e30a4d3',
-      'appsecret' => 'a50c9b7a5524a2626f29d33502098486'
+      'appid' => 'wx4d00bcc6e70cbcd9',
+      'appsecret' => '7f69b523092be35b2768d6d5b417ef2b'
     ];
     return Jssdk::getSignPackage($params['appid'], $params['appsecret'], $request_params['url']);
   }
