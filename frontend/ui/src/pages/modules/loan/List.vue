@@ -19,7 +19,7 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="pagination.page + 1"
+        :current-page="pagination.page"
         :page-sizes="[10, 20, 50, 100, 200]"
         :page-size="pagination.size"
         layout="total, prev, pager, next, jumper"
@@ -134,6 +134,7 @@ export default {
         this.tableData = resp.items
         this.pagination.page = resp._meta.currentPage
         this.pagination.totalElements = resp._meta.totalCount
+        console.log(this.pagination)
       }).catch((resp) => {
         this.$notify({
           title: '加载失败',
