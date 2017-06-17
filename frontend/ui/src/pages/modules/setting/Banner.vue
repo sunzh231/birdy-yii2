@@ -4,7 +4,7 @@
       <el-form-item label="轮番图">
         <el-upload
           class="upload-demo"
-          action="api/upload/file"
+          action="/api/upload/file"
           :on-remove="handleRemove"
           :before-upload="uploadCheck"
           :on-success="onSuccess"

@@ -101,9 +101,9 @@ export default {
 
       this.$wechat.onMenuShareAppMessage({
         title: `${this.target.name}微信贷款信息核对确认书`, // 分享标题
-        desc: '微信官方贷款在线申请', // 分享描述
+        desc: ' ', // 分享描述
         link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: 'http://loan.bailongsheng.cn/upload/base/loan_logo.png', // 分享图标
+        imgUrl: 'http://www.xindaifuwu.com/upload/base/loan_logo.png', // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function () {

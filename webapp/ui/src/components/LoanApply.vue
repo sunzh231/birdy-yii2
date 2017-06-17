@@ -134,10 +134,10 @@ export default {
       })
 
       this.$wechat.onMenuShareAppMessage({
-        title: '微信贷款在线申请', // 分享标题
-        desc: '微信官方贷款在线申请', // 分享描述
-        link: 'http://loan.bailongsheng.cn/webapp', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: 'http://loan.bailongsheng.cn/upload/base/loan_logo.png', // 分享图标
+        title: '微信在线贷款申请', // 分享标题
+        desc: '微信1~20万元，无抵押信用贷款，最快30分钟审批', // 分享描述
+        link: 'http://www.xindaifuwu.com/webapp', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+        imgUrl: 'http://www.xindaifuwu.com/upload/base/loan_logo.png', // 分享图标
         type: '', // 分享类型,music、video或link，不填默认为link
         dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
         success: function () {
