@@ -7,7 +7,7 @@
       <el-form-item label="图片设置">
         <el-upload
           class="upload-demo"
-          action="api/upload/file"
+          action="/api/upload/file"
           :on-remove="handleRemove"
           :before-upload="uploadCheck"
           :on-success="onSuccess"
@@ -23,7 +23,7 @@
       <el-form-item label="二维码设置">
         <el-upload
           class="upload-demo"
-          action="api/upload/file"
+          action="/api/upload/file"
           :on-remove="handleRemoveQr"
           :before-upload="uploadCheckQr"
           :on-success="onSuccessQr"
