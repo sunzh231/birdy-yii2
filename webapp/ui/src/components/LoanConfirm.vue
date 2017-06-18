@@ -60,7 +60,7 @@
         </div>
         <div class="content-group help-tip">
           <label>办理截止时间<span>:</span></label>
-          <span>18：00前，逾期系统将取消该贷款订单，请尽快点击办理</span>
+          <span>18:00前，逾期系统将取消该贷款订单，请尽快点击办理</span>
         </div>
       </div>
       <box gap="10px 10px">
