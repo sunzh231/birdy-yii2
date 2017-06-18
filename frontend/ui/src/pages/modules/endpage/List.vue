@@ -196,7 +196,7 @@ export default {
     onSubmit () {
       this.target.banners = [...this.bannerMap]
       if (this.target.qr[0].url) {
-        this.target.qr = [this.target.qr.url]
+        this.target.qr = [this.target.qr[0].url]
       }
 
       this.demoService.update('/api/endpage/update/1?access-token=abc123_', this.target).then((resp) => {

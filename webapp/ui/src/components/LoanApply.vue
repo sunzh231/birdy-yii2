@@ -30,7 +30,6 @@
         <div class="content-control">
           <select v-model="target.loan_amount">
             <option v-bind:value='0'>请选择您的贷款金额</option>
-            <option v-bind:value='1'>1万</option>
             <option v-bind:value='2'>2万</option>
             <option v-bind:value='3'>3万</option>
             <option v-bind:value='4'>4万</option>
