@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e9321ddb72ab272766fc977c767c6441",
+    "content-hash": "6dc466dbf962059d1ed183dd66054689",
     "packages": [
         {
             "name": "arogachev/yii2-excel",
@@ -877,58 +877,6 @@
                 "storage"
             ],
             "time": "2016-01-11T13:20:52+00:00"
-        },
-        {
-            "name": "riverslei/payment",
-            "version": "v3.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/helei112g/payment.git",
-                "reference": "911e3105b90f2b56a87ed7bd120a92c1249dee9d"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://files.phpcomposer.com/files/helei112g/payment/911e3105b90f2b56a87ed7bd120a92c1249dee9d.zip",
-                "reference": "911e3105b90f2b56a87ed7bd120a92c1249dee9d",
-                "shasum": ""
-            },
-            "require": {
-                "ext-bcmath": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.6"
-            },
-            "require-dev": {
-                "endroid/qrcode": "~1.9"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Payment\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "helei",
-                    "email": "dayugog@gmail.com",
-                    "homepage": "https://helei112g.github.io/categories/payment-3/"
-                }
-            ],
-            "description": "支付宝支付、微信支付、招商一网通支付php SDK。方便快速接入，最完整的开源支付 php sdk",
-            "homepage": "https://helei112g.github.io/categories/payment-3/",
-            "keywords": [
-                "alipay",
-                "weixin",
-                "一网通",
-                "微信支付",
-                "招商一网通",
-                "支付宝支付",
-                "集成支付接口SDK"
-            ],
-            "time": "2017-06-19T08:55:03+00:00"
         },
         {
             "name": "sizeg/yii2-jwt",

@@ -77,7 +77,6 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
-            'Payment\\' => 8,
         ),
         'L' => 
         array (
@@ -222,10 +221,6 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
-        ),
-        'Payment\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/riverslei/payment/src',
         ),
         'League\\Flysystem\\' => 
         array (
