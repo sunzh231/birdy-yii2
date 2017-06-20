@@ -120,6 +120,7 @@ export default {
         }
         li {
           width: 100%;
+          margin: 15px 0px;
         }
         .question {
           border-bottom: solid 2px @blue;
@@ -140,7 +141,11 @@ export default {
             max-width: 80%;
             word-break: break-all;
             vertical-align: top;
+            vertical-align: middle;
           }
+        }
+        .answer {
+          text-indent: 2em;
         }
       }
     }
