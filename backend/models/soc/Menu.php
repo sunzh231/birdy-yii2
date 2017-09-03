@@ -1,19 +1,19 @@
 <?php
-namespace backend\models\socails;
+namespace backend\models\soc;
 
 use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
-class Channel extends ActiveRecord
+class Menu extends ActiveRecord
 {
   const STATUS_DELETED = 0;
   const STATUS_ACTIVE = 1;
 
   public static function tableName()
   {
-    return 'bs_channels';
+    return 'soc_menus';
   }
 
   /**
@@ -32,18 +32,16 @@ class Channel extends ActiveRecord
   public function rules()
   {
     return [
-      ['status', 'default', 'value' => self::STATUS_ACTIVE],
-      ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_DELETED]],
     ];
   }
 
   public function attributes()
   {
-    return ['id', 'name', 'originid', 'appid', 'appsecret', 'wechat_token',
-            'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
+    return ['id', 'name', 'type', 'grade_code', 'event_key', 'content',
+            'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
   public function safeAttributes()
   {
-    return ['name', 'originid', 'appid', 'appsecret', 'wechat_token'];
+    return ['name', 'type', 'grade_code', 'event_key', 'content'];
   }
 }

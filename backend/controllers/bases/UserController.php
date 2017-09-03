@@ -12,8 +12,9 @@ class UserController extends RestController
 
   public function actionIndex()
   {
+    $params = Yii::$app->request->get();
     $pagination = [];
-    $query = $this->modelClass::findWithPagination($pagination);
+    $query = $this->modelClass::findWithPagination($params, $pagination);
     return $query;
   }
 

@@ -68,6 +68,7 @@ angular.module('app')
               }
           }).state('app.edit', {
               url: '/:target/edit',
+              controller: 'EditCtrl',
               templateUrl: function ($stateParams){
                 return 'tpl/modules/'+ $stateParams.target +'/edit.html';
               },

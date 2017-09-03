@@ -6,7 +6,6 @@ use yii\base\InvalidParamException;
 use yii\web\BadRequestHttpException;
 use yii\rest\ActiveController;
 use common\models\User;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
 
 /**
  * Site controller
@@ -43,15 +42,15 @@ class SiteController extends ActiveController
   {
     try {
       $params = Yii::$app->request->post();
-      $model = User::findByParams($params['name']);
-      $signer = new Sha256();
-      $token = Yii::$app->jwt->getBuilder()->setIssuer('http://example.com'); // Retrieves the generated token
-
-      // return $token;
+      $model = User::findByLoginParams($params['name']);
       if ($model->validatePassword($params['password'])) {
-        return ['code' => 0, 'msg' => 'OK', 'data' => $model, 'token' => $token];
+        $model->generateAccessToken();
+        if (!$model->save()) {
+          return array_values($model->getFirstErrors())[0];
+        }
+        return ['success' => true, 'msg' => 'OK', 'token' => $model->access_token];
       } else {
-        return ['code' => -1, 'msg' => '用户名或密码错误'];
+        return ['success' => false, 'msg' => '用户名或密码错误'];
       }
     } catch (InvalidParamException $e) {
       throw new BadRequestHttpException($e->getMessage());

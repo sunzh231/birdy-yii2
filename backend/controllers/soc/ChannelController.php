@@ -1,14 +1,26 @@
 <?php
-namespace backend\controllers\socails;
+namespace backend\controllers\soc;
 
 use Yii;
 use backend\controllers\RestController;
 use yii\data\ActiveDataProvider;
-use backend\models\socails\Fans;
+use backend\models\soc\Channel;
+use backend\models\soc\Menu;
+use common\utils\Weconnect;
 
-class FansController extends RestController
+class ChannelController extends RestController
 {
-  public $modelClass = 'backend\models\socails\Fans';
+  public $modelClass = 'backend\models\soc\Channel';
+
+  public function actionMenu()
+  {
+    $params = Yii::$app->request->post();
+    $model = $this->findModel($params['id']);
+    $access_token = Weconnect::getAccessToken($model->appid, $model->appsecret);
+    // $menu = new Menu;
+    $result = Weconnect::createMenu($params['data'], $access_token->access_token);
+    return $result;
+  }
 
   public function actionIndex()
   {
@@ -19,8 +31,10 @@ class FansController extends RestController
 
   public function actionCreate()
   {
-    $model = new Fans;
+    $model = new Channel;
     $model->attributes = Yii::$app->request->post();
+    $model->updated_by = 1;
+    $model->created_by = 1;
     if (!$model->save()) {
       return array_values($model->getFirstErrors())[0];
     }
@@ -69,6 +83,6 @@ class FansController extends RestController
 
   private function findModel($id)
   {
-    return Fans::findOne(['id' => $id]);
+    return Channel::findOne($id);
   }
 }

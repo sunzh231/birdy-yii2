@@ -1,3 +1,17 @@
+<style type="text/css">
+  .verify-code {
+    width: 180px;
+    padding: 3px 10px;
+  }
+  #code {
+    font-family: Arial;
+    font-style: italic;
+    font-weight: bold;
+    border: 0;
+    letter-spacing: 2px;
+    color: blue;
+  }
+</style>
 <div class="container w-xxl w-auto-xs" ng-controller="SigninController" ng-init="app.settings.container = false;">
   <a href class="navbar-brand block m-t">登陆硕鸟科技云平台</a>
   <div class="m-b-lg">
@@ -8,6 +22,10 @@
         </div>
         <div class="list-group-item">
            <input type="password" placeholder="密码" class="form-control no-border" ng-model="user.password" required>
+        </div>
+        <div class="list-group-item">
+          <input type = "text" class="verify-code no-border" ng-model="code" placeholder="验证码" id="input" required/>
+          <input type = "button" id="code" ng-click="createCode()"/>
         </div>
       </div>
       <div class="text-right m-t m-b"><a ui-sref="access.forgotpwd">忘记密码?</a></div>

@@ -59,13 +59,13 @@ class User extends ActiveRecord implements IdentityInterface
 
   public function attributes()
   {
-    return ['id', 'username', 'realname', 'password_hash', 'email', 'tel', 'access_token',
+    return ['id', 'username', 'realname', 'password_hash', 'email', 'tel', 'access_token', 'expired_time',
             'status', 'created_by', 'created_at', 'updated_by', 'updated_at'];
   }
 
   public function safeAttributes()
   {
-    return ['username', 'realname', 'password_hash', 'email', 'tel'];
+    return ['username', 'realname', 'password_hash', 'email', 'tel', 'access_token', 'expired_time', 'created_by', 'updated_by'];
   }
 
   /**
@@ -76,17 +76,50 @@ class User extends ActiveRecord implements IdentityInterface
     return static::findOne(['id' => $id, 'status' => self::STATUS_ACTIVE]);
   }
 
-  public static function findWithPagination($pagination = null)
+  public static function findByLoginParams($params)
   {
-    return new ActiveDataProvider(['query' => static::find(), 'pagination' => ['pageSize' => 10]]);
+    return static::find()->where([
+        'and', 'status=:status',
+        ['or', 'username=:username', 'email=:email', 'tel=:tel']
+      ], [
+        ':status' => self::STATUS_ACTIVE,
+        ':username' => $params,
+        ':email' => $params,
+        ':tel' => $params
+      ])->one();
   }
 
-  /**
-   * @inheritdoc
-   */
+  public static function findByParams($params)
+  {
+    return static::find()->where([
+        'and', 'status=:status',
+        ['or', ['like', 'username', $params], ['like', 'email', $params], ['like', 'tel', $params]]
+      ], [
+        ':status' => self::STATUS_ACTIVE
+      ]);
+  }
+
+  public static function findWithPagination($params=null, $pagination = null)
+  {
+    return new ActiveDataProvider([
+      'query' => static::findByParams($params),
+      'pagination' => array_merge(['pageSize' => 10], $pagination),
+      'sort' => [
+        'defaultOrder' => [
+          'updated_at' => SORT_DESC
+        ]
+      ]
+    ]);
+  }
+
   public static function findIdentityByAccessToken($token, $type = null)
   {
-    return static::findOne(['access_token' => $token]);
+    $model = static::findOne(['access_token' => $token]);
+    if ($model && $model->expired_time > strtotime(date('Y-m-d H:i:s'))) {
+      return $model;
+    } else {
+      return null;
+    }
   }
 
   /**
@@ -98,19 +131,6 @@ class User extends ActiveRecord implements IdentityInterface
   public static function findByUsername($username)
   {
     return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
-  }
-
-  public static function findByParams($params)
-  {
-    return static::find()->where([
-        'and', 'status=:status',
-        ['or', 'username=:username', 'email=:email', 'tel=:tel']
-      ], [
-        ':status' => self::STATUS_ACTIVE,
-        ':username' => $params,
-        ':email' => $params,
-        ':tel' => $params
-      ])->one();
   }
 
   /**
@@ -216,6 +236,7 @@ class User extends ActiveRecord implements IdentityInterface
   public function generateAccessToken()
   {
     $this->access_token = Yii::$app->security->generateRandomString();
+    $this->expired_time = strtotime(date('Y-m-d 01:59:59')) + 24 * 60 * 60;
   }
 
   /**

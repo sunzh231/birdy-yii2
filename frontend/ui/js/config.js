@@ -1,4 +1,16 @@
 // config
+function getCookie(cname) {
+  var name = cname + "=";
+  var ca = document.cookie.split(';');
+  for(var i=0; i<ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0)==' ') c = c.substring(1);
+    if (c.indexOf(name) != -1) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
 
 var app =
 angular.module('app')
@@ -30,10 +42,61 @@ angular.module('app')
   }])
   .config(['$resourceProvider', function($resourceProvider){
     $resourceProvider.defaults.actions = {
-      create: {method: 'POST', headers: {Authorization: 'Bearer 123456'}},
-      get:    {method: 'GET', headers: {Authorization: 'Bearer 123456'}},
-      query:  {method: 'GET', isArray: false, headers: {Authorization: 'Bearer 123456'}},
-      update: {method: 'PUT', headers: {Authorization: 'Bearer 123456'}},
-      delete: {method: 'DELETE', headers: {Authorization: 'Bearer 123456'}}
+      save:   {
+        method: 'POST',
+        headers: {Authorization: 'Bearer ' + getCookie('birdy_token')},
+        transformResponse: function (data, headersGetter, status) {
+          if (status === 401) {
+            window.location.href = '/#/access/signin';
+          } else {
+            return JSON.parse(data);
+          }
+        }
+      },
+      get:    {
+        method: 'GET',
+        headers: {Authorization: 'Bearer ' + getCookie('birdy_token')},
+        transformResponse: function (data, headersGetter, status) {
+          if (status === 401) {
+            window.location.href = '/#/access/signin';
+          } else {
+            return JSON.parse(data);
+          }
+        }
+      },
+      query:  {
+        method: 'GET',
+        isArray: false,
+        headers: {Authorization: 'Bearer ' + getCookie('birdy_token')},
+        transformResponse: function (data, headersGetter, status) {
+          if (status === 401) {
+            window.location.href = '/#/access/signin';
+          } else {
+            return JSON.parse(data);
+          }
+        }
+      },
+      update: {
+        method: 'PUT',
+        headers: {Authorization: 'Bearer ' + getCookie('birdy_token')},
+        transformResponse: function (data, headersGetter, status) {
+          if (status === 401) {
+            window.location.href = '/#/access/signin';
+          } else {
+            return JSON.parse(data);
+          }
+        }
+      },
+      delete: {
+        method: 'DELETE',
+        headers: {Authorization: 'Bearer ' + getCookie('birdy_token')},
+        transformResponse: function (data, headersGetter, status) {
+          if (status === 401) {
+            window.location.href = '/#/access/signin';
+          } else {
+            return JSON.parse(data);
+          }
+        }
+      }
     };
   }]);

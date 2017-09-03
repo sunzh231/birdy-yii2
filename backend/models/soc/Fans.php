@@ -1,5 +1,5 @@
 <?php
-namespace backend\models\socails;
+namespace backend\models\soc;
 
 use Yii;
 use yii\base\NotSupportedException;
@@ -13,7 +13,7 @@ class Fans extends ActiveRecord
 
   public static function tableName()
   {
-    return 'bs_fans';
+    return 'soc_fans';
   }
 
   /**

@@ -2,7 +2,7 @@
 
 var dlg = null;
 /* User Controller */
-app.controller('IndexCtrl', ['$scope', 'dialogs', '$resource', 'toaster', function($scope, $dialogs, $resource, toaster) {
+app.controller('UserIndexCtrl', ['$scope', 'dialogs', '$resource', 'toaster', function($scope, $dialogs, $resource, toaster) {
   $scope.table_render = function(current_page) {
     var url = '/api/bases/user/index';
     var resource = $resource(url, {page: current_page});
