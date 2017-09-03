@@ -1,0 +1,285 @@
+<div id="channel_detail">
+  <div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3"> 媒体账号详情 </h1>
+  </div>
+  <div class="wrapper-md">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">基础信息</h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">账号名称:</label>
+            <div class="col-sm-8">{{ channel.name }}</div>
+          </div>
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">账号类型:</label>
+            <div class="col-sm-8">微信订阅号</div>
+          </div>
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">媒体类型:</label>
+            <div class="col-sm-8 control-content">微信</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">原始ID:</label>
+            <div class="col-sm-8 control-content">{{ channel.originid }}</div>
+          </div>
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">App ID:</label>
+            <div class="col-sm-8 control-content">{{ channel.appid }}</div>
+          </div>
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">App Secret:</label>
+            <div class="col-sm-8 control-content">{{ channel.appsecret }}</div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <label class="col-sm-4 control-label">回调地址:</label>
+            <div class="col-sm-8 control-content">http://birdycloud.xyz/api/wechat/valid</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-container">
+      <ul class="nav nav-tabs">
+        <li class="active">
+          <a href data-toggle="tab" data-target="#tab_1"> 基础配置 </a>
+        </li>
+        <li>
+          <a href data-toggle="tab" data-target="#tab_2">
+            粉丝管理
+            <span class="badge bg-danger badge-sm m-l-xs">6</span>
+          </a>
+        </li>
+        <li>
+          <a href data-toggle="tab" data-target="#tab_3">
+            消息管理
+            <span class="badge bg-primary badge-sm m-l-xs">9</span>
+          </a>
+        </li>
+        <li>
+          <a href data-toggle="tab" data-target="#tab_4"> 关注消息配置 </a>
+        </li>
+        <li>
+          <a href data-toggle="tab" data-target="#tab_5"> 素材库 </a>
+        </li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="tab_1">
+          <div class="row row-sm">
+            <div class="col-lg-5 col-md-6 col-sm-8">
+              <div class="mobile-preview-wrap">
+                <div class="mobile-bottom">
+                  <div class="keyboard-btn"></div>
+                  <ul>
+                    <li ng-repeat="menu in wechatMenus" ng-click="setMenu(-1, $index, $event)" class="wechat-menu">
+                      <ul>
+                        <li ng-repeat="sub_menu in menu.sub_button" ng-click="setMenu($parent.$index, $index, $event)" class="wechat-sub-menu">
+
+                        </li>
+                        <li ng-show="menu.sub_button.length < 5" ng-click="addMenu($index)" class="add-menu-btn">
+                          添加子菜单
+                        </li>
+                      </ul>
+                    </li>
+                    <li ng-show="wechatMenus.length < 3" ng-click="addMenu()" class="add-menu-btn">
+                      添加菜单
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-7 col-md-6 col-sm-8">
+              <div class="panel  panel-default">
+                <div class="panel-heading">
+                  菜单设置
+                </div>
+                <div class="panel-body">
+                  <form class="form-horizontal" method="get">
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">菜单名称</label>
+                      <div class="col-sm-9">
+                        <input type="text" ng-model="menu.name" class="form-control" placeholder="请输入菜单名称">
+                        <span class="help-block m-b-none">字数不超过4个汉字或8个字母</span>
+                      </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">菜单类型</label>
+                      <div class="col-sm-9">
+                        <ui-select ng-model="menu.type" theme="bootstrap">
+                          <ui-select-match placeholder="请选择菜单类型">{{$select.selected.name}}</ui-select-match>
+                          <ui-select-choices group-by="'group'" repeat="item in menu_types | filter: $select.search">
+                            <span ng-bind-html="item.name | highlight: $select.search"></span>
+                            <small ng-bind-html="item.type | highlight: $select.search"></small>
+                          </ui-select-choices>
+                        </ui-select>
+                      </div>
+                    </div>
+                    <div class="line line-dashed b-b line-lg pull-in"></div>
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">页面地址</label>
+                          <div class="col-sm-9">
+                            <div class="input-group">
+                              <input type="text" ng-model="menu.url" class="form-control" placeholder="请输入点击菜单跳转地址">
+                              <span class="input-group-btn">
+                                <button class="btn btn-info" ng-click="" type="button">选择</button>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="form-group">
+                          <label class="col-sm-3 control-label">关键字</label>
+                          <div class="col-sm-9">
+                            <ui-select ng-model="menu.event_key" theme="bootstrap">
+                              <ui-select-match placeholder="请选择自定义事件关键字">{{$select.selected.name}}</ui-select-match>
+                              <ui-select-choices group-by="'group'" repeat="item in menu_types | filter: $select.search">
+                                <span ng-bind-html="item.name | highlight: $select.search"></span>
+                                <small ng-bind-html="item.type | highlight: $select.search"></small>
+                              </ui-select-choices>
+                            </ui-select>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <ul class="metail-type">
+                              <li> 图文消息 </li>
+                              <li> 图片 </li>
+                              <li> 语音 </li>
+                              <li> 视频 </li>
+                            </ul>
+                          </div>
+                          <div class="panel-body">
+                            <input type="text" ng-model="menu.media_id" class="form-control" placeholder="Media ID">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row operation-wrap">
+            <div class="col-lg-12 text-center">
+              <button ng-click="menuActive()" class="btn m-b-xs w-xs btn-info">保存并发布</button>
+              <button class="btn m-b-xs w-xs btn-default">预览</button>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="tab_2">
+          <div class="panel panel-default table-wrap">
+            <div class="panel-heading">
+              粉丝列表
+            </div>
+            <div class="row wrapper">
+              <div class="col-sm-5 m-b-xs">
+                <select class="input-sm form-control w-sm inline v-middle">
+                  <option value="0">Bulk action</option>
+                  <option value="1">Delete selected</option>
+                  <option value="2">Bulk edit</option>
+                  <option value="3">Export</option>
+                </select>
+                <button class="btn btn-sm btn-info">查询</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-striped b-t b-light">
+                <thead>
+                  <tr>
+                    <th style="width:20px;">
+                      <label class="i-checks m-b-none">
+                        <input type="checkbox"><i></i>
+                      </label>
+                    </th>
+                    <th>头像</th>
+                    <th>昵称</th>
+                    <th>openid</th>
+                    <th>性别</th>
+                    <th>地址</th>
+                    <th>关注时间</th>
+                    <th>关注状态</th>
+                    <th>备注</th>
+                    <th style="width:120px;">操作</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="item in result['items']">
+                    <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+                    <td><span class="text-ellipsis">{{ item.username }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.email }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+                    <td>
+                      <a href class="active" ui-toggle-class>
+                        <i class="fa fa-check text-success text-active"></i>
+                        <i class="fa fa-times text-danger text"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <footer class="panel-footer">
+              <div class="row">
+                <div class="col-sm-4 text-left">
+                  <small class="text-muted inline m-t-sm m-b-sm">第{{ pagination.currentPage }}页 共{{ pagination.pageCount }}页</small>
+                </div>
+                <div class="col-sm-8 text-right text-center-xs">
+                  <div class="input-group turn-btn">
+                    <input type="text" class="form-control input-sm" ng-model="turnPage">
+                    <span class="input-group-btn">
+                      <button class="btn btn-sm btn-info" ng-click="setPage(turnPage)" type="button">跳转</button>
+                    </span>
+                  </div>
+                  <ul uib-pagination total-items="pagination.totalCount" ng-model="pagination.currentPage"
+                      max-size="5" items-per-page="10" class="pagination pagination-sm m-t-none m-b-none"
+                      ng-change="pageChanged()"
+                      previous-text="上一页" next-text="下一页" boundary-link-numbers="true">
+                  </ul>
+                </div>
+              </div>
+            </footer>
+          </div>
+        </div>
+        <div class="tab-pane" id="tab_3">
+          <ul class="list-group list-group-lg no-borders pull-in m-b-none">
+            <li class="list-group-item">
+              <a href="#" class="h4 text-primary m-b-sm block">Mauris convallis mauris at pellentesque volutpat</a>
+              <p class="b wrapper-md pos-rlt bg-light r r-2x"><span class="arrow top pull-left arrow-light"></span>Lorem ipsum dolor sit amet, fermentum diam. Vivamus vel tincidunt libero, vitae elementum ligula venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum</p>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="h4 text-primary m-b-sm block">Phasellus at ultricies neque, quis malesuada augu</a>
+              <p class="b wrapper-md pos-rlt"><span class="arrow top pull-left"></span>Fermentum diam. Vivamus vel tincidunt libero, vitae elementum ligula venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum</p>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="h4 text-primary m-b-sm block">Morbi nec nunc condimentum, egestas dui nec, fermentum diam</a>
+              <p class="b wrapper-md pos-rlt bg-info text-lt r r-2x"><span class="arrow top pull-left arrow-info"></span>Vivamus vel tincidunt libero, vitae elementum ligula venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum</p>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="h4 text-primary m-b-sm block">Vestibulum ullamcorper sodales nisi nec condimentum Mauris convallis</a>
+              <p class="b wrapper-md pos-rlt"><span class="arrow top pull-left"></span>Egestas dui nec, fermentum diam. Vivamus vel tincidunt libero, vitae elementum ligula venenatis ipsum ac feugiat. Vestibulum ullamcorper sodales nisi nec condimentum</p>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-pane" id="tab_4">
+        </div>
+        <div class="tab-pane" id="tab_5" ng-controller="MeterialCtrl">
+          <button class="btn btn-info pull-right" ng-click="launch('create')">
+            <i class="fa fa-plus"></i><span>新增</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

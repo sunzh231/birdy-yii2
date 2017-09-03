@@ -1,0 +1,79 @@
+<div ng-controller="IndexCtrl">
+  <div class="bg-light lter b-b wrapper-md">
+    <h1 class="m-n font-thin h3">
+      用户管理
+      <button class="btn btn-info pull-right" ng-click="launch('create')">
+        <i class="fa fa-plus"></i><span>新增</span>
+      </button>
+    </h1>
+  </div>
+  <div class="wrapper-md table-wrap">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        用户列表
+      </div>
+      <div class="row wrapper">
+        <div class="col-sm-5 m-b-xs">
+          <select class="input-sm form-control w-sm inline v-middle">
+            <option value="0">Bulk action</option>
+            <option value="1">Delete selected</option>
+            <option value="2">Bulk edit</option>
+            <option value="3">Export</option>
+          </select>
+          <button class="btn btn-sm btn-info">查询</button>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-striped b-t b-light">
+          <thead>
+            <tr>
+              <th style="width:20px;">
+                <label class="i-checks m-b-none">
+                  <input type="checkbox"><i></i>
+                </label>
+              </th>
+              <th>用户名</th>
+              <th>电子邮箱</th>
+              <th>手机号码</th>
+              <th style="width:30px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="item in result['items']">
+              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+              <td><span class="text-ellipsis">{{ item.username }}</span></td>
+              <td><span class="text-ellipsis">{{ item.email }}</span></td>
+              <td><span class="text-ellipsis">{{ item.tel }}</span></td>
+              <td>
+                <a href class="active" ui-toggle-class>
+                  <i class="fa fa-check text-success text-active"></i>
+                  <i class="fa fa-times text-danger text"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <footer class="panel-footer">
+        <div class="row">
+          <div class="col-sm-4 text-left">
+            <small class="text-muted inline m-t-sm m-b-sm">第{{ pagination.currentPage }}页 共{{ pagination.pageCount }}页</small>
+          </div>
+          <div class="col-sm-8 text-right text-center-xs">
+            <div class="input-group turn-btn">
+              <input type="text" class="form-control input-sm" ng-model="turnPage">
+              <span class="input-group-btn">
+                <button class="btn btn-sm btn-info" ng-click="setPage(turnPage)" type="button">跳转</button>
+              </span>
+            </div>
+            <ul uib-pagination total-items="pagination.totalCount" ng-model="pagination.currentPage"
+                max-size="5" items-per-page="10" class="pagination pagination-sm m-t-none m-b-none"
+                ng-change="pageChanged()"
+                previous-text="上一页" next-text="下一页" boundary-link-numbers="true">
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
