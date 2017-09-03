@@ -38,6 +38,29 @@
         <i class="fa fa-fw fa-angle-right text"></i>
         <i class="fa fa-fw fa-angle-down text-active"></i>
       </span>
+      <i class="icon-users text-info-lter"></i>
+      <span class="font-bold" translate="aside.nav.core.CUSTOMER"></span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span translate="aside.nav.core.CUSTOMER"></span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.index({target: 'channels'})">
+          <b class="label bg-info pull-right">N</b>
+          <span>媒体帐号</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
       <i class="fa fa-cogs text-info-lter"></i>
       <span class="font-bold" translate="aside.nav.base.SYS_SETTING"></span>
     </a>
@@ -64,40 +87,6 @@
   <li class="line dk"></li>
 
   <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
-    <span translate="aside.nav.CORE_FEATURE"></span>
-  </li>
-  <li>
-    <a ui-sref="app.dashboard">
-      <i class="glyphicon glyphicon-home"></i>
-      <span translate="aside.nav.core.DASHBOARD"></span>
-    </a>
-  </li>
-  <li>
-    <a href class="auto">
-      <span class="pull-right text-muted">
-        <i class="fa fa-fw fa-angle-right text"></i>
-        <i class="fa fa-fw fa-angle-down text-active"></i>
-      </span>
-      <i class="fa fa-key"></i>
-      <span class="font-bold" translate="aside.nav.core.CUSTOMER"></span>
-    </a>
-    <ul class="nav nav-sub dk">
-      <li class="nav-sub-header">
-        <a href>
-          <span translate="aside.nav.core.CUSTOMER"></span>
-        </a>
-      </li>
-      <li ui-sref-active="active">
-        <a ui-sref="app.index({target: 'channels'})">
-          <b class="label bg-info pull-right">N</b>
-          <span>媒体帐号</span>
-        </a>
-      </li>
-    </ul>
-  </li>
-  <li class="line dk"></li>
-
-  <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
     <span translate="aside.nav.EXTEND_FEATURE"></span>
   </li>
   <li>
@@ -113,12 +102,12 @@
         <i class="fa fa-fw fa-angle-down text-active"></i>
       </span>
       <i class="glyphicon glyphicon-stats icon"></i>
-      <span class="font-bold">产品内容管理</span>
+      <span class="font-bold">产品管理</span>
     </a>
     <ul class="nav nav-sub dk">
       <li class="nav-sub-header">
         <a href>
-          <span>产品内容管理</span>
+          <span>产品管理</span>
         </a>
       </li>
       <li ui-sref-active="active">
@@ -143,6 +132,29 @@
         <a ui-sref="app.index({target: 'users'})">
           <b class="label bg-info pull-right">N</b>
           <span>产品管理</span>
+        </a>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <a href class="auto">
+      <span class="pull-right text-muted">
+        <i class="fa fa-fw fa-angle-right text"></i>
+        <i class="fa fa-fw fa-angle-down text-active"></i>
+      </span>
+      <i class="glyphicon glyphicon-stats icon"></i>
+      <span class="font-bold">仓库管理</span>
+    </a>
+    <ul class="nav nav-sub dk">
+      <li class="nav-sub-header">
+        <a href>
+          <span>仓库管理</span>
+        </a>
+      </li>
+      <li ui-sref-active="active">
+        <a ui-sref="app.index({target: 'users'})">
+          <b class="label bg-info pull-right">N</b>
+          <span>品牌管理</span>
         </a>
       </li>
     </ul>

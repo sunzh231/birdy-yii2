@@ -1,8 +1,7 @@
 'use strict';
 
-var dlg = null;
-/* User Controller */
-app.controller('UserIndexCtrl', ['$scope', 'dialogs', '$resource', 'toaster', function($scope, $dialogs, $resource, toaster) {
+app.controller('UserIndexCtrl', ['$scope', 'dialogs', '$resource', 'toaster','$uibModal', '$log', function($scope, $dialogs, $resource, toaster, $uibModal, $log) {
+
   $scope.table_render = function(current_page) {
     var url = '/api/bases/user/index';
     var resource = $resource(url, {page: current_page});
@@ -23,15 +22,6 @@ app.controller('UserIndexCtrl', ['$scope', 'dialogs', '$resource', 'toaster', fu
 
   $scope.table_render(1);
 
-  $scope.launch = function(id){
-    dlg = $dialogs.create('/tpl/modules/users/form.html','DialogCtrl',{id: id},{key: false,back: 'static'});
-    dlg.result.then(function(name){
-      $scope.table_render(1);
-    },function(){
-      console.log('modal closed!');
-    });
-  };
-
   $scope.del = function(id) {
     $dialogs.confirm('删除操作确认','确定要删除本条记录吗？').result.then(function(btn){
       var url = '/api/bases/user/delete/:id';
@@ -44,6 +34,24 @@ app.controller('UserIndexCtrl', ['$scope', 'dialogs', '$resource', 'toaster', fu
       });
     },function(btn){
 
+    });
+  };
+
+  $scope.launch = function (data) {
+    var modalInstance = $uibModal.open({
+      templateUrl: 'myModalContent.html',
+      controller: 'ModalInstanceCtrl',
+      resolve: {
+        data: function () {
+          return data;
+        }
+      }
+    });
+
+    modalInstance.result.then(function (data) {
+      $scope.table_render(1);
+    }, function () {
+      $log.info('Modal dismissed at: ' + new Date());
     });
   };
 }]);
@@ -75,8 +83,9 @@ app.filter('propsFilter', function() {
   };
 });
 
-/* Dialog Controller */
-app.controller('DialogCtrl', ['$scope', '$resource', 'data', 'toaster', function($scope, $resource, data, toaster) {
+
+app.controller('ModalInstanceCtrl', ['$scope', '$resource', 'toaster', '$uibModalInstance','data', function ($scope, $resource, toaster, $uibModalInstance, data) {
+
   $scope.multipleDemo = {}
   $scope.multipleDemo.selectedRolesWithGroupBy = [];
   $scope.table_render = function(current_page) {
@@ -84,10 +93,10 @@ app.controller('DialogCtrl', ['$scope', '$resource', 'data', 'toaster', function
     var resource = $resource(url, {page: current_page});
     resource.query($scope.query,function(resp) {
       $scope.roles = resp.items;
-      if (data.id != 0) {
+      if (data && data != 0) {
         var url = '/api/bases/user/view/:id';
         var resource = $resource(url, { id: '@id' });
-        resource.get({ id: data.id }, function(resp) {
+        resource.get({ id: data }, function(resp) {
           $scope.target = resp.user;
           var target_roles = [];
           angular.forEach($scope.roles, function(origin_value, origin_key) {
@@ -104,9 +113,9 @@ app.controller('DialogCtrl', ['$scope', '$resource', 'data', 'toaster', function
   }
   $scope.table_render(1);
 
-  $scope.cancel = function() {
-    dlg.dismiss('Canceled');
-  }
+  $scope.cancel = function () {
+    $uibModalInstance.dismiss('cancel');
+  };
 
   $scope.save = function(){
     $scope.target['roles'] = $scope.multipleDemo.selectedRolesWithGroupBy;
@@ -117,14 +126,14 @@ app.controller('DialogCtrl', ['$scope', '$resource', 'data', 'toaster', function
       });
       resource.update({ id: $scope.target.id }, $scope.target, function(resp) {
         toaster.pop('success', '操作成功', '角色更新成功');
-        dlg.close();
+        $uibModalInstance.close();
       });
     } else {
       var url = '/api/bases/user/create';
       var resource = $resource(url);
       resource.save($scope.target, function(resp) {
         toaster.pop('success', '操作成功', '角色创建成功');
-        dlg.close();
+        $uibModalInstance.close();
       });
     }
   };

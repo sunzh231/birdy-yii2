@@ -27,13 +27,13 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
             'yii\\bootstrap\\' => 14,
             'yii\\' => 4,
         ),
-        's' => 
-        array (
-            'sizeg\\jwt\\' => 10,
-        ),
         'p' => 
         array (
             'phpDocumentor\\Reflection\\' => 25,
+        ),
+        'm' => 
+        array (
+            'mikehaertl\\tmp\\' => 15,
         ),
         'f' => 
         array (
@@ -46,6 +46,7 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         ),
         'c' => 
         array (
+            'codemix\\excelexport\\' => 20,
             'cebe\\markdown\\' => 14,
         ),
         'a' => 
@@ -81,7 +82,6 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'L' => 
         array (
             'League\\Flysystem\\' => 17,
-            'Lcobucci\\JWT\\' => 13,
         ),
         'G' => 
         array (
@@ -136,15 +136,15 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2',
         ),
-        'sizeg\\jwt\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/sizeg/yii2-jwt',
-        ),
         'phpDocumentor\\Reflection\\' => 
         array (
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+        ),
+        'mikehaertl\\tmp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mikehaertl/php-tmpfile/src',
         ),
         'filsh\\yii2\\oauth2server\\' => 
         array (
@@ -157,6 +157,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'dcb9\\qiniu\\' => 
         array (
             0 => __DIR__ . '/..' . '/dcb9/yii2-qiniu/src',
+        ),
+        'codemix\\excelexport\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/codemix/yii2-excelexport/src',
         ),
         'cebe\\markdown\\' => 
         array (
@@ -225,10 +229,6 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'League\\Flysystem\\' => 
         array (
             0 => __DIR__ . '/..' . '/league/flysystem/src',
-        ),
-        'Lcobucci\\JWT\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (
@@ -801,6 +801,7 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'SebastianBergmann\\Diff\\Line' => __DIR__ . '/..' . '/sebastian/diff/src/Line.php',
         'SebastianBergmann\\Diff\\Parser' => __DIR__ . '/..' . '/sebastian/diff/src/Parser.php',
         'SebastianBergmann\\Environment\\Console' => __DIR__ . '/..' . '/sebastian/environment/src/Console.php',
+        'SebastianBergmann\\Environment\\OperatingSystem' => __DIR__ . '/..' . '/sebastian/environment/src/OperatingSystem.php',
         'SebastianBergmann\\Environment\\Runtime' => __DIR__ . '/..' . '/sebastian/environment/src/Runtime.php',
         'SebastianBergmann\\Exporter\\Exporter' => __DIR__ . '/..' . '/sebastian/exporter/src/Exporter.php',
         'SebastianBergmann\\GlobalState\\Blacklist' => __DIR__ . '/..' . '/sebastian/global-state/src/Blacklist.php',
