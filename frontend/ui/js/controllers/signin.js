@@ -44,8 +44,8 @@ app.controller('SigninController', ['$scope', '$resource', '$state', 'toaster', 
       var resource = $resource(url);
       resource.save($scope.user, function(resp) {
         if (resp.success) {
-          setCookie('birdy_token', resp.token, 2)
-          window.location.href = '/'
+          setCookie('birdy_token', resp.token, 2);
+          $state.go('app.index', {target: 'users'});
         }
       }, function(resp) {
         toaster.pop({type: 'error', title: '用户名或密码错误'});

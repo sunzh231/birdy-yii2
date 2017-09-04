@@ -1,4 +1,3 @@
-'use strict';
 
 app.controller('UserIndexCtrl', ['$scope', 'dialogs', '$resource', 'toaster','$uibModal', '$log', function($scope, $dialogs, $resource, toaster, $uibModal, $log) {
 

@@ -8,8 +8,10 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
 ]).config(['$stateProvider', '$urlRouterProvider', 'JQ_CONFIG', 'MODULE_CONFIG',
   function ($stateProvider,   $urlRouterProvider, JQ_CONFIG, MODULE_CONFIG) {
     var layout = "tpl/app.html";
-    $urlRouterProvider.otherwise('/app/users/index');
-
+    $urlRouterProvider
+      .when('', '/app/user/index')
+      .when('/', '/app/user/index')
+      .otherwise('/access/404');
     $stateProvider
       .state('lockme', {
         url: '/lockme',
