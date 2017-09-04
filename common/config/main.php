@@ -1,9 +1,24 @@
 <?php
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    // 'bootstrap' => [
+    //     'queue', // The component registers own console commands
+    // ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
+        ],
+        'redis' => [
+            'class' => 'dcb9\redis\Connection',
+            'hostname' => 'localhost',
+            'port' => 6379,
+            'database' => 0,
+        ],
+        'queue' => [
+            'class' => \yii\queue\redis\Queue::class,
+            'redis' => 'redis', // Redis connection component or its config
+            'channel' => 'queue', // Queue channel key
+            // Other driver options
         ],
         'qiniu' => [
             'class' => 'dcb9\qiniu\Component',

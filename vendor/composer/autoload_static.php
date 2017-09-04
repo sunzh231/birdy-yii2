@@ -19,7 +19,14 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'y' => 
         array (
             'yii\\swiftmailer\\' => 16,
-            'yii\\redis\\' => 10,
+            'yii\\queue\\sync\\' => 15,
+            'yii\\queue\\redis\\' => 16,
+            'yii\\queue\\gearman\\' => 18,
+            'yii\\queue\\file\\' => 15,
+            'yii\\queue\\db\\' => 13,
+            'yii\\queue\\beanstalk\\' => 20,
+            'yii\\queue\\amqp\\' => 15,
+            'yii\\queue\\' => 10,
             'yii\\gii\\' => 8,
             'yii\\faker\\' => 10,
             'yii\\debug\\' => 10,
@@ -42,6 +49,7 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         ),
         'd' => 
         array (
+            'dcb9\\redis\\' => 11,
             'dcb9\\qiniu\\' => 11,
         ),
         'c' => 
@@ -61,6 +69,7 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\Yaml\\' => 23,
+            'Symfony\\Component\\Process\\' => 26,
             'Symfony\\Component\\Finder\\' => 25,
             'Symfony\\Component\\EventDispatcher\\' => 34,
             'Symfony\\Component\\DomCrawler\\' => 29,
@@ -108,9 +117,37 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             0 => __DIR__ . '/..' . '/yiisoft/yii2-swiftmailer',
         ),
-        'yii\\redis\\' => 
+        'yii\\queue\\sync\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yiisoft/yii2-redis',
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-queue/src/drivers/sync',
+        ),
+        'yii\\queue\\redis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-queue/src/drivers/redis',
+        ),
+        'yii\\queue\\gearman\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-queue/src/drivers/gearman',
+        ),
+        'yii\\queue\\file\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-queue/src/drivers/file',
+        ),
+        'yii\\queue\\db\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-queue/src/drivers/db',
+        ),
+        'yii\\queue\\beanstalk\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-queue/src/drivers/beanstalk',
+        ),
+        'yii\\queue\\amqp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-queue/src/drivers/amqp',
+        ),
+        'yii\\queue\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/yiisoft/yii2-queue/src',
         ),
         'yii\\gii\\' => 
         array (
@@ -154,6 +191,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         array (
             0 => __DIR__ . '/..' . '/fedemotta/yii2-cronjob',
         ),
+        'dcb9\\redis\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/dcb9/yii2-phpredis',
+        ),
         'dcb9\\qiniu\\' => 
         array (
             0 => __DIR__ . '/..' . '/dcb9/yii2-qiniu/src',
@@ -181,6 +222,10 @@ class ComposerStaticInit355fa56710293498d9007cd7348263e7
         'Symfony\\Component\\Yaml\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
         ),
         'Symfony\\Component\\Finder\\' => 
         array (

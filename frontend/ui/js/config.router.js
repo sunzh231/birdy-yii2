@@ -47,7 +47,7 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
       }).state('app.custom_module', {
         url: '/custom_module',
         templateUrl: 'tpl/modules/custom_module.html',
-        resolve: load(['js/controllers/chart.js'])
+        resolve: load([''])
       }).state('app.index', {
         url: '/:target/index',
         controller: 'IndexCtrl',
