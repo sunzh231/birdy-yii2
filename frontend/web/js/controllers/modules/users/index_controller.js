@@ -1,5 +1,5 @@
 
-app.controller('UserIndexCtrl', ['$scope', 'dialogs', '$resource', 'toaster','$uibModal', '$log', function($scope, $dialogs, $resource, toaster, $uibModal, $log) {
+app.controller('UserIndexCtrl', ['$scope', 'dialogs', '$resource', 'toaster', '$uibModal', '$log', function($scope, $dialogs, $resource, toaster, $uibModal, $log) {
 
   $scope.table_render = function(current_page) {
     var url = '/api/bases/user/index';
@@ -81,7 +81,6 @@ app.filter('propsFilter', function() {
     return out;
   };
 });
-
 
 app.controller('ModalInstanceCtrl', ['$scope', '$resource', 'toaster', '$uibModalInstance','data', function ($scope, $resource, toaster, $uibModalInstance, data) {
 

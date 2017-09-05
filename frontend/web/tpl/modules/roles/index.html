@@ -5,6 +5,9 @@
       <button class="btn btn-info pull-right" ng-click="launch(0)">
         <i class="fa fa-plus"></i><span>新增</span>
       </button>
+      <script type="text/ng-template" id="myModalContent.html">
+        <div ng-include="'tpl/modules/roles/form.html'"></div>
+      </script>
     </h1>
   </div>
   <div class="wrapper-md table-wrap">
@@ -29,7 +32,7 @@
             <tr>
               <th>角色名称</th>
               <th>描述</th>
-              <th style="width:120px;">操作</th>
+              <th style="width:150px;">操作</th>
             </tr>
           </thead>
           <tbody>
@@ -37,12 +40,24 @@
               <td><span class="text-ellipsis">{{ item.name }}</span></td>
               <td><span class="text-ellipsis">{{ item.desc }}</span></td>
               <td>
-                <div ng-if="item.id > 0" class="btn-group dropdown row-btn-group">
-                  <button class="btn btn-success" data-toggle="dropdown">操作<span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="" ng-click="launch(item.id)">编辑</a></li>
-                    <li><a href="" ng-click="del(item.id)">删除</a></li>
-                  </ul>
+                <div ng-if="item.id > 0">
+                  <button ng-click="launch(item.id)" tooltip-trigger="mouseenter" tooltip-placement="top" uib-tooltip="编辑" class="btn btn-rounded btn-sm btn-icon btn-success">
+                    <i class="fa fa-edit"></i>
+                  </button>
+                  <button ng-click="del(item.id)" tooltip-trigger="mouseenter" tooltip-placement="top" uib-tooltip="删除" class="btn btn-rounded btn-sm btn-icon btn-danger">
+                    <i class="glyphicon glyphicon-trash"></i>
+                  </button>
+                  <button tooltip-trigger="mouseenter" tooltip-placement="top" uib-tooltip="更多" popover-trigger="focus" popover-placement="left" uib-popover-template="'myPopoverTemplate.html'" class="btn btn-rounded btn-sm btn-icon btn-default">
+                    <i class="fa fa-ellipsis-h"></i>
+                  </button>
+                  <script type="text/ng-template" id="myPopoverTemplate.html">
+                    <button ng-click="launch(item.id)" tooltip-trigger="mouseenter" tooltip-placement="top" uib-tooltip="编辑" class="btn btn-rounded btn-sm btn-icon btn-success">
+                      <i class="fa fa-edit"></i>
+                    </button>
+                    <button ng-click="del(item.id)" tooltip-trigger="mouseenter" tooltip-placement="top" uib-tooltip="删除" class="btn btn-rounded btn-sm btn-icon btn-danger">
+                      <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                  </script>
                 </div>
               </td>
             </tr>
